@@ -1,5 +1,4 @@
-// Tipos de dato para nuestro lenguaje
-/*
+/* Archivo Principal Para Proyecto Final
 
                               __
                             .d$$b
@@ -27,20 +26,11 @@
                             ;`-
                            :\
                            ;
-                           Amistades,
-                           En estos tiempos lealtad queda muy poca,
-                           Inteligencia adquirió experiencia
-                           Se ha escuchado mentar como "Él Neto Roca". - Tomen Nota - Adirel Favela
+                          Me gustó vivirla recio
+                          Siempre me gusto el peligro
+                          Nunca he sido mala gente
+                          Pero defiendo lo mío
 
-
+                          Acá andamos en la perla
+                          Bien puesta la camiseta - Sigo Con Lo Mio - Adriel Favela
 */
-#define INT "int"
-#define FLOAT "float"
-#define DOUBLE "double"
-#define CHAR "char"
-#define BOOL "bool"
-#define VOID "void"
-// Tipos de variables
-#define funcion 1
-#define variable 2
-#define parametro 3

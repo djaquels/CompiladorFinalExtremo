@@ -27,10 +27,11 @@
                             ;`-
                            :\
                            ;
-                           Yo no conosco la línea pues trabajo sin parar y al cuerpo doy lo que me pida
-                           solo una vida hay que vivirla
-                           ese problema lo traigo pendiente estalla póngase pilas ..
-                            - El problema . Cornelio Vega y Su Dinastia (FT. Adriel Favela)
+                           Desmadroso desde morro
+                           Ya ni modo esta vida me toco
+
+                           Y aquí andamos al millón
+                           Bien placoso y malandron - La Escuela No Me Gusto - Adriel Favela
 
 
 */

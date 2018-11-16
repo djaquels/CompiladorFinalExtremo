@@ -25,17 +25,44 @@
     _.                      :
                             ;`-
                            :\
-                           ;  bug
+                           ;
+                           Ya nada me asusta,
+                           ni me cuentan nada,
+                           al final de cuentas la vida es prestada
+                           aqui esta mi mano pa´ quien lo merece
+                           agance pa´ un lado todos lo corrientes
+                           a chingasos me hice fuerte - Cuando Los Necesite - Adirel Favela
 
 
 */
 %{
  #include <stdio.h>
+ #include <string.h>
+ //#include "y.tab.h"
 %}
+%option yylineno
+%option noyywrap
+
+%s COMM
+%s COMMII
 digito [0-9]
 id_valido  [a-zA-Z_\-]
 %%
 /* TOKENS VALIDOS DEL LENGUAJE :3*/
+<INITIAL>{
+
+	"/*" {
+		// printf("INICIO COMENTARIO");
+		BEGIN COMM;
+	}
+
+	"*/" {
+		printf("\nerrorLexico::linea:%d -> %s [NO SE INDICA EL INICIO DEL COMENTARIO]\n\n",yylineno,yytext);
+	}
+
+	"//" {
+		BEGIN COMMII;
+	}
 "int" {return INT;}
 "float" {return FLOAT;}
 "double" {return DOUBLE;}
@@ -53,12 +80,14 @@ id_valido  [a-zA-Z_\-]
 "break" {return BREAK;}
 "default" {return DEFAULT;}
 "return" {return RETURN;}
+// Hata aquí terminan las palabras reservadas.
 "(" {return PD;}
 ")" {return PI;}
 "{" {return LD;}
 "}" {return LI;}
 "[" {return CD;}
 "]" {return CI;}
+// Hasta aquí terminan los deliminatores
 "," {return COMMA;}
 ";" {return TERMINADOR;}
 "true" {return TRUES;}
@@ -71,9 +100,48 @@ id_valido  [a-zA-Z_\-]
 "/" {return OPDIV;}
 "*" {return OPMULT;}
 "=" {return ASIGNACION;}
+"==" {return IGUALA;}
+"!=" {return DIFERENTEDE;}
+"<=" {return MENOROIGUAL;}
+">=" {return MEYOROIGUAL;}
+"<" {return MENORQUE;}
+">" {return MAYORQUE;}
 [\%] {return MODULUS;}
 {id_valido}+{id_valido}* {return ID;}
 {digito}+ {return ENTERO}
 {digito}+.{digito}+"f" {return DECIMAL}
 "'"{id_valid}"'" {return CARACTER;}
-[\"]{id_valido}*[\"] {return CADENA;}
+[\""]{id_valido}*[\""] {return CADENA;}
+<<EOF>> 	 { yyterminate(); }
+
+	. {
+		printf("Error Lexico: %d -> %s token invalido.\n\n",yylineno,yytext);
+	}
+}
+
+<COMM>{
+
+	"*/" {
+		// printf("FIN COMENTARIO");
+		BEGIN INITIAL;
+	}
+
+	[^"*""/"] {
+		// Cualquier cosa que no sea * ó /
+		// ejemplo: hola como estas 341241 11 1
+	}
+
+	"*" {}
+
+	"/" {}
+}
+
+<COMMII>{
+	[^\n] {}
+
+	"\n" {
+		BEGIN INITIAL;
+	}
+}
+
+%% /* Codigo C*/
