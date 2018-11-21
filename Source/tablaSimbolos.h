@@ -52,8 +52,8 @@ typedef struct TablaSimbolos {
   int id; // LLave
   Lexema lexema; // valor
 } TablaSimbolos;
-// Pila De Tabla De Simbolos
-TablaSimbolos* crearTabla(){
+// Crea una tabla
+TablaSimbolos* crearTablaSimbolos(){
   TablaSimbolos *t;
   t = malloc(sizeof(TablaSimbolos) * TAMANIOHASH);
   return t;
@@ -72,3 +72,4 @@ Lexema crearLexema(char* t,int d, int t_var,char* args[]){
   //tmp.argumentos = args;
   return tmp;
 }
+// PILA DE TABLA DE SIMBOLOS

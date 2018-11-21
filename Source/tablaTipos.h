@@ -43,33 +43,35 @@
 
 #define TAMANIOHASH 1500
 
-typedef struct Lexema {
-  char* tipo; // int,float,double,char,bool o void
-  int direccion; // direccion en memoria
-  int tipo_variable; // funcion,variable,parametro
-  char* argumentos[]; // lista de argumentos en caso de ser una funcion.
-} Lexema;
-typedef struct TablaSimbolos {
+typedef struct Tipo {
+  int pos;
+  int tipo;
+  int dim;
+  int tipo_base;
+} Tipo;
+typedef struct TablaTipos{
   int id; // LLave
-  Lexema lexema; // valor
-} TablaSimbolos;
-// Pila De Tabla De Simbolos
-TablaSimbolos* crearTabla(){
-  TablaSimbolos *t;
-  t = malloc(sizeof(TablaSimbolos) * TAMANIOHASH);
+  Tipo tipo; // valor
+} TablaTipos;
+// Crea una Tabla
+TablaTipos* crearTablaTipos(){
+  TablaTipos *t;
+  t = malloc(sizeof(TablaTipos) * TAMANIOHASH);
   return t;
 }
-int addSimbolo(int llave ,Lexema l, TablaSimbolos t[]){
- t[llave].id = llave;
- t[llave].lexema = l;
- printf("id:%i-> tipo:%s dir:%i tipo:%i \n",t[llave].id,t[llave].lexema.tipo,t[llave].lexema.direccion,t[llave].lexema.tipo_variable);
+int addTipo(int llave ,Tipo t, TablaTipos ta[]){
+ ta[llave].id = llave;
+ ta[llave].tipo= t;
+ printf("id:%i-> pos:%s tipo:%i dim:%i base: \n",ta[llave].id,ta[llave].tipo.pos,ta[llave].tipo.tipo,ta[llave].tipo.dim,ta[llave].tipo.tipo_base);
  return llave += 1;
 }
-Lexema crearLexema(char* t,int d, int t_var,char* args[]){
-  Lexema tmp;
+Tipo crearTipo(int p, int t,int d,int tb){
+  Tipo tmp;
+  tmp.pos = p;
   tmp.tipo = t;
-  tmp.direccion = d;
-  tmp.tipo_variable = t_var;
+  tmp.dim = d;
+  tmp.tipo_base = tb;
   //tmp.argumentos = args;
   return tmp;
 }
+// PILA DE TABLAS DE TIPOS

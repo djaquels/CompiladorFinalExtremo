@@ -2,21 +2,26 @@
 // hjacales
 #include <stdio.h>
 #include "tablaSimbolos.h"
+#include "tablaTipos.h"
+#include "Pilas.h"
 
 int i = 0; // La llave
 
 int main(){
-  TablaSimbolos * tabla;
+  TablaSimbolos *tablasim_global = crearTablaSimbolos();
+  TablaTipos  * tablatipos_global = crearTablaTipos();
   char* args[0];
-  Lexema a = crearLexema(CHAR,0,variable,args);
-  Lexema b = crearLexema(FLOAT,8,variable,args);
-  Lexema c = crearLexema(VOID,16,parametro,args);
-  tabla = crearTabla();
-  i = addSimbolo(i,a,tabla);
-  //printf("%i\n",i);
-  i = addSimbolo(i,b,tabla);
-  i = addSimbolo(i,c,tabla);
-  return 0;
-
+  struct PilaSimbolosNodo* simbolos = NULL;
+  struct PilaTiposNodo* tipos = NULL;
+    // TIPOS
+  Tipo entero = crearTipo(0,0,4,NULL);
+  addTipo(0,entero,tablatipos_global);
+  //--------------------------------------------
+  Lexema token = crearLexema(INT,0,variable,NULL);
+  addSimbolo(0,token,tablasim_global);
+  pushSimbolo(&simbolos,tablasim_global);
+  pushTipo(&tipos,tablatipos_global);
+  TablaSimbolos * last = topSimbolos(simbolos);
+  printf("%d\n",last[0].id);
 }
-//🍺 🍺 🍺 🍺 
+//🍺 🍺 🍺 🍺
