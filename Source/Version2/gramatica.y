@@ -45,18 +45,19 @@ extern FILE *yyin;
 void yyerror(const char *s);
 extern int yylex();
 extern int yylineno();
+//tabla de simbolos
+TablaSimbolos * tabla = crearTablaSimbolos();
+int tipo;
 %}
 /*DEFINICION DE TU UNION PARA MANEJAR TIPOS*/
-/*%union {
-	struct {int entero;
-	float flotante;
-  double dobledecimal;
-	char caracter;
-  char* cadena;
-  void sintipo;
-  struct estructura;} tipo;
-	char* id;
-}*/
+%union {
+	struct {
+		int ival;
+		double dval;
+		int type;
+	}numero;
+	int type;
+}
 /*DEFINICION DE TIPOS*/
 /*%token <entero> INT
 %token <flotante> FLOAT
@@ -68,10 +69,10 @@ extern int yylineno();
 %token INT FLOAT DOUBLE CHAR VOID STRUCT
 %token IF DO WHILE FOR SWICH CASE BREAK DEFAULT ELSE RETURN PRINT
 %token COMA PYC DP PTO
-%token ID
+%token<id> ID
 %token FUNC
 %token CADENA CARACTER
-%token NUMERO
+%token<numero> NUMERO
 %token TRUE FALSE
 
 %right ASIG
@@ -86,6 +87,7 @@ extern int yylineno();
 %nonassoc IFX
 %nonassoc ELSE
 
+%type<type> tipo
 %start programa
 
 %%
@@ -93,8 +95,8 @@ extern int yylineno();
 programa : declaraciones funciones {
 	printf("p -> D F\n");
 }
-declaraciones : tipo lista PYC declaraciones | ;
-tipo : INT | FLOAT | DOUBLE | CHAR | VOID | STRUCT LKEY declaraciones RKEY ;
+declaraciones : tipo {tipo = $1;} lista PYC declaraciones| ;
+tipo : INT {$$ = 0;} | FLOAT  {$$ = 1;}| DOUBLE  {$$ = 2;}| CHAR {$$ = 3;} | VOID {$$ = 4;} | STRUCT LKEY declaraciones RKEY {$$ = 5;} ;
 lista : lista COMA ID arreglo | ID arreglo;
 arreglo : LCOR arreglo RCOR arreglo | ;
 funciones : FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | ;
@@ -128,4 +130,9 @@ rel: GT | LT | GE | LE | DISTINTO| IGUAL;
 void yyerror(const char *s) {
 	printf("Error en: %s linea: %d\n ",s,yylineno);
 	exit(-1);
+}
+void init(){
+	//pilas de ts y ttp
+	TablaSimbolos *tablasim_global = crearTablaSimbolos();
+  TablaTipos  * tablatipos_global = crearTablaTipos();
 }

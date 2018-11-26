@@ -1,4 +1,5 @@
-/* Archivo Principal Para Proyecto Final
+// Tipos de dato para nuestro lenguaje
+/*
 
                               __
                             .d$$b
@@ -26,31 +27,20 @@
                             ;`-
                            :\
                            ;
-                          Me gustó vivirla recio
-                          Siempre me gusto el peligro
-                          Nunca he sido mala gente
-                          Pero defiendo lo mío
+                           Amistades,
+                           En estos tiempos lealtad queda muy poca,
+                           Inteligencia adquirió experiencia
+                           Se ha escuchado mentar como "Él Neto Roca". - Tomen Nota - Adirel Favela
 
-                          Acá andamos en la perla
-                          Bien puesta la camiseta - Sigo Con Lo Mio - Adriel Favela
+
 */
-#include <stdio.h>
-#include <stdlib.h>
-extern int yyparse();
-extern FILE * yyin;
-int main(int argc, char const *argv[]) {
-  /* code */
-  if(argc < 2) {
-    return -1;
-    printf("%s\n","Falta Nombre Del Archivo" );
-    exit(-1);
-  }
-  yyin = fopen(argv[1],"r");
-  if(!yyin){
-    printf("%s\n", "Archivo Corrupto u.u" );
-    exit(-1);
-  }
-  yyparse();
-  fclose(yyin);
-  return 0;
-}
+#define INT "int"
+#define FLOAT "float"
+#define DOUBLE "double"
+#define CHAR "char"
+#define BOOL "bool"
+#define VOID "void"
+// Tipos de variables
+#define funcion 1
+#define variable 2
+#define parametro 3

@@ -1,0 +1,99 @@
+%{
+#include <stdio.h>
+
+//  #include "stack.h"
+%}
+
+%token INT FLOAT DOUBLE CHAR VOID
+%token IF DO WHILE FOR WWITCH CASE BREAK DEFAULT ELSE RETURN PRINT 
+%token TRUE FALSE 
+%token COMA PYC DP PTO 
+%token ID 
+%token CADENA CARACTER 
+%token NUMERO 
+
+
+%right ASIG 
+%left OR
+%left AND 
+%left IGUAL DISTITNTO 
+%left GT LT LE GE  
+%left MAS MENOS 
+%left MUL DIV MOD 
+%nonassoc LPAR RPAR RKEY LKEY LCOR RCOR 
+%nonassoc IFX
+%nonassoc ELSE 
+
+
+
+%start program 
+
+%%
+
+program: declaraciones funciones{printf ("P-> D F\n ");};
+
+declaraciones: tipo lista PYC | ; 
+
+tipo: INT | FLOAT | DOUBLE | CHAR | VOID | STRUCK LKEY declaraciones RKEY;
+
+lista: lista COMA ID arreglo | ID  arreglo;
+
+arreglo: LCOR NUMERO RCOR arreglo | ;  
+
+funciones: FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | ; 
+
+
+
+argumentos: lista_argumentos | ;
+lista_argumentos: lista_ argumentos COMA tipo ID parte_arreglo | tipo ID  parte_arreglo;
+parte_arreglo: LCOR RCOR parte_arreglo | ;
+sentencias: sentencia sentencias | sentencia; //corregir en el pdf  porque en el pdf dice sentencias en todo 
+
+sentencia: IF LPAR condicion RPAR sentencia %prec IFX | IF LPAR condicion RPAR sentencias ELSE sentencia  | WHILE LPAR condicion RPAR sentencia | DO sentencia WHILE LPAR condicion RPAR PYC | FOR LPAR sentencia PYC condicion PYC sentencia RPAR sentencia | parte_izq ASIG expresion PYC | RETURN expresion PYC | RETURN PYC | LKEY sentencias Rkey | SWITCH LAPR expresion RPAR LKEY casos predeterminados RKEY | BRAK PYC | PRINT expresion PYC;
+
+// LE DAMOS LA SENTENCIA A IFX NO APARECERA PORQUE NO EXISTE
+
+
+
+casos: CASE NUMERO DP sentencias casos | ; //coregir en el pdf 
+
+predeterminados: DEFAULT DP sentencias | ;
+parte_izq: ID | var_arreglo | ID PTO ID;
+var_arreglo: ID LCOR expresion RCOR | var_arreglo LCOR expresion RCOR;
+expresion: expresion MAS expresion 
+		| expresion MENOS expresion
+		| expresion MULT expresion 
+		| expresion DIV expresion
+		| expresion MOD expresion
+		| LPAR expresion RPAR 
+		| parte_izq
+		| CADENA 
+		| NUMERO 	
+		| CARACTER 
+		| ID LPAR parametros RPAR;
+
+condicion: condicion OR condicion 
+		| condicion AND condicion 
+		| NEG condicion 
+		| expresion rel expresion 
+		| LPAR condicion RPAR
+		| TRUE
+		| FALSE;
+
+parametros: | lista_param;
+
+lista_param: lista_param COMA expresion | expresion;
+relacional: GT | LT | GE | LE | DISTINTO | IGUAL;  
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -111,7 +111,9 @@ id_valido  [a-zA-Z_\-]
 
 <<EOF>> 	 { yyterminate(); }
 
-. {}
+	. {
+		printf("Error Lexico: %d -> %s token invalido.\n\n",yylineno,yytext);
+	}
 }
 
 <COMM>{

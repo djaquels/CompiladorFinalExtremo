@@ -1,0 +1,2168 @@
+Rules never reduced
+
+   64 parametros: /* empty */
+
+
+State 50 conflicts: 1 shift/reduce
+State 91 conflicts: 1 reduce/reduce
+
+
+Grammar
+
+    0 $accept: programa $end
+
+    1 programa: declaraciones funciones
+
+    2 declaraciones: tipo lista PYC
+    3              | /* empty */
+
+    4 tipo: INT
+    5     | FLOAT
+    6     | DOUBLE
+    7     | CHAR
+    8     | VOID
+    9     | STRUCT LKEY declaraciones RKEY
+
+   10 lista: lista COMA ID arreglo
+   11      | ID arreglo
+
+   12 arreglo: LCOR arreglo RCOR arreglo
+   13        | /* empty */
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones
+   15          | /* empty */
+
+   16 argumentos: lista_argumentos
+   17           | /* empty */
+
+   18 lista_argumentos: lista_argumentos COMA tipo ID parte_arreglo
+   19                 | tipo ID parte_arreglo
+
+   20 parte_arreglo: LCOR RCOR parte_arreglo
+   21              | /* empty */
+
+   22 sentencias: sentencia sentencias
+   23           | sentencia
+
+   24 sentencia: IF LPAR condicion RPAR sentencia
+   25          | IF LPAR condicion RPAR sentencia ELSE sentencia
+   26          | WHILE LPAR condicion RPAR sentencia
+   27          | DO sentencia WHILE LPAR condicion RPAR PYC
+   28          | FOR LPAR sentencia PYC condicion PYC sentencia RPAR sentencia
+   29          | parte_izq ASIG expresion PYC
+   30          | RETURN expresion PYC
+   31          | RETURN PYC
+   32          | LKEY sentencias RKEY
+   33          | SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY
+   34          | BREAK PYC
+   35          | PRINT expresion PYC
+
+   36 casos: CASE NUMERO DP sentencias casos
+   37      | /* empty */
+
+   38 predeterminado: DEFAULT DP sentencias
+   39               | /* empty */
+
+   40 parte_izq: ID
+   41          | var_arreglo
+   42          | ID PTO ID
+   43          | /* empty */
+
+   44 var_arreglo: ID LCOR expresion RCOR
+   45            | var_arreglo LCOR expresion RCOR
+
+   46 expresion: expresion MAS expresion
+   47          | expresion MENOS expresion
+   48          | expresion MUL expresion
+   49          | expresion DIV expresion
+   50          | expresion MOD expresion
+   51          | LPAR expresion RPAR
+   52          | parte_izq
+   53          | CADENA
+   54          | NUMERO
+   55          | CARACTER
+   56          | ID LPAR parametros RPAR
+
+   57 condicion: condicion OR condicion
+   58          | condicion AND condicion
+   59          | NEG condicion
+   60          | expresion rel expresion
+   61          | LPAR condicion RPAR
+   62          | TRUE
+   63          | FALSE
+
+   64 parametros: /* empty */
+   65           | lista_param
+
+   66 lista_param: lista_param COMA expresion
+   67            | expresion
+
+   68 rel: GT
+   69    | LT
+   70    | GE
+   71    | LE
+   72    | DISTINTO
+   73    | IGUAL
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+INT (258) 4
+FLOAT (259) 5
+DOUBLE (260) 6
+CHAR (261) 7
+VOID (262) 8
+STRUCT (263) 9
+IF (264) 24 25
+DO (265) 27
+WHILE (266) 26 27
+FOR (267) 28
+SWICH (268) 33
+CASE (269) 36
+BREAK (270) 34
+DEFAULT (271) 38
+ELSE (272) 25
+RETURN (273) 30 31
+PRINT (274) 35
+COMA (275) 10 18 66
+PYC (276) 2 27 28 29 30 31 34 35
+DP (277) 36 38
+PTO (278) 42
+ID (279) 10 11 14 18 19 40 42 44 56
+FUNC (280) 14
+CADENA (281) 53
+CARACTER (282) 55
+NUMERO (283) 36 54
+TRUE (284) 62
+FALSE (285) 63
+ASIG (286) 29
+NEG (287) 59
+OR (288) 57
+AND (289) 58
+DISTINTO (290) 72
+IGUAL (291) 73
+GE (292) 70
+LE (293) 71
+LT (294) 69
+GT (295) 68
+MENOS (296) 47
+MAS (297) 46
+MOD (298) 50
+DIV (299) 49
+MUL (300) 48
+RCOR (301) 12 20 44 45
+LCOR (302) 12 20 44 45
+LKEY (303) 9 14 32 33
+RKEY (304) 9 14 32 33
+RPAR (305) 14 24 25 26 27 28 33 51 56 61
+LPAR (306) 14 24 25 26 27 28 33 51 56 61
+IFX (307)
+
+
+Nonterminals, with rules where they appear
+
+$accept (53)
+    on left: 0
+programa (54)
+    on left: 1, on right: 0
+declaraciones (55)
+    on left: 2 3, on right: 1 9 14
+tipo (56)
+    on left: 4 5 6 7 8 9, on right: 2 14 18 19
+lista (57)
+    on left: 10 11, on right: 2 10
+arreglo (58)
+    on left: 12 13, on right: 10 11 12
+funciones (59)
+    on left: 14 15, on right: 1 14
+argumentos (60)
+    on left: 16 17, on right: 14
+lista_argumentos (61)
+    on left: 18 19, on right: 16 18
+parte_arreglo (62)
+    on left: 20 21, on right: 18 19 20
+sentencias (63)
+    on left: 22 23, on right: 14 22 32 36 38
+sentencia (64)
+    on left: 24 25 26 27 28 29 30 31 32 33 34 35, on right: 22 23 24
+    25 26 27 28
+casos (65)
+    on left: 36 37, on right: 33 36
+predeterminado (66)
+    on left: 38 39, on right: 33
+parte_izq (67)
+    on left: 40 41 42 43, on right: 29 52
+var_arreglo (68)
+    on left: 44 45, on right: 41 45
+expresion (69)
+    on left: 46 47 48 49 50 51 52 53 54 55 56, on right: 29 30 33 35
+    44 45 46 47 48 49 50 51 60 66 67
+condicion (70)
+    on left: 57 58 59 60 61 62 63, on right: 24 25 26 27 28 57 58 59
+    61
+parametros (71)
+    on left: 64 65, on right: 56
+lista_param (72)
+    on left: 66 67, on right: 65 66
+rel (73)
+    on left: 68 69 70 71 72 73, on right: 60
+
+
+state 0
+
+    0 $accept: . programa $end
+
+    INT     shift, and go to state 1
+    FLOAT   shift, and go to state 2
+    DOUBLE  shift, and go to state 3
+    CHAR    shift, and go to state 4
+    VOID    shift, and go to state 5
+    STRUCT  shift, and go to state 6
+
+    $default  reduce using rule 3 (declaraciones)
+
+    programa       go to state 7
+    declaraciones  go to state 8
+    tipo           go to state 9
+
+
+state 1
+
+    4 tipo: INT .
+
+    $default  reduce using rule 4 (tipo)
+
+
+state 2
+
+    5 tipo: FLOAT .
+
+    $default  reduce using rule 5 (tipo)
+
+
+state 3
+
+    6 tipo: DOUBLE .
+
+    $default  reduce using rule 6 (tipo)
+
+
+state 4
+
+    7 tipo: CHAR .
+
+    $default  reduce using rule 7 (tipo)
+
+
+state 5
+
+    8 tipo: VOID .
+
+    $default  reduce using rule 8 (tipo)
+
+
+state 6
+
+    9 tipo: STRUCT . LKEY declaraciones RKEY
+
+    LKEY  shift, and go to state 10
+
+
+state 7
+
+    0 $accept: programa . $end
+
+    $end  shift, and go to state 11
+
+
+state 8
+
+    1 programa: declaraciones . funciones
+
+    FUNC  shift, and go to state 12
+
+    $default  reduce using rule 15 (funciones)
+
+    funciones  go to state 13
+
+
+state 9
+
+    2 declaraciones: tipo . lista PYC
+
+    ID  shift, and go to state 14
+
+    lista  go to state 15
+
+
+state 10
+
+    9 tipo: STRUCT LKEY . declaraciones RKEY
+
+    INT     shift, and go to state 1
+    FLOAT   shift, and go to state 2
+    DOUBLE  shift, and go to state 3
+    CHAR    shift, and go to state 4
+    VOID    shift, and go to state 5
+    STRUCT  shift, and go to state 6
+
+    $default  reduce using rule 3 (declaraciones)
+
+    declaraciones  go to state 16
+    tipo           go to state 9
+
+
+state 11
+
+    0 $accept: programa $end .
+
+    $default  accept
+
+
+state 12
+
+   14 funciones: FUNC . tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones
+
+    INT     shift, and go to state 1
+    FLOAT   shift, and go to state 2
+    DOUBLE  shift, and go to state 3
+    CHAR    shift, and go to state 4
+    VOID    shift, and go to state 5
+    STRUCT  shift, and go to state 6
+
+    tipo  go to state 17
+
+
+state 13
+
+    1 programa: declaraciones funciones .
+
+    $default  reduce using rule 1 (programa)
+
+
+state 14
+
+   11 lista: ID . arreglo
+
+    LCOR  shift, and go to state 18
+
+    $default  reduce using rule 13 (arreglo)
+
+    arreglo  go to state 19
+
+
+state 15
+
+    2 declaraciones: tipo lista . PYC
+   10 lista: lista . COMA ID arreglo
+
+    COMA  shift, and go to state 20
+    PYC   shift, and go to state 21
+
+
+state 16
+
+    9 tipo: STRUCT LKEY declaraciones . RKEY
+
+    RKEY  shift, and go to state 22
+
+
+state 17
+
+   14 funciones: FUNC tipo . ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones
+
+    ID  shift, and go to state 23
+
+
+state 18
+
+   12 arreglo: LCOR . arreglo RCOR arreglo
+
+    LCOR  shift, and go to state 18
+
+    $default  reduce using rule 13 (arreglo)
+
+    arreglo  go to state 24
+
+
+state 19
+
+   11 lista: ID arreglo .
+
+    $default  reduce using rule 11 (lista)
+
+
+state 20
+
+   10 lista: lista COMA . ID arreglo
+
+    ID  shift, and go to state 25
+
+
+state 21
+
+    2 declaraciones: tipo lista PYC .
+
+    $default  reduce using rule 2 (declaraciones)
+
+
+state 22
+
+    9 tipo: STRUCT LKEY declaraciones RKEY .
+
+    $default  reduce using rule 9 (tipo)
+
+
+state 23
+
+   14 funciones: FUNC tipo ID . LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones
+
+    LPAR  shift, and go to state 26
+
+
+state 24
+
+   12 arreglo: LCOR arreglo . RCOR arreglo
+
+    RCOR  shift, and go to state 27
+
+
+state 25
+
+   10 lista: lista COMA ID . arreglo
+
+    LCOR  shift, and go to state 18
+
+    $default  reduce using rule 13 (arreglo)
+
+    arreglo  go to state 28
+
+
+state 26
+
+   14 funciones: FUNC tipo ID LPAR . argumentos RPAR LKEY declaraciones sentencias RKEY funciones
+
+    INT     shift, and go to state 1
+    FLOAT   shift, and go to state 2
+    DOUBLE  shift, and go to state 3
+    CHAR    shift, and go to state 4
+    VOID    shift, and go to state 5
+    STRUCT  shift, and go to state 6
+
+    $default  reduce using rule 17 (argumentos)
+
+    tipo              go to state 29
+    argumentos        go to state 30
+    lista_argumentos  go to state 31
+
+
+state 27
+
+   12 arreglo: LCOR arreglo RCOR . arreglo
+
+    LCOR  shift, and go to state 18
+
+    $default  reduce using rule 13 (arreglo)
+
+    arreglo  go to state 32
+
+
+state 28
+
+   10 lista: lista COMA ID arreglo .
+
+    $default  reduce using rule 10 (lista)
+
+
+state 29
+
+   19 lista_argumentos: tipo . ID parte_arreglo
+
+    ID  shift, and go to state 33
+
+
+state 30
+
+   14 funciones: FUNC tipo ID LPAR argumentos . RPAR LKEY declaraciones sentencias RKEY funciones
+
+    RPAR  shift, and go to state 34
+
+
+state 31
+
+   16 argumentos: lista_argumentos .
+   18 lista_argumentos: lista_argumentos . COMA tipo ID parte_arreglo
+
+    COMA  shift, and go to state 35
+
+    $default  reduce using rule 16 (argumentos)
+
+
+state 32
+
+   12 arreglo: LCOR arreglo RCOR arreglo .
+
+    $default  reduce using rule 12 (arreglo)
+
+
+state 33
+
+   19 lista_argumentos: tipo ID . parte_arreglo
+
+    LCOR  shift, and go to state 36
+
+    $default  reduce using rule 21 (parte_arreglo)
+
+    parte_arreglo  go to state 37
+
+
+state 34
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR . LKEY declaraciones sentencias RKEY funciones
+
+    LKEY  shift, and go to state 38
+
+
+state 35
+
+   18 lista_argumentos: lista_argumentos COMA . tipo ID parte_arreglo
+
+    INT     shift, and go to state 1
+    FLOAT   shift, and go to state 2
+    DOUBLE  shift, and go to state 3
+    CHAR    shift, and go to state 4
+    VOID    shift, and go to state 5
+    STRUCT  shift, and go to state 6
+
+    tipo  go to state 39
+
+
+state 36
+
+   20 parte_arreglo: LCOR . RCOR parte_arreglo
+
+    RCOR  shift, and go to state 40
+
+
+state 37
+
+   19 lista_argumentos: tipo ID parte_arreglo .
+
+    $default  reduce using rule 19 (lista_argumentos)
+
+
+state 38
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR LKEY . declaraciones sentencias RKEY funciones
+
+    INT     shift, and go to state 1
+    FLOAT   shift, and go to state 2
+    DOUBLE  shift, and go to state 3
+    CHAR    shift, and go to state 4
+    VOID    shift, and go to state 5
+    STRUCT  shift, and go to state 6
+
+    $default  reduce using rule 3 (declaraciones)
+
+    declaraciones  go to state 41
+    tipo           go to state 9
+
+
+state 39
+
+   18 lista_argumentos: lista_argumentos COMA tipo . ID parte_arreglo
+
+    ID  shift, and go to state 42
+
+
+state 40
+
+   20 parte_arreglo: LCOR RCOR . parte_arreglo
+
+    LCOR  shift, and go to state 36
+
+    $default  reduce using rule 21 (parte_arreglo)
+
+    parte_arreglo  go to state 43
+
+
+state 41
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones . sentencias RKEY funciones
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencias   go to state 54
+    sentencia    go to state 55
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 42
+
+   18 lista_argumentos: lista_argumentos COMA tipo ID . parte_arreglo
+
+    LCOR  shift, and go to state 36
+
+    $default  reduce using rule 21 (parte_arreglo)
+
+    parte_arreglo  go to state 58
+
+
+state 43
+
+   20 parte_arreglo: LCOR RCOR parte_arreglo .
+
+    $default  reduce using rule 20 (parte_arreglo)
+
+
+state 44
+
+   24 sentencia: IF . LPAR condicion RPAR sentencia
+   25          | IF . LPAR condicion RPAR sentencia ELSE sentencia
+
+    LPAR  shift, and go to state 59
+
+
+state 45
+
+   27 sentencia: DO . sentencia WHILE LPAR condicion RPAR PYC
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 60
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 46
+
+   26 sentencia: WHILE . LPAR condicion RPAR sentencia
+
+    LPAR  shift, and go to state 61
+
+
+state 47
+
+   28 sentencia: FOR . LPAR sentencia PYC condicion PYC sentencia RPAR sentencia
+
+    LPAR  shift, and go to state 62
+
+
+state 48
+
+   33 sentencia: SWICH . LPAR expresion RPAR LKEY casos predeterminado RKEY
+
+    LPAR  shift, and go to state 63
+
+
+state 49
+
+   34 sentencia: BREAK . PYC
+
+    PYC  shift, and go to state 64
+
+
+state 50
+
+   30 sentencia: RETURN . expresion PYC
+   31          | RETURN . PYC
+
+    PYC       shift, and go to state 65
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    PYC       [reduce using rule 43 (parte_izq)]
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 72
+
+
+state 51
+
+   35 sentencia: PRINT . expresion PYC
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 73
+
+
+state 52
+
+   40 parte_izq: ID .
+   42          | ID . PTO ID
+   44 var_arreglo: ID . LCOR expresion RCOR
+
+    PTO   shift, and go to state 74
+    LCOR  shift, and go to state 75
+
+    $default  reduce using rule 40 (parte_izq)
+
+
+state 53
+
+   32 sentencia: LKEY . sentencias RKEY
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencias   go to state 76
+    sentencia    go to state 55
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 54
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias . RKEY funciones
+
+    RKEY  shift, and go to state 77
+
+
+state 55
+
+   22 sentencias: sentencia . sentencias
+   23           | sentencia .
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    ASIG      reduce using rule 43 (parte_izq)
+    $default  reduce using rule 23 (sentencias)
+
+    sentencias   go to state 78
+    sentencia    go to state 55
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 56
+
+   29 sentencia: parte_izq . ASIG expresion PYC
+
+    ASIG  shift, and go to state 79
+
+
+state 57
+
+   41 parte_izq: var_arreglo .
+   45 var_arreglo: var_arreglo . LCOR expresion RCOR
+
+    LCOR  shift, and go to state 80
+
+    $default  reduce using rule 41 (parte_izq)
+
+
+state 58
+
+   18 lista_argumentos: lista_argumentos COMA tipo ID parte_arreglo .
+
+    $default  reduce using rule 18 (lista_argumentos)
+
+
+state 59
+
+   24 sentencia: IF LPAR . condicion RPAR sentencia
+   25          | IF LPAR . condicion RPAR sentencia ELSE sentencia
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 86
+
+
+state 60
+
+   27 sentencia: DO sentencia . WHILE LPAR condicion RPAR PYC
+
+    WHILE  shift, and go to state 87
+
+
+state 61
+
+   26 sentencia: WHILE LPAR . condicion RPAR sentencia
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 88
+
+
+state 62
+
+   28 sentencia: FOR LPAR . sentencia PYC condicion PYC sentencia RPAR sentencia
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 89
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 63
+
+   33 sentencia: SWICH LPAR . expresion RPAR LKEY casos predeterminado RKEY
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 90
+
+
+state 64
+
+   34 sentencia: BREAK PYC .
+
+    $default  reduce using rule 34 (sentencia)
+
+
+state 65
+
+   31 sentencia: RETURN PYC .
+
+    $default  reduce using rule 31 (sentencia)
+
+
+state 66
+
+   40 parte_izq: ID .
+   42          | ID . PTO ID
+   44 var_arreglo: ID . LCOR expresion RCOR
+   56 expresion: ID . LPAR parametros RPAR
+
+    PTO   shift, and go to state 74
+    LCOR  shift, and go to state 75
+    LPAR  shift, and go to state 91
+
+    $default  reduce using rule 40 (parte_izq)
+
+
+state 67
+
+   53 expresion: CADENA .
+
+    $default  reduce using rule 53 (expresion)
+
+
+state 68
+
+   55 expresion: CARACTER .
+
+    $default  reduce using rule 55 (expresion)
+
+
+state 69
+
+   54 expresion: NUMERO .
+
+    $default  reduce using rule 54 (expresion)
+
+
+state 70
+
+   51 expresion: LPAR . expresion RPAR
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 92
+
+
+state 71
+
+   52 expresion: parte_izq .
+
+    $default  reduce using rule 52 (expresion)
+
+
+state 72
+
+   30 sentencia: RETURN expresion . PYC
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    PYC    shift, and go to state 93
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+
+
+state 73
+
+   35 sentencia: PRINT expresion . PYC
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    PYC    shift, and go to state 99
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+
+
+state 74
+
+   42 parte_izq: ID PTO . ID
+
+    ID  shift, and go to state 100
+
+
+state 75
+
+   44 var_arreglo: ID LCOR . expresion RCOR
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 101
+
+
+state 76
+
+   32 sentencia: LKEY sentencias . RKEY
+
+    RKEY  shift, and go to state 102
+
+
+state 77
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY . funciones
+
+    FUNC  shift, and go to state 12
+
+    $default  reduce using rule 15 (funciones)
+
+    funciones  go to state 103
+
+
+state 78
+
+   22 sentencias: sentencia sentencias .
+
+    $default  reduce using rule 22 (sentencias)
+
+
+state 79
+
+   29 sentencia: parte_izq ASIG . expresion PYC
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 104
+
+
+state 80
+
+   45 var_arreglo: var_arreglo LCOR . expresion RCOR
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 105
+
+
+state 81
+
+   62 condicion: TRUE .
+
+    $default  reduce using rule 62 (condicion)
+
+
+state 82
+
+   63 condicion: FALSE .
+
+    $default  reduce using rule 63 (condicion)
+
+
+state 83
+
+   59 condicion: NEG . condicion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 106
+
+
+state 84
+
+   51 expresion: LPAR . expresion RPAR
+   61 condicion: LPAR . condicion RPAR
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 107
+    condicion    go to state 108
+
+
+state 85
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   60 condicion: expresion . rel expresion
+
+    DISTINTO  shift, and go to state 109
+    IGUAL     shift, and go to state 110
+    GE        shift, and go to state 111
+    LE        shift, and go to state 112
+    LT        shift, and go to state 113
+    GT        shift, and go to state 114
+    MENOS     shift, and go to state 94
+    MAS       shift, and go to state 95
+    MOD       shift, and go to state 96
+    DIV       shift, and go to state 97
+    MUL       shift, and go to state 98
+
+    rel  go to state 115
+
+
+state 86
+
+   24 sentencia: IF LPAR condicion . RPAR sentencia
+   25          | IF LPAR condicion . RPAR sentencia ELSE sentencia
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+
+    OR    shift, and go to state 116
+    AND   shift, and go to state 117
+    RPAR  shift, and go to state 118
+
+
+state 87
+
+   27 sentencia: DO sentencia WHILE . LPAR condicion RPAR PYC
+
+    LPAR  shift, and go to state 119
+
+
+state 88
+
+   26 sentencia: WHILE LPAR condicion . RPAR sentencia
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+
+    OR    shift, and go to state 116
+    AND   shift, and go to state 117
+    RPAR  shift, and go to state 120
+
+
+state 89
+
+   28 sentencia: FOR LPAR sentencia . PYC condicion PYC sentencia RPAR sentencia
+
+    PYC  shift, and go to state 121
+
+
+state 90
+
+   33 sentencia: SWICH LPAR expresion . RPAR LKEY casos predeterminado RKEY
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+    RPAR   shift, and go to state 122
+
+
+state 91
+
+   56 expresion: ID LPAR . parametros RPAR
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    RPAR      reduce using rule 43 (parte_izq)
+    RPAR      [reduce using rule 64 (parametros)]
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 123
+    parametros   go to state 124
+    lista_param  go to state 125
+
+
+state 92
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   51          | LPAR expresion . RPAR
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+    RPAR   shift, and go to state 126
+
+
+state 93
+
+   30 sentencia: RETURN expresion PYC .
+
+    $default  reduce using rule 30 (sentencia)
+
+
+state 94
+
+   47 expresion: expresion MENOS . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 127
+
+
+state 95
+
+   46 expresion: expresion MAS . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 128
+
+
+state 96
+
+   50 expresion: expresion MOD . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 129
+
+
+state 97
+
+   49 expresion: expresion DIV . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 130
+
+
+state 98
+
+   48 expresion: expresion MUL . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 131
+
+
+state 99
+
+   35 sentencia: PRINT expresion PYC .
+
+    $default  reduce using rule 35 (sentencia)
+
+
+state 100
+
+   42 parte_izq: ID PTO ID .
+
+    $default  reduce using rule 42 (parte_izq)
+
+
+state 101
+
+   44 var_arreglo: ID LCOR expresion . RCOR
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+    RCOR   shift, and go to state 132
+
+
+state 102
+
+   32 sentencia: LKEY sentencias RKEY .
+
+    $default  reduce using rule 32 (sentencia)
+
+
+state 103
+
+   14 funciones: FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones .
+
+    $default  reduce using rule 14 (funciones)
+
+
+state 104
+
+   29 sentencia: parte_izq ASIG expresion . PYC
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    PYC    shift, and go to state 133
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+
+
+state 105
+
+   45 var_arreglo: var_arreglo LCOR expresion . RCOR
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+    RCOR   shift, and go to state 134
+
+
+state 106
+
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+   59          | NEG condicion .
+
+    OR   shift, and go to state 116
+    AND  shift, and go to state 117
+
+    $default  reduce using rule 59 (condicion)
+
+
+state 107
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   51          | LPAR expresion . RPAR
+   60 condicion: expresion . rel expresion
+
+    DISTINTO  shift, and go to state 109
+    IGUAL     shift, and go to state 110
+    GE        shift, and go to state 111
+    LE        shift, and go to state 112
+    LT        shift, and go to state 113
+    GT        shift, and go to state 114
+    MENOS     shift, and go to state 94
+    MAS       shift, and go to state 95
+    MOD       shift, and go to state 96
+    DIV       shift, and go to state 97
+    MUL       shift, and go to state 98
+    RPAR      shift, and go to state 126
+
+    rel  go to state 115
+
+
+state 108
+
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+   61          | LPAR condicion . RPAR
+
+    OR    shift, and go to state 116
+    AND   shift, and go to state 117
+    RPAR  shift, and go to state 135
+
+
+state 109
+
+   72 rel: DISTINTO .
+
+    $default  reduce using rule 72 (rel)
+
+
+state 110
+
+   73 rel: IGUAL .
+
+    $default  reduce using rule 73 (rel)
+
+
+state 111
+
+   70 rel: GE .
+
+    $default  reduce using rule 70 (rel)
+
+
+state 112
+
+   71 rel: LE .
+
+    $default  reduce using rule 71 (rel)
+
+
+state 113
+
+   69 rel: LT .
+
+    $default  reduce using rule 69 (rel)
+
+
+state 114
+
+   68 rel: GT .
+
+    $default  reduce using rule 68 (rel)
+
+
+state 115
+
+   60 condicion: expresion rel . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 136
+
+
+state 116
+
+   57 condicion: condicion OR . condicion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 137
+
+
+state 117
+
+   58 condicion: condicion AND . condicion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 138
+
+
+state 118
+
+   24 sentencia: IF LPAR condicion RPAR . sentencia
+   25          | IF LPAR condicion RPAR . sentencia ELSE sentencia
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 139
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 119
+
+   27 sentencia: DO sentencia WHILE LPAR . condicion RPAR PYC
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 140
+
+
+state 120
+
+   26 sentencia: WHILE LPAR condicion RPAR . sentencia
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 141
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 121
+
+   28 sentencia: FOR LPAR sentencia PYC . condicion PYC sentencia RPAR sentencia
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    TRUE      shift, and go to state 81
+    FALSE     shift, and go to state 82
+    NEG       shift, and go to state 83
+    LPAR      shift, and go to state 84
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 85
+    condicion    go to state 142
+
+
+state 122
+
+   33 sentencia: SWICH LPAR expresion RPAR . LKEY casos predeterminado RKEY
+
+    LKEY  shift, and go to state 143
+
+
+state 123
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   67 lista_param: expresion .
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+
+    $default  reduce using rule 67 (lista_param)
+
+
+state 124
+
+   56 expresion: ID LPAR parametros . RPAR
+
+    RPAR  shift, and go to state 144
+
+
+state 125
+
+   65 parametros: lista_param .
+   66 lista_param: lista_param . COMA expresion
+
+    COMA  shift, and go to state 145
+
+    $default  reduce using rule 65 (parametros)
+
+
+state 126
+
+   51 expresion: LPAR expresion RPAR .
+
+    $default  reduce using rule 51 (expresion)
+
+
+state 127
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   47          | expresion MENOS expresion .
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    MOD  shift, and go to state 96
+    DIV  shift, and go to state 97
+    MUL  shift, and go to state 98
+
+    $default  reduce using rule 47 (expresion)
+
+
+state 128
+
+   46 expresion: expresion . MAS expresion
+   46          | expresion MAS expresion .
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    MOD  shift, and go to state 96
+    DIV  shift, and go to state 97
+    MUL  shift, and go to state 98
+
+    $default  reduce using rule 46 (expresion)
+
+
+state 129
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   50          | expresion MOD expresion .
+
+    $default  reduce using rule 50 (expresion)
+
+
+state 130
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   49          | expresion DIV expresion .
+   50          | expresion . MOD expresion
+
+    $default  reduce using rule 49 (expresion)
+
+
+state 131
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   48          | expresion MUL expresion .
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+
+    $default  reduce using rule 48 (expresion)
+
+
+state 132
+
+   44 var_arreglo: ID LCOR expresion RCOR .
+
+    $default  reduce using rule 44 (var_arreglo)
+
+
+state 133
+
+   29 sentencia: parte_izq ASIG expresion PYC .
+
+    $default  reduce using rule 29 (sentencia)
+
+
+state 134
+
+   45 var_arreglo: var_arreglo LCOR expresion RCOR .
+
+    $default  reduce using rule 45 (var_arreglo)
+
+
+state 135
+
+   61 condicion: LPAR condicion RPAR .
+
+    $default  reduce using rule 61 (condicion)
+
+
+state 136
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   60 condicion: expresion rel expresion .
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+
+    $default  reduce using rule 60 (condicion)
+
+
+state 137
+
+   57 condicion: condicion . OR condicion
+   57          | condicion OR condicion .
+   58          | condicion . AND condicion
+
+    AND  shift, and go to state 117
+
+    $default  reduce using rule 57 (condicion)
+
+
+state 138
+
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+   58          | condicion AND condicion .
+
+    $default  reduce using rule 58 (condicion)
+
+
+state 139
+
+   24 sentencia: IF LPAR condicion RPAR sentencia .
+   25          | IF LPAR condicion RPAR sentencia . ELSE sentencia
+
+    ELSE  shift, and go to state 146
+
+    $default  reduce using rule 24 (sentencia)
+
+
+state 140
+
+   27 sentencia: DO sentencia WHILE LPAR condicion . RPAR PYC
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+
+    OR    shift, and go to state 116
+    AND   shift, and go to state 117
+    RPAR  shift, and go to state 147
+
+
+state 141
+
+   26 sentencia: WHILE LPAR condicion RPAR sentencia .
+
+    $default  reduce using rule 26 (sentencia)
+
+
+state 142
+
+   28 sentencia: FOR LPAR sentencia PYC condicion . PYC sentencia RPAR sentencia
+   57 condicion: condicion . OR condicion
+   58          | condicion . AND condicion
+
+    PYC  shift, and go to state 148
+    OR   shift, and go to state 116
+    AND  shift, and go to state 117
+
+
+state 143
+
+   33 sentencia: SWICH LPAR expresion RPAR LKEY . casos predeterminado RKEY
+
+    CASE  shift, and go to state 149
+
+    $default  reduce using rule 37 (casos)
+
+    casos  go to state 150
+
+
+state 144
+
+   56 expresion: ID LPAR parametros RPAR .
+
+    $default  reduce using rule 56 (expresion)
+
+
+state 145
+
+   66 lista_param: lista_param COMA . expresion
+
+    ID        shift, and go to state 66
+    CADENA    shift, and go to state 67
+    CARACTER  shift, and go to state 68
+    NUMERO    shift, and go to state 69
+    LPAR      shift, and go to state 70
+
+    $default  reduce using rule 43 (parte_izq)
+
+    parte_izq    go to state 71
+    var_arreglo  go to state 57
+    expresion    go to state 151
+
+
+state 146
+
+   25 sentencia: IF LPAR condicion RPAR sentencia ELSE . sentencia
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 152
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 147
+
+   27 sentencia: DO sentencia WHILE LPAR condicion RPAR . PYC
+
+    PYC  shift, and go to state 153
+
+
+state 148
+
+   28 sentencia: FOR LPAR sentencia PYC condicion PYC . sentencia RPAR sentencia
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 154
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 149
+
+   36 casos: CASE . NUMERO DP sentencias casos
+
+    NUMERO  shift, and go to state 155
+
+
+state 150
+
+   33 sentencia: SWICH LPAR expresion RPAR LKEY casos . predeterminado RKEY
+
+    DEFAULT  shift, and go to state 156
+
+    $default  reduce using rule 39 (predeterminado)
+
+    predeterminado  go to state 157
+
+
+state 151
+
+   46 expresion: expresion . MAS expresion
+   47          | expresion . MENOS expresion
+   48          | expresion . MUL expresion
+   49          | expresion . DIV expresion
+   50          | expresion . MOD expresion
+   66 lista_param: lista_param COMA expresion .
+
+    MENOS  shift, and go to state 94
+    MAS    shift, and go to state 95
+    MOD    shift, and go to state 96
+    DIV    shift, and go to state 97
+    MUL    shift, and go to state 98
+
+    $default  reduce using rule 66 (lista_param)
+
+
+state 152
+
+   25 sentencia: IF LPAR condicion RPAR sentencia ELSE sentencia .
+
+    $default  reduce using rule 25 (sentencia)
+
+
+state 153
+
+   27 sentencia: DO sentencia WHILE LPAR condicion RPAR PYC .
+
+    $default  reduce using rule 27 (sentencia)
+
+
+state 154
+
+   28 sentencia: FOR LPAR sentencia PYC condicion PYC sentencia . RPAR sentencia
+
+    RPAR  shift, and go to state 158
+
+
+state 155
+
+   36 casos: CASE NUMERO . DP sentencias casos
+
+    DP  shift, and go to state 159
+
+
+state 156
+
+   38 predeterminado: DEFAULT . DP sentencias
+
+    DP  shift, and go to state 160
+
+
+state 157
+
+   33 sentencia: SWICH LPAR expresion RPAR LKEY casos predeterminado . RKEY
+
+    RKEY  shift, and go to state 161
+
+
+state 158
+
+   28 sentencia: FOR LPAR sentencia PYC condicion PYC sentencia RPAR . sentencia
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencia    go to state 162
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 159
+
+   36 casos: CASE NUMERO DP . sentencias casos
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencias   go to state 163
+    sentencia    go to state 55
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 160
+
+   38 predeterminado: DEFAULT DP . sentencias
+
+    IF      shift, and go to state 44
+    DO      shift, and go to state 45
+    WHILE   shift, and go to state 46
+    FOR     shift, and go to state 47
+    SWICH   shift, and go to state 48
+    BREAK   shift, and go to state 49
+    RETURN  shift, and go to state 50
+    PRINT   shift, and go to state 51
+    ID      shift, and go to state 52
+    LKEY    shift, and go to state 53
+
+    $default  reduce using rule 43 (parte_izq)
+
+    sentencias   go to state 164
+    sentencia    go to state 55
+    parte_izq    go to state 56
+    var_arreglo  go to state 57
+
+
+state 161
+
+   33 sentencia: SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY .
+
+    $default  reduce using rule 33 (sentencia)
+
+
+state 162
+
+   28 sentencia: FOR LPAR sentencia PYC condicion PYC sentencia RPAR sentencia .
+
+    $default  reduce using rule 28 (sentencia)
+
+
+state 163
+
+   36 casos: CASE NUMERO DP sentencias . casos
+
+    CASE  shift, and go to state 149
+
+    $default  reduce using rule 37 (casos)
+
+    casos  go to state 165
+
+
+state 164
+
+   38 predeterminado: DEFAULT DP sentencias .
+
+    $default  reduce using rule 38 (predeterminado)
+
+
+state 165
+
+   36 casos: CASE NUMERO DP sentencias casos .
+
+    $default  reduce using rule 36 (casos)
