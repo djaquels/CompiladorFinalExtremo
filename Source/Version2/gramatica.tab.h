@@ -106,17 +106,12 @@ union YYSTYPE
 #line 58 "gramatica.y" /* yacc.c:1909  */
 
     struct {
-      char*val;
-      int type;
+      char* val;
     }numero;
     char *id;
-    struct {
-      int type;
-    }tipos;
-    
-    
+    int type;  
 
-#line 120 "gramatica.tab.h" /* yacc.c:1909  */
+#line 115 "gramatica.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

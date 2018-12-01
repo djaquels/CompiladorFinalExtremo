@@ -57,15 +57,10 @@ int tipo;
 /*DEFINICION DE TU UNION PARA MANEJAR TIPOS*/
 %union{
     struct {
-      char*val;
-      int type;
+      char* val;
     }numero;
     char *id;
-    struct {
-      int type;
-    }tipos;
-    
-    
+    int type;  
 }
 
 /*DEFINICION DE TIPOS*/
@@ -97,19 +92,17 @@ int tipo;
 %nonassoc IFX
 %nonassoc ELSE
 
-%type<tipos> tipo arreglo
+%type<type> tipo arreglo
 %start programa
 
 %%
 /*GRAMATICA DEL LENGUAJE*/
-programa : {init();} declaraciones funciones {
-	printf("p -> D F\n");
-}
-declaraciones : tipo lista | ;
-tipo : INT {$$ = 0;} | FLOAT  {$$ = 1;}| DOUBLE  {$$ = 2;}| CHAR {$$ = 3;} | VOID {$$ = 4;} | STRUCT LKEY declaraciones RKEY {$$= 5;} ;
+programa : {init();} declaraciones funciones ;
+declaraciones : tipo lista  PYC declaraciones  | {printf("Fin Declaraciones\n");} ;
+tipo : INT { $$ = 0;} | FLOAT  {$$ = 1;}| DOUBLE  {$$ = 2;}| CHAR {$$ = 3;} | VOID {$$ = 4;} /*| STRUCT LKEY declaraciones RKEY {$$= 5;} ;*/
 lista : lista COMA ID arreglo | ID arreglo;
-arreglo : LCOR NUMERO RCOR arreglo |{} ;
-funciones : FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | ;
+arreglo : LCOR NUMERO RCOR arreglo | {} ;
+funciones : FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | {};
 argumentos : lista_argumentos | ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo;
 parte_arreglo : LCOR RCOR parte_arreglo | ;
@@ -146,7 +139,7 @@ rel: GT | LT | GE | LE | DISTINTO| IGUAL;
 
 %%
 void yyerror(char *s) {
-	printf("Error: %s  %n\n ",s,yylineno);
+	printf("Error: %s  %d\n ",s,yylineno);
 }
 
 void init(){
