@@ -80,10 +80,12 @@ void init();
 extern int yylex();
 extern int yylineno();
 int tipo;
+int direccion = 0;
+int llavesimbolos = 0;
 // VARIABLES GLOBALES
 
 
-#line 87 "gramatica.tab.c" /* yacc.c:339  */
+#line 89 "gramatica.tab.c" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -176,7 +178,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 58 "gramatica.y" /* yacc.c:355  */
+#line 60 "gramatica.y" /* yacc.c:355  */
 
     struct {
       char* val;
@@ -184,7 +186,7 @@ union YYSTYPE
     char *id;
     int type;  
 
-#line 188 "gramatica.tab.c" /* yacc.c:355  */
+#line 190 "gramatica.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -201,7 +203,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 205 "gramatica.tab.c" /* yacc.c:358  */
+#line 207 "gramatica.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -503,14 +505,14 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   100,   100,   100,   101,   101,   102,   102,   102,   102,
-     102,   103,   103,   104,   104,   105,   105,   106,   106,   107,
-     107,   108,   108,   109,   109,   110,   111,   112,   113,   114,
-     115,   116,   117,   118,   119,   120,   121,   122,   122,   123,
-     123,   124,   124,   124,   124,   125,   125,   126,   127,   128,
-     129,   130,   131,   132,   133,   133,   133,   133,   134,   134,
-     135,   135,   135,   135,   135,   136,   136,   137,   137,   138,
-     138,   138,   138,   138,   138
+       0,   102,   102,   102,   103,   103,   104,   104,   104,   104,
+     104,   105,   105,   112,   112,   113,   113,   114,   114,   115,
+     115,   116,   116,   117,   117,   118,   119,   120,   121,   122,
+     123,   124,   125,   126,   127,   128,   129,   130,   130,   131,
+     131,   132,   132,   132,   132,   133,   133,   134,   135,   136,
+     137,   138,   139,   140,   141,   141,   141,   141,   142,   142,
+     143,   143,   143,   143,   143,   144,   144,   145,   145,   146,
+     146,   146,   146,   146,   146
 };
 #endif
 
@@ -1402,67 +1404,73 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 100 "gramatica.y" /* yacc.c:1646  */
+#line 102 "gramatica.y" /* yacc.c:1646  */
     {init();}
-#line 1408 "gramatica.tab.c" /* yacc.c:1646  */
-    break;
-
-  case 4:
-#line 101 "gramatica.y" /* yacc.c:1646  */
-    {(yyvsp[-3].type) = (yyvsp[-3].type);}
-#line 1414 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1410 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 101 "gramatica.y" /* yacc.c:1646  */
+#line 103 "gramatica.y" /* yacc.c:1646  */
     {printf("Fin Declaraciones\n");}
-#line 1420 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1416 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 102 "gramatica.y" /* yacc.c:1646  */
-    { (yyval.type) = 0;}
-#line 1426 "gramatica.tab.c" /* yacc.c:1646  */
+#line 104 "gramatica.y" /* yacc.c:1646  */
+    { tipo = 0;}
+#line 1422 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 102 "gramatica.y" /* yacc.c:1646  */
-    {(yyval.type) = 1;}
-#line 1432 "gramatica.tab.c" /* yacc.c:1646  */
+#line 104 "gramatica.y" /* yacc.c:1646  */
+    {tipo = 1;}
+#line 1428 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 102 "gramatica.y" /* yacc.c:1646  */
-    {(yyval.type) = 2;}
-#line 1438 "gramatica.tab.c" /* yacc.c:1646  */
+#line 104 "gramatica.y" /* yacc.c:1646  */
+    {tipo = 2;}
+#line 1434 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 102 "gramatica.y" /* yacc.c:1646  */
-    {(yyval.type) = 3;}
-#line 1444 "gramatica.tab.c" /* yacc.c:1646  */
+#line 104 "gramatica.y" /* yacc.c:1646  */
+    {tipo = 3;}
+#line 1440 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 102 "gramatica.y" /* yacc.c:1646  */
-    {(yyval.type) = 4;}
-#line 1450 "gramatica.tab.c" /* yacc.c:1646  */
+#line 104 "gramatica.y" /* yacc.c:1646  */
+    {tipo = 4;}
+#line 1446 "gramatica.tab.c" /* yacc.c:1646  */
+    break;
+
+  case 12:
+#line 105 "gramatica.y" /* yacc.c:1646  */
+    {
+ Lexema l;
+ TablaTipos * t; 
+ t = topTipos(tipos); 
+ l = crearLexema(tipo,yyval.id,direccion,variable,NULL); // Nuevo Lexema
+ llavesimbolos = addSimbolo(llavesimbolos,l,tablasim_global); // Añadimos simbolo a la tabla de simbolos
+}
+#line 1458 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 104 "gramatica.y" /* yacc.c:1646  */
-    {}
-#line 1456 "gramatica.tab.c" /* yacc.c:1646  */
+#line 112 "gramatica.y" /* yacc.c:1646  */
+    {(yyval.type) = tipo;}
+#line 1464 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 105 "gramatica.y" /* yacc.c:1646  */
+#line 113 "gramatica.y" /* yacc.c:1646  */
     {}
-#line 1462 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1470 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1466 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1474 "gramatica.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1690,7 +1698,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 140 "gramatica.y" /* yacc.c:1906  */
+#line 148 "gramatica.y" /* yacc.c:1906  */
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylineno);

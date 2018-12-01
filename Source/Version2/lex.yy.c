@@ -1132,41 +1132,44 @@ YY_RULE_SETUP
 case 46:
 YY_RULE_SETUP
 #line 106 "lexer.l"
-{return ID;}
+{
+			yylval.id = (char*)malloc(strlen(yytext)*sizeof(char));
+			strcpy(yylval.id, yytext);
+  return ID;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 107 "lexer.l"
+#line 110 "lexer.l"
 {return NUMERO;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 108 "lexer.l"
+#line 111 "lexer.l"
 {return NUMERO;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 109 "lexer.l"
+#line 112 "lexer.l"
 {return CARACTER;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 110 "lexer.l"
+#line 113 "lexer.l"
 {return CADENA;}
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 111 "lexer.l"
+#line 114 "lexer.l"
 {}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 112 "lexer.l"
+#line 115 "lexer.l"
 { yyterminate(); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 114 "lexer.l"
+#line 117 "lexer.l"
 {
 		printf("Error Lexico: %d -> %s token invalido.\n\n",yylineno,yytext);
 	}
@@ -1175,7 +1178,7 @@ YY_RULE_SETUP
 
 case 53:
 YY_RULE_SETUP
-#line 121 "lexer.l"
+#line 124 "lexer.l"
 {
 		// printf("FIN COMENTARIO");
 		BEGIN INITIAL;
@@ -1184,7 +1187,7 @@ YY_RULE_SETUP
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 126 "lexer.l"
+#line 129 "lexer.l"
 {
 		// Cualquier cosa que no sea * ó /
 		// ejemplo: hola como estas 341241 11 1
@@ -1192,25 +1195,25 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 131 "lexer.l"
+#line 134 "lexer.l"
 {}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 133 "lexer.l"
+#line 136 "lexer.l"
 {}
 	YY_BREAK
 
 
 case 57:
 YY_RULE_SETUP
-#line 137 "lexer.l"
+#line 140 "lexer.l"
 {}
 	YY_BREAK
 case 58:
 /* rule 58 can match eol */
 YY_RULE_SETUP
-#line 139 "lexer.l"
+#line 142 "lexer.l"
 {
 		BEGIN INITIAL;
 	}
@@ -1218,10 +1221,10 @@ YY_RULE_SETUP
 
 case 59:
 YY_RULE_SETUP
-#line 144 "lexer.l"
+#line 147 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 1225 "lex.yy.c"
+#line 1228 "lex.yy.c"
 case YY_STATE_EOF(COMM):
 case YY_STATE_EOF(COMMII):
 	yyterminate();
@@ -2235,7 +2238,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 144 "lexer.l"
+#line 147 "lexer.l"
 
 
 

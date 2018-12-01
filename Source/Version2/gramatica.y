@@ -51,6 +51,8 @@ void init();
 extern int yylex();
 extern int yylineno();
 int tipo;
+int direccion = 0;
+int llavesimbolos = 0;
 // VARIABLES GLOBALES
 
 %}
@@ -99,9 +101,16 @@ int tipo;
 /*GRAMATICA DEL LENGUAJE*/
 programa : {init();} declaraciones funciones ;
 declaraciones : tipo lista  PYC declaraciones  | {printf("Fin Declaraciones\n");} ;
-tipo : INT { $$ = 0;} | FLOAT  {$$ = 1;}| DOUBLE  {$$ = 2;}| CHAR {$$ = 3;} | VOID {$$ = 4;} /*| STRUCT LKEY declaraciones RKEY {$$= 5;} ;*/
-lista : lista COMA ID arreglo | ID arreglo;
-arreglo : LCOR NUMERO RCOR arreglo | {} ;
+tipo : INT { tipo = 0;} | FLOAT  {tipo = 1;}| DOUBLE  {tipo = 2;}| CHAR {tipo = 3;} | VOID {tipo = 4;} /*| STRUCT LKEY declaraciones RKEY {$$= 5;} ;*/
+lista : lista COMA ID arreglo  | ID arreglo {
+ Lexema l;
+ TablaTipos * t; 
+ t = topTipos(tipos);
+  
+ l = crearLexema(tipo,yyval.id,direccion,variable,NULL); // Nuevo Lexema
+ llavesimbolos = addSimbolo(llavesimbolos,l,tablasim_global); // Añadimos simbolo a la tabla de simbolos
+};
+arreglo : LCOR NUMERO RCOR arreglo | {$$ = tipo;} ;
 funciones : FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | {};
 argumentos : lista_argumentos | ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo;

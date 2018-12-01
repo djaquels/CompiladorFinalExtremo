@@ -1,2 +1,3 @@
-int a,b;
-float c,d;
+int factorial;
+int numero;
+char a;

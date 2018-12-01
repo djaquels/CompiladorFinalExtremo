@@ -103,7 +103,10 @@ id_valido  [a-zA-Z_\-]
 "<" {return LT;}
 ">" {return GT;}
 [\%] {return MOD;}
-{id_valido}+{id_valido}* {return ID;}
+{id_valido}+{id_valido}* {
+			yylval.id = (char*)malloc(strlen(yytext)*sizeof(char));
+			strcpy(yylval.id, yytext);
+  return ID;}
 {digito}+ {return NUMERO;}
 {digito}+.{digito}+"f" {return NUMERO;}
 "'"{id_valido}"'" {return CARACTER;}

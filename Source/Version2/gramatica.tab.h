@@ -103,7 +103,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 58 "gramatica.y" /* yacc.c:1909  */
+#line 60 "gramatica.y" /* yacc.c:1909  */
 
     struct {
       char* val;
