@@ -38,7 +38,7 @@
 %{
  #include <stdio.h>
  #include <string.h>
- #include "y.tab.h"
+ #include "gramatica.tab.h"
 %}
 %option yylineno
 %option noyywrap
@@ -108,7 +108,7 @@ id_valido  [a-zA-Z_\-]
 {digito}+.{digito}+"f" {return NUMERO;}
 "'"{id_valido}"'" {return CARACTER;}
 [\""]{id_valido}*[\""] {return CADENA;}
-
+[ \n\t] {}
 <<EOF>> 	 { yyterminate(); }
 
 	. {

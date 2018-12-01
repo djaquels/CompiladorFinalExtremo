@@ -34,12 +34,12 @@
 
 
 */
-#define INT "int"
-#define FLOAT "float"
-#define DOUBLE "double"
-#define CHAR "char"
-#define BOOL "bool"
-#define VOID "void"
+#define INTT 0
+#define FLOATT 1
+#define DOUBLET 2
+#define CHART 3
+#define VOIDT 4
+#define STRUCTT 5
 // Tipos de variables
 #define funcion 1
 #define variable 2

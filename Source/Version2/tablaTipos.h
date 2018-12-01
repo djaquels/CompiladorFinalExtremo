@@ -62,7 +62,7 @@ TablaTipos* crearTablaTipos(){
 int addTipo(int llave ,Tipo t, TablaTipos ta[]){
  ta[llave].id = llave;
  ta[llave].tipo= t;
- printf("id:%i-> pos:%s tipo:%i dim:%i base: \n",ta[llave].id,ta[llave].tipo.pos,ta[llave].tipo.tipo,ta[llave].tipo.dim,ta[llave].tipo.tipo_base);
+ printf("Nuevo Tipo: %d %d %d\n",llave,ta[llave].tipo.tipo,ta[llave].tipo.dim);
  return llave += 1;
 }
 Tipo crearTipo(int p, int t,int d,int tb){
@@ -75,3 +75,4 @@ Tipo crearTipo(int p, int t,int d,int tb){
   return tmp;
 }
 // PILA DE TABLAS DE TIPOS
+

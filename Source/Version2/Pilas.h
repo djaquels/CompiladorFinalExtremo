@@ -232,3 +232,33 @@ char* topTrue(struct TruePilaNodo* root)
         perror("u.u");
     return root->label;
 }
+// TABLA DE TIPOS  y PILA
+int llavetipos = 5;
+TablaTipos  * tablatipos_global;
+struct PilaTiposNodo* tipos = NULL;
+void crearPilaTablaTipos(){
+  printf("Creando Tabla De Tipos\n");
+  // Se crean los tipos
+  tablatipos_global = crearTablaTipos();
+  Tipo inttipo = crearTipo(0,INTT,4,-1);
+  Tipo floattipo = crearTipo(1,FLOATT,4,-1);
+  Tipo doubletipo = crearTipo(2,DOUBLET,8,-1);
+  Tipo chartipo = crearTipo(3,CHART,4,-1);
+  Tipo voidtipo = crearTipo(4,VOIDT,0,-1);
+  addTipo(0,inttipo,tablatipos_global);
+  addTipo(1,floattipo,tablatipos_global);
+  addTipo(2,doubletipo,tablatipos_global);
+  addTipo(3,chartipo,tablatipos_global);
+  addTipo(4,voidtipo,tablatipos_global);
+  pushTipo(&tipos,tablatipos_global);
+}
+
+// PILA DE TABLA DE SIMBOLOS
+TablaSimbolos *tablasim_global;
+struct PilaSimbolosNodo* simbolos = NULL;
+void crearPilaTablaSimbolos(){
+  printf("Creando Tabla De Simbolos\n");
+  tablasim_global = crearTablaSimbolos();
+  pushSimbolo(&simbolos,tablasim_global);
+}
+
