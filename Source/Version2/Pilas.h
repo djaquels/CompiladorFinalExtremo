@@ -233,7 +233,7 @@ char* topTrue(struct TruePilaNodo* root)
     return root->label;
 }
 // TABLA DE TIPOS  y PILA
-int llavetipos = 5;
+int llaveTipos = 5;
 TablaTipos  * tablatipos_global;
 struct PilaTiposNodo* tipos = NULL;
 void crearPilaTablaTipos(){

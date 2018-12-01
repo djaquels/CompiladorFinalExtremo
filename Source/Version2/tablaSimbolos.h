@@ -72,6 +72,7 @@ Lexema crearLexema(char* t,char* id,int d, int t_var,char* args[]){
   tmp.tipo_variable = t_var;
   tmp.tokens = id;
   //tmp.argumentos = args;
+  printf("Lexema %s creado \n",id);
   return tmp;
 }
 // PILA DE TABLA DE SIMBOLOS

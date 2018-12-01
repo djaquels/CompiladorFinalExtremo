@@ -103,16 +103,20 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 59 "gramatica.y" /* yacc.c:1909  */
+#line 58 "gramatica.y" /* yacc.c:1909  */
 
     struct {
       char*val;
       int type;
     }numero;
     char *id;
-    int type;
+    struct {
+      int type;
+    }tipos;
+    
+    
 
-#line 116 "gramatica.tab.h" /* yacc.c:1909  */
+#line 120 "gramatica.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
