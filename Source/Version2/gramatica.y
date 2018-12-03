@@ -58,11 +58,11 @@ int llavesimbolos = 0;
 %}
 /*DEFINICION DE TU UNION PARA MANEJAR TIPOS*/
 %union{
-    struct {
-      char* val;
-    }numero;
+    int numero;
+    float numerof;
     char *id;
     int type;  
+    int line;
 }
 
 /*DEFINICION DE TIPOS*/
@@ -99,19 +99,58 @@ int llavesimbolos = 0;
 
 %%
 /*GRAMATICA DEL LENGUAJE*/
-programa : {init();} declaraciones funciones ;
-declaraciones : tipo lista  PYC declaraciones  | {printf("Fin Declaraciones\n");} ;
+programa : {
+  direccion = 0;
+  init();} declaraciones {
+    printf("Aquí comienza el analicis de funciones\n");
+  } funciones ;
+declaraciones : tipo lista  PYC declaraciones  | {printf("Fin De declaraciones\n");};
 tipo : INT { tipo = 0;} | FLOAT  {tipo = 1;}| DOUBLE  {tipo = 2;}| CHAR {tipo = 3;} | VOID {tipo = 4;} /*| STRUCT LKEY declaraciones RKEY {$$= 5;} ;*/
-lista : lista COMA ID arreglo  | ID arreglo {
+lista : lista COMA ID arreglo  {
  Lexema l;
  TablaTipos * t; 
- t = topTipos(tipos);
-  
- l = crearLexema(tipo,yyval.id,direccion,variable,NULL); // Nuevo Lexema
+ t = topTipos(tipos); 
+ char * tempid = malloc(sizeof(char*));
+ strcpy(tempid,yyval.id);
+ l = crearLexema(tipo,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim_global); // Añadimos simbolo a la tabla de simbolos
+ free(yyval.id);
+ direccion = direccion + t[tipo].tipo.dim;
+} | ID arreglo {
+ Lexema l;
+ TablaTipos * t; 
+ t = topTipos(tipos); 
+ //printf("%i\n",t[tipo].tipo.tipo);
+ char * tempid = malloc(sizeof(char*));
+ strcpy(tempid,yyval.id);
+ l = crearLexema(tipo,tempid,direccion,variable,NULL); // Nuevo Lexema
+ llavesimbolos = addSimbolo(llavesimbolos,l,tablasim_global); // Añadimos simbolo a la tabla de simbolos
+ free(yyval.id);
+ direccion = direccion + t[tipo].tipo.dim;
 };
-arreglo : LCOR NUMERO RCOR arreglo | {$$ = tipo;} ;
-funciones : FUNC tipo ID LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | {};
+arreglo : LCOR NUMERO RCOR arreglo {
+ printf("o.o %d\n",yyval.numero);
+} | {$$ = tipo;} ;
+funciones : FUNC tipo ID {
+  //Buscamos en la tabla de simbolos
+  char * tempid = malloc(sizeof(char*));
+  strcpy(tempid,yyval.id);
+  int existe = 0;
+  TablaSimbolos * last = topSimbolos(simbolos);
+  for(int i = 0; i < llavesimbolos;i++){
+    if(strcmp(tempid,last[i].lexema.tokens) == 0){
+      //printf("omg ya existe\n");
+      existe = 1;
+    }
+    //printf("%s ==? %s\n",tempid,last[i].lexema.tokens);
+  }
+  if(existe == 0){
+    // Se crea una tabla de simbolos;
+  }else{
+    yyerror("ID Duplicado, se necesita cambiar el identificador de la funcion");
+    exit(-1);
+  }
+} LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | {};
 argumentos : lista_argumentos | ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo;
 parte_arreglo : LCOR RCOR parte_arreglo | ;
@@ -148,7 +187,7 @@ rel: GT | LT | GE | LE | DISTINTO| IGUAL;
 
 %%
 void yyerror(char *s) {
-	printf("Error: %s  %d\n ",s,yylineno);
+	printf("Error: %s  %d\n ",s,yylval.line);
 }
 
 void init(){

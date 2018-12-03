@@ -105,11 +105,11 @@ union YYSTYPE
 {
 #line 60 "gramatica.y" /* yacc.c:1909  */
 
-    struct {
-      char* val;
-    }numero;
+    int numero;
+    float numerof;
     char *id;
     int type;  
+    int line;
 
 #line 115 "gramatica.tab.h" /* yacc.c:1909  */
 };

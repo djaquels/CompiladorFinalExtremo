@@ -1,3 +1,5 @@
-int factorial;
 int numero;
-char a;
+int resultado;
+func int factorial(){
+    int temporal;
+}

@@ -61,8 +61,12 @@ id_valido  [a-zA-Z_\-]
 	"//" {
 		BEGIN COMMII;
 	}
-"int" {return INT;}
-"float" {return FLOAT;}
+"int" {
+    yylval.line = yylineno;
+    return INT;}
+"float" {
+    yylval.line = yylineno;
+    return FLOAT;}
 "double" {return DOUBLE;}
 "char" {return CHAR;}
 "void" {return VOID;}
@@ -78,8 +82,12 @@ id_valido  [a-zA-Z_\-]
 "break" {return BREAK;}
 "default" {return DEFAULT;}
 "return" {return RETURN;}
-"(" {return LPAR;}
-")" {return RPAR;}
+"(" {
+    yylval.line = yylineno;
+    return LPAR;}
+")" {
+    yylval.line = yylineno;
+    return RPAR;}
 "{" {return LKEY;}
 "}" {return RKEY;}
 "[" {return LCOR;}
@@ -107,8 +115,12 @@ id_valido  [a-zA-Z_\-]
 			yylval.id = (char*)malloc(strlen(yytext)*sizeof(char));
 			strcpy(yylval.id, yytext);
   return ID;}
-{digito}+ {return NUMERO;}
-{digito}+.{digito}+"f" {return NUMERO;}
+{digito}+ {
+      yylval.numerof = atof(yytext);
+      return NUMERO;}
+{digito}+.{digito}+"f" {
+      yylval.numero = (int )atoi(yytext);
+      return NUMERO;}
 "'"{id_valido}"'" {return CARACTER;}
 [\""]{id_valido}*[\""] {return CADENA;}
 [ \n\t] {}
