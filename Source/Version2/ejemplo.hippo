@@ -1,2 +1,1 @@
-int tests[6];
-int resultados[6];
+int tests[6],resultados[7];

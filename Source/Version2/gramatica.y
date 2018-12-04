@@ -109,7 +109,7 @@ declaraciones : tipo lista  PYC declaraciones  | {printf("Fin De declaraciones\n
 tipo : INT { $$.type = 0; tipo = 0;} | FLOAT  {$$.type = 1; tipo = 1;}| DOUBLE  {$$.type = 2; tipo = 2;}
       | CHAR {$$.type = 3; tipo = 3;} | VOID {$$.type = 4; tipo = 4;} /*| STRUCT LKEY declaraciones RKEY {$$= 5;} ;*/
 lista : lista COMA ID arreglo  {
- printf("Añadiendo Simbolos\n");
+ printf("Añadiendo Simbolo: %s\n", $3);
  //$$.type = $4.type;
  Lexema l;
  TablaTipos * t; 
@@ -123,7 +123,7 @@ lista : lista COMA ID arreglo  {
  free(tempid);
  direccion = direccion + t[$4.type].tipo.dim;
 } | ID arreglo {
- printf("Añadiendo Simbolo :%s\n",$1);
+ printf("Añadiendo Simbolo : %s\n",$1);
  //$$.type = $2.type;
  Lexema l;
  TablaTipos * t; 
@@ -143,8 +143,14 @@ arreglo : LCOR NUMERO RCOR arreglo {
   TablaTipos * t = topTipos(tipos);
   int n = atoi($2);
   dimarr = t[tipo].tipo.dim * n;
-  Tipo nuevoarreglo = crearTipo(toptipo,toptipo,dimarr,t[tipo].tipo.tipo);
-  addTipo(toptipo,nuevoarreglo,topTipos(tipos));
+  Tipo nuevoarreglo;
+  //printf("%d %d \n\n",t[toptipo - 1 ].tipo.tipo_base,tipo);
+  if( t[toptipo - 1 ].tipo.tipo_base == tipo && t[toptipo - 1 ].tipo.dim == dimarr){
+    toptipo = toptipo - 1;
+  }else{
+    nuevoarreglo = crearTipo(toptipo,toptipo,dimarr,t[tipo].tipo.tipo);
+    addTipo(toptipo,nuevoarreglo,topTipos(tipos));
+  }
   toptipo += 1;
   $$.type = toptipo - 1 ;
 } | {$$.type = tipo;} ;
