@@ -146,11 +146,12 @@ TablaSimbolos* popSimbolos(struct PilaSimbolosNodo** p){
    perror("u.u");
    printf("La Pila Esta Vacia Y No Se Puede hacer pop!\n");
    }
-
+ 
  struct PilaSimbolosNodo* temp = *p;
  *p = (*p)->next;
  TablaSimbolos* popped = temp->tabla;
  free(temp);
+ printf("Se quito una Tabla De Simbolos:pop()\n");
  return popped;
 }
 TablaTipos* popTipos(struct PilaTiposNodo** p){

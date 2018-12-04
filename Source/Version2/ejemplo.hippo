@@ -1,5 +1,5 @@
 int numero;
 int resultado;
 func int factorial(){
-    int temporal;
+    int temporal,iterar;
 }

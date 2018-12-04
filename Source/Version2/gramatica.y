@@ -26,13 +26,6 @@
                             ;`-
                            :\
                            ;
-                           Rey de Oro Blanco
-                           Uno de Tantos Apodos
-                           Controló el Mercado
-                           El lo hizo a Su Modo
-                           -Aerolineas Carrillo- T3CER Elemento (FT. Gerardo Ortiz)
-
-
 */
 %{
 #include <string.h>
@@ -41,18 +34,20 @@
 #include "tablaTipos.h"
 #include "tablaSimbolos.h"
 #include "Pilas.h"
-
+#include "mipsCode.h"
 // BISON NECESITA SABER DE ESTAS FUNCIONES
 extern int yylex();
 extern int yyparse();
 extern FILE *yyin;
 void yyerror(char *s);
 void init();
+int existeID(char*id,TablaSimbolos *t);//Verifica si un id ya existe en la Tabla de Simbolos
 extern int yylex();
 extern int yylineno();
 int tipo;
 int direccion = 0;
 int llavesimbolos = 0;
+int reskey;
 // VARIABLES GLOBALES
 
 %}
@@ -110,21 +105,25 @@ lista : lista COMA ID arreglo  {
  Lexema l;
  TablaTipos * t; 
  t = topTipos(tipos); 
+ TablaSimbolos * tablasim = crearTablaSimbolos();
+ tablasim = topSimbolos(simbolos);
  char * tempid = malloc(sizeof(char*));
  strcpy(tempid,yyval.id);
  l = crearLexema(tipo,tempid,direccion,variable,NULL); // Nuevo Lexema
- llavesimbolos = addSimbolo(llavesimbolos,l,tablasim_global); // Añadimos simbolo a la tabla de simbolos
+ llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
  free(yyval.id);
  direccion = direccion + t[tipo].tipo.dim;
 } | ID arreglo {
  Lexema l;
  TablaTipos * t; 
- t = topTipos(tipos); 
+ t = topTipos(tipos);
+ TablaSimbolos * tablasim = crearTablaSimbolos();
+ tablasim = topSimbolos(simbolos); 
  //printf("%i\n",t[tipo].tipo.tipo);
  char * tempid = malloc(sizeof(char*));
  strcpy(tempid,yyval.id);
  l = crearLexema(tipo,tempid,direccion,variable,NULL); // Nuevo Lexema
- llavesimbolos = addSimbolo(llavesimbolos,l,tablasim_global); // Añadimos simbolo a la tabla de simbolos
+ llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
  free(yyval.id);
  direccion = direccion + t[tipo].tipo.dim;
 };
@@ -132,26 +131,27 @@ arreglo : LCOR NUMERO RCOR arreglo {
  printf("o.o %d\n",yyval.numero);
 } | {$$ = tipo;} ;
 funciones : FUNC tipo ID {
+  crearSalidaIntermedia();
   //Buscamos en la tabla de simbolos
   char * tempid = malloc(sizeof(char*));
   strcpy(tempid,yyval.id);
   int existe = 0;
   TablaSimbolos * last = topSimbolos(simbolos);
-  for(int i = 0; i < llavesimbolos;i++){
-    if(strcmp(tempid,last[i].lexema.tokens) == 0){
-      //printf("omg ya existe\n");
-      existe = 1;
-    }
-    //printf("%s ==? %s\n",tempid,last[i].lexema.tokens);
-  }
+  existe = existeID(tempid,last);
   if(existe == 0){
     // Se crea una tabla de simbolos;
+    reskey = llavesimbolos;
+    llavesimbolos = 0;
+    TablaSimbolos * FTS = crearTablaSimbolos();
+    pushSimbolo(&simbolos,FTS);
+    escribirCodigo("label","","",tempid);
   }else{
     yyerror("ID Duplicado, se necesita cambiar el identificador de la funcion");
     exit(-1);
   }
-} LPAR argumentos RPAR LKEY declaraciones sentencias RKEY funciones | {};
-argumentos : lista_argumentos | ;
+} LPAR argumentos RPAR LKEY declaraciones sentencias RKEY {
+  popSimbolos(&simbolos);} funciones | {};
+argumentos : lista_argumentos |  ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo;
 parte_arreglo : LCOR RCOR parte_arreglo | ;
 sentencias : sentencia sentencias | sentencia;
@@ -193,4 +193,15 @@ void yyerror(char *s) {
 void init(){
   crearPilaTablaTipos();
   crearPilaTablaSimbolos();
+}
+int existeID(char* id, TablaSimbolos* t){
+  int resultado = 0;
+  for(int i = 0; i < llavesimbolos;i++){
+    if(strcmp(id,t[i].lexema.tokens) == 0){
+      //printf("omg ya existe\n");
+      resultado = 1;
+    }
+    //printf("%s ==? %s\n",tempid,t[i].lexema.tokens);
+  }
+  return resultado;
 }

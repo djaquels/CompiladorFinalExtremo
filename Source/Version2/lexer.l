@@ -26,14 +26,6 @@
                             ;`-
                            :\
                            ;
-                           Ya nada me asusta,
-                           ni me cuentan nada,
-                           al final de cuentas la vida es prestada
-                           aqui esta mi mano pa´ quien lo merece
-                           agance pa´ un lado todos lo corrientes
-                           a chingasos me hice fuerte - Cuando Los Necesite - Adirel Favela
-
-
 */
 %{
  #include <stdio.h>
@@ -119,7 +111,7 @@ id_valido  [a-zA-Z_\-]
       yylval.numerof = atof(yytext);
       return NUMERO;}
 {digito}+.{digito}+"f" {
-      yylval.numero = (int )atoi(yytext);
+      yylval.numero = atoi(yytext);
       return NUMERO;}
 "'"{id_valido}"'" {return CARACTER;}
 [\""]{id_valido}*[\""] {return CADENA;}
