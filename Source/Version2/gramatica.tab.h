@@ -148,16 +148,20 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 55 "gramatica.y"
+#line 56 "gramatica.y"
 {
-    int numero;
-    float numerof;
+    char *numero; // representa un numero
     char *id;
-    int type;  
     int line;
+    struct {
+      char codigo[150];
+    }codigo;
+    struct {
+      int type;
+    }type;
 }
 /* Line 1529 of yacc.c.  */
-#line 161 "gramatica.tab.h"
+#line 165 "gramatica.tab.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

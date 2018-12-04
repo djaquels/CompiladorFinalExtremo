@@ -196,6 +196,7 @@ int tipo;
 int direccion = 0;
 int llavesimbolos = 0;
 int reskey;
+int toptipo = 5;
 // VARIABLES GLOBALES
 
 
@@ -220,16 +221,20 @@ int reskey;
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 55 "gramatica.y"
+#line 56 "gramatica.y"
 {
-    int numero;
-    float numerof;
+    char *numero; // representa un numero
     char *id;
-    int type;  
     int line;
+    struct {
+      char codigo[150];
+    }codigo;
+    struct {
+      int type;
+    }type;
 }
 /* Line 193 of yacc.c.  */
-#line 233 "gramatica.tab.c"
+#line 238 "gramatica.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -242,7 +247,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 246 "gramatica.tab.c"
+#line 251 "gramatica.tab.c"
 
 #ifdef short
 # undef short
@@ -561,14 +566,14 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    97,    97,    99,    97,   102,   102,   103,   103,   103,
-     103,   103,   104,   116,   130,   132,   133,   152,   133,   153,
-     154,   154,   155,   155,   156,   156,   157,   157,   158,   159,
-     160,   161,   162,   163,   164,   165,   166,   167,   168,   169,
-     170,   170,   171,   171,   172,   172,   172,   172,   173,   173,
-     174,   175,   176,   177,   178,   179,   180,   181,   181,   181,
-     181,   182,   182,   183,   183,   183,   183,   183,   184,   184,
-     185,   185,   186,   186,   186,   186,   186,   186
+       0,   103,   103,   105,   103,   108,   108,   109,   109,   109,
+     110,   110,   111,   125,   141,   150,   151,   170,   151,   171,
+     172,   172,   173,   173,   174,   174,   175,   175,   176,   177,
+     178,   179,   180,   181,   182,   183,   184,   185,   186,   187,
+     188,   188,   189,   189,   190,   190,   190,   190,   191,   191,
+     192,   193,   194,   195,   196,   197,   198,   199,   199,   199,
+     199,   200,   200,   201,   201,   201,   201,   201,   202,   202,
+     203,   203,   204,   204,   204,   204,   204,   204
 };
 #endif
 
@@ -1593,69 +1598,73 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 97 "gramatica.y"
+#line 103 "gramatica.y"
     {
   direccion = 0;
   init();;}
     break;
 
   case 3:
-#line 99 "gramatica.y"
+#line 105 "gramatica.y"
     {
     printf("Aquí comienza el analicis de funciones\n");
   ;}
     break;
 
   case 6:
-#line 102 "gramatica.y"
+#line 108 "gramatica.y"
     {printf("Fin De declaraciones\n");;}
     break;
 
   case 7:
-#line 103 "gramatica.y"
-    { tipo = 0;;}
+#line 109 "gramatica.y"
+    { (yyval.type).type = 0; tipo = 0;;}
     break;
 
   case 8:
-#line 103 "gramatica.y"
-    {tipo = 1;;}
+#line 109 "gramatica.y"
+    {(yyval.type).type = 1; tipo = 1;;}
     break;
 
   case 9:
-#line 103 "gramatica.y"
-    {tipo = 2;;}
+#line 109 "gramatica.y"
+    {(yyval.type).type = 2; tipo = 2;;}
     break;
 
   case 10:
-#line 103 "gramatica.y"
-    {tipo = 3;;}
+#line 110 "gramatica.y"
+    {(yyval.type).type = 3; tipo = 3;;}
     break;
 
   case 11:
-#line 103 "gramatica.y"
-    {tipo = 4;;}
+#line 110 "gramatica.y"
+    {(yyval.type).type = 4; tipo = 4;;}
     break;
 
   case 12:
-#line 104 "gramatica.y"
+#line 111 "gramatica.y"
     {
+ printf("Añadiendo Simbolos\n");
+ //$$.type = $4.type;
  Lexema l;
  TablaTipos * t; 
  t = topTipos(tipos); 
  TablaSimbolos * tablasim = crearTablaSimbolos();
  tablasim = topSimbolos(simbolos);
  char * tempid = malloc(sizeof(char*));
- strcpy(tempid,yyval.id);
- l = crearLexema(tipo,tempid,direccion,variable,NULL); // Nuevo Lexema
+ strcpy(tempid,(yyvsp[(3) - (4)].id));
+ l = crearLexema((yyvsp[(4) - (4)].type).type,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
- free(yyval.id);
- direccion = direccion + t[tipo].tipo.dim;
+ free(tempid);
+ direccion = direccion + t[(yyvsp[(4) - (4)].type).type].tipo.dim;
 ;}
     break;
 
   case 13:
-#line 116 "gramatica.y"
+#line 125 "gramatica.y"
     {
+ printf("Añadiendo Simbolo :%s\n",(yyvsp[(1) - (2)].id));
+ //$$.type = $2.type;
  Lexema l;
  TablaTipos * t; 
  t = topTipos(tipos);
@@ -1663,28 +1672,35 @@ yyreduce:
  tablasim = topSimbolos(simbolos); 
  //printf("%i\n",t[tipo].tipo.tipo);
  char * tempid = malloc(sizeof(char*));
- strcpy(tempid,yyval.id);
- l = crearLexema(tipo,tempid,direccion,variable,NULL); // Nuevo Lexema
+ strcpy(tempid,(yyvsp[(1) - (2)].id));
+ l = crearLexema((yyvsp[(2) - (2)].type).type,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
- free(yyval.id);
- direccion = direccion + t[tipo].tipo.dim;
+ free(tempid);
+ direccion = direccion + t[(yyvsp[(2) - (2)].type).type].tipo.dim;
 ;}
     break;
 
   case 14:
-#line 130 "gramatica.y"
+#line 141 "gramatica.y"
     {
- printf("o.o %d\n",yyval.numero);
+  int dimarr ;
+  TablaTipos * t = topTipos(tipos);
+  int n = atoi((yyvsp[(2) - (4)].numero));
+  dimarr = t[tipo].tipo.dim * n;
+  Tipo nuevoarreglo = crearTipo(toptipo,toptipo,dimarr,t[tipo].tipo.tipo);
+  addTipo(toptipo,nuevoarreglo,topTipos(tipos));
+  toptipo += 1;
+  (yyval.type).type = toptipo - 1 ;
 ;}
     break;
 
   case 15:
-#line 132 "gramatica.y"
-    {(yyval.type) = tipo;;}
+#line 150 "gramatica.y"
+    {(yyval.type).type = tipo;;}
     break;
 
   case 16:
-#line 133 "gramatica.y"
+#line 151 "gramatica.y"
     {
   crearSalidaIntermedia();
   //Buscamos en la tabla de simbolos
@@ -1708,19 +1724,24 @@ yyreduce:
     break;
 
   case 17:
-#line 152 "gramatica.y"
+#line 170 "gramatica.y"
     {
   popSimbolos(&simbolos);;}
     break;
 
   case 19:
-#line 153 "gramatica.y"
+#line 171 "gramatica.y"
     {;}
+    break;
+
+  case 20:
+#line 172 "gramatica.y"
+    { strcpy((yyval.codigo).codigo,(yyvsp[(1) - (1)].codigo).codigo);;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1724 "gramatica.tab.c"
+#line 1745 "gramatica.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1934,7 +1955,7 @@ yyreturn:
 }
 
 
-#line 188 "gramatica.y"
+#line 206 "gramatica.y"
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylval.line);

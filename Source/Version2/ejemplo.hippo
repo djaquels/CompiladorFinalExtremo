@@ -1,5 +1,2 @@
-int numero;
-int resultado;
-func int factorial(){
-    int temporal,iterar;
-}
+int tests[6];
+int resultados[6];

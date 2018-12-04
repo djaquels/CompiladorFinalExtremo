@@ -1125,39 +1125,41 @@ case 47:
 YY_RULE_SETUP
 #line 110 "lexer.l"
 {
-      yylval.numerof = atof(yytext);
+       yylval.numero = (char*)malloc(strlen(yytext)*sizeof(char));
+       strcpy(yylval.numero,yytext);
       return NUMERO;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 113 "lexer.l"
+#line 114 "lexer.l"
 {
-      yylval.numero = atoi(yytext);
+      yylval.numero = (char*)malloc(strlen(yytext)*sizeof(char));
+      strcpy(yylval.numero,yytext);
       return NUMERO;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 116 "lexer.l"
+#line 118 "lexer.l"
 {return CARACTER;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 117 "lexer.l"
+#line 119 "lexer.l"
 {return CADENA;}
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 118 "lexer.l"
+#line 120 "lexer.l"
 {}
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 119 "lexer.l"
+#line 121 "lexer.l"
 { yyterminate(); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 121 "lexer.l"
+#line 123 "lexer.l"
 {
 		printf("Error Lexico: %d -> %s token invalido.\n\n",yylineno,yytext);
 	}
@@ -1166,7 +1168,7 @@ YY_RULE_SETUP
 
 case 53:
 YY_RULE_SETUP
-#line 128 "lexer.l"
+#line 130 "lexer.l"
 {
 		// printf("FIN COMENTARIO");
 		BEGIN INITIAL;
@@ -1175,7 +1177,7 @@ YY_RULE_SETUP
 case 54:
 /* rule 54 can match eol */
 YY_RULE_SETUP
-#line 133 "lexer.l"
+#line 135 "lexer.l"
 {
 		// Cualquier cosa que no sea * ó /
 		// ejemplo: hola como estas 341241 11 1
@@ -1183,25 +1185,25 @@ YY_RULE_SETUP
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 138 "lexer.l"
+#line 140 "lexer.l"
 {}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 140 "lexer.l"
+#line 142 "lexer.l"
 {}
 	YY_BREAK
 
 
 case 57:
 YY_RULE_SETUP
-#line 144 "lexer.l"
+#line 146 "lexer.l"
 {}
 	YY_BREAK
 case 58:
 /* rule 58 can match eol */
 YY_RULE_SETUP
-#line 146 "lexer.l"
+#line 148 "lexer.l"
 {
 		BEGIN INITIAL;
 	}
@@ -1209,10 +1211,10 @@ YY_RULE_SETUP
 
 case 59:
 YY_RULE_SETUP
-#line 151 "lexer.l"
+#line 153 "lexer.l"
 ECHO;
 	YY_BREAK
-#line 1216 "lex.yy.c"
+#line 1218 "lex.yy.c"
 case YY_STATE_EOF(COMM):
 case YY_STATE_EOF(COMMII):
 	yyterminate();
@@ -2222,7 +2224,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 151 "lexer.l"
+#line 153 "lexer.l"
 
 
 
