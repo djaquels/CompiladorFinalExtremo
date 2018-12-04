@@ -37,3 +37,6 @@ void crearSalidaIntermedia(){
 void escribirCodigo(char* c1,char*c2,char*c3,char*c4){
     fprintf(codintermedio,"%s %s %s %s\n",c1,c2,c3,c4);
 }
+void Label(){
+  
+}

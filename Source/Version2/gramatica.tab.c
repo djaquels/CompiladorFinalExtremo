@@ -568,12 +568,12 @@ static const yytype_uint8 yyrline[] =
 {
        0,   103,   103,   105,   103,   108,   108,   109,   109,   109,
      110,   110,   111,   125,   141,   156,   157,   176,   157,   177,
-     178,   178,   179,   179,   180,   180,   181,   181,   182,   183,
-     184,   185,   186,   187,   188,   189,   190,   191,   192,   193,
-     194,   194,   195,   195,   196,   196,   196,   196,   197,   197,
-     198,   199,   200,   201,   202,   203,   204,   205,   205,   205,
-     205,   206,   206,   207,   207,   207,   207,   207,   208,   208,
-     209,   209,   210,   210,   210,   210,   210,   210
+     178,   178,   179,   179,   182,   182,   183,   183,   184,   185,
+     186,   187,   188,   189,   190,   191,   192,   193,   194,   195,
+     196,   196,   197,   197,   198,   198,   198,   198,   199,   199,
+     200,   201,   202,   203,   204,   205,   206,   207,   207,   207,
+     207,   208,   208,   209,   209,   209,   209,   209,   210,   210,
+     211,   211,   212,   212,   212,   212,   212,   212
 };
 #endif
 
@@ -1721,7 +1721,7 @@ yyreduce:
     llavesimbolos = 0;
     TablaSimbolos * FTS = crearTablaSimbolos();
     pushSimbolo(&simbolos,FTS);
-    escribirCodigo("label","","",tempid);
+    escribirCodigo(tempid,":","","");
   }else{
     yyerror("ID Duplicado, se necesita cambiar el identificador de la funcion");
     exit(-1);
@@ -1745,9 +1745,16 @@ yyreduce:
     { strcpy((yyval.codigo).codigo,(yyvsp[(1) - (1)].codigo).codigo);;}
     break;
 
+  case 23:
+#line 179 "gramatica.y"
+    {
+  TablaSimbolos * t = crearTablaSimbolos();
+;}
+    break;
+
 
 /* Line 1267 of yacc.c.  */
-#line 1751 "gramatica.tab.c"
+#line 1758 "gramatica.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1961,7 +1968,7 @@ yyreturn:
 }
 
 
-#line 212 "gramatica.y"
+#line 214 "gramatica.y"
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylval.line);
@@ -1978,7 +1985,7 @@ int existeID(char* id, TablaSimbolos* t){
       //printf("omg ya existe\n");
       resultado = 1;
     }
-    printf("%s ==? %s\n",id,t[i].lexema.tokens);
+    //printf("%s ==? %s\n",id,t[i].lexema.tokens);
   }
   return resultado;
 }

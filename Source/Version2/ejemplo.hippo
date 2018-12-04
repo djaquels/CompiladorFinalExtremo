@@ -1,5 +1,9 @@
 int numero;
 int resultado;
 func int factorial(int f){
-    return ;
+    /*Programa que calcula el factorial de un numero*/
+    //resultado = 1;
+    //resultado = f * resultado;
+    //f = f - 1;
+    return 0;
 }

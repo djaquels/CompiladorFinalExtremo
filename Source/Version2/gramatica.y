@@ -168,7 +168,7 @@ funciones : FUNC tipo ID {
     llavesimbolos = 0;
     TablaSimbolos * FTS = crearTablaSimbolos();
     pushSimbolo(&simbolos,FTS);
-    escribirCodigo("label","","",tempid);
+    escribirCodigo(tempid,":","","");
   }else{
     yyerror("ID Duplicado, se necesita cambiar el identificador de la funcion");
     exit(-1);
@@ -176,7 +176,9 @@ funciones : FUNC tipo ID {
 } LPAR argumentos RPAR LKEY declaraciones sentencias RKEY {
   popSimbolos(&simbolos);} funciones | { printf("Exito!\n");};
 argumentos : lista_argumentos { strcpy($$.codigo,$1.codigo);} |  ;
-lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo;
+lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo {
+  TablaSimbolos * t = crearTablaSimbolos();
+};
 parte_arreglo : LCOR RCOR parte_arreglo | ;
 sentencias : sentencia sentencias | sentencia;
 sentencia : IF LPAR condicion RPAR sentencia %prec IFX
@@ -225,7 +227,7 @@ int existeID(char* id, TablaSimbolos* t){
       //printf("omg ya existe\n");
       resultado = 1;
     }
-    printf("%s ==? %s\n",id,t[i].lexema.tokens);
+    //printf("%s ==? %s\n",id,t[i].lexema.tokens);
   }
   return resultado;
 }
