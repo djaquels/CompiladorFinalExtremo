@@ -1,1 +1,5 @@
-int tests[6],resultados[7];
+int numero;
+int resultado;
+func int factorial(int f){
+    return ;
+}

@@ -1655,7 +1655,7 @@ yyreduce:
  strcpy(tempid,(yyvsp[(3) - (4)].id));
  l = crearLexema((yyvsp[(4) - (4)].type).type,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
- free(tempid);
+ free(yylval.id);
  direccion = direccion + t[(yyvsp[(4) - (4)].type).type].tipo.dim;
 ;}
     break;
@@ -1675,7 +1675,7 @@ yyreduce:
  strcpy(tempid,(yyvsp[(1) - (2)].id));
  l = crearLexema((yyvsp[(2) - (2)].type).type,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
- free(tempid);
+ free(yylval.id);
  direccion = direccion + t[(yyvsp[(2) - (2)].type).type].tipo.dim;
 ;}
     break;
@@ -1711,7 +1711,7 @@ yyreduce:
   crearSalidaIntermedia();
   //Buscamos en la tabla de simbolos
   char * tempid = malloc(sizeof(char*));
-  strcpy(tempid,yyval.id);
+  strcpy(tempid,(yyvsp[(3) - (3)].id));
   int existe = 0;
   TablaSimbolos * last = topSimbolos(simbolos);
   existe = existeID(tempid,last);
@@ -1737,7 +1737,7 @@ yyreduce:
 
   case 19:
 #line 177 "gramatica.y"
-    {;}
+    { printf("Exito!\n");;}
     break;
 
   case 20:
@@ -1978,7 +1978,7 @@ int existeID(char* id, TablaSimbolos* t){
       //printf("omg ya existe\n");
       resultado = 1;
     }
-    //printf("%s ==? %s\n",tempid,t[i].lexema.tokens);
+    printf("%s ==? %s\n",id,t[i].lexema.tokens);
   }
   return resultado;
 }

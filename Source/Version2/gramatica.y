@@ -120,7 +120,7 @@ lista : lista COMA ID arreglo  {
  strcpy(tempid,$3);
  l = crearLexema($4.type,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
- free(tempid);
+ free(yylval.id);
  direccion = direccion + t[$4.type].tipo.dim;
 } | ID arreglo {
  printf("Añadiendo Simbolo : %s\n",$1);
@@ -135,7 +135,7 @@ lista : lista COMA ID arreglo  {
  strcpy(tempid,$1);
  l = crearLexema($2.type,tempid,direccion,variable,NULL); // Nuevo Lexema
  llavesimbolos = addSimbolo(llavesimbolos,l,tablasim); // Añadimos simbolo a la tabla de simbolos
- free(tempid);
+ free(yylval.id);
  direccion = direccion + t[$2.type].tipo.dim;
 };
 arreglo : LCOR NUMERO RCOR arreglo {
@@ -158,7 +158,7 @@ funciones : FUNC tipo ID {
   crearSalidaIntermedia();
   //Buscamos en la tabla de simbolos
   char * tempid = malloc(sizeof(char*));
-  strcpy(tempid,yyval.id);
+  strcpy(tempid,$3);
   int existe = 0;
   TablaSimbolos * last = topSimbolos(simbolos);
   existe = existeID(tempid,last);
@@ -174,7 +174,7 @@ funciones : FUNC tipo ID {
     exit(-1);
   }
 } LPAR argumentos RPAR LKEY declaraciones sentencias RKEY {
-  popSimbolos(&simbolos);} funciones | {};
+  popSimbolos(&simbolos);} funciones | { printf("Exito!\n");};
 argumentos : lista_argumentos { strcpy($$.codigo,$1.codigo);} |  ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo;
 parte_arreglo : LCOR RCOR parte_arreglo | ;
@@ -225,7 +225,7 @@ int existeID(char* id, TablaSimbolos* t){
       //printf("omg ya existe\n");
       resultado = 1;
     }
-    //printf("%s ==? %s\n",tempid,t[i].lexema.tokens);
+    printf("%s ==? %s\n",id,t[i].lexema.tokens);
   }
   return resultado;
 }
