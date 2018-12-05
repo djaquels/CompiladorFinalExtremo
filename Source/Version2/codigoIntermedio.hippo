@@ -1,1 +1,3 @@
 factorial   label0
+t0 := 16D + 20D   
+return 4D goto label0   

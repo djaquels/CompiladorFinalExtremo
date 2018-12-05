@@ -108,12 +108,14 @@ id_valido  [a-zA-Z_\-]
 			strcpy(yylval.id, yytext);
   return ID;}
 {digito}+ {
-       yylval.numero = (char*)malloc(strlen(yytext)*sizeof(char));
-       strcpy(yylval.numero,yytext);
+       yylval.numero.type = 0;
+       yylval.numero.numero = (char*)malloc(strlen(yytext)*sizeof(char));
+       strcpy(yylval.numero.numero,yytext);
       return NUMERO;}
 {digito}+.{digito}+"f" {
-      yylval.numero = (char*)malloc(strlen(yytext)*sizeof(char));
-      strcpy(yylval.numero,yytext);
+      yylval.numero.type = 1;
+      yylval.numero.numero = (char*)malloc(strlen(yytext)*sizeof(char));
+      strcpy(yylval.numero.numero,yytext);
       return NUMERO;}
 "'"{id_valido}"'" {return CARACTER;}
 [\""]{id_valido}*[\""] {return CADENA;}
