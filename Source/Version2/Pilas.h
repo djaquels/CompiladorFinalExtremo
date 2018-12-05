@@ -262,4 +262,11 @@ void crearPilaTablaSimbolos(){
   tablasim_global = crearTablaSimbolos();
   pushSimbolo(&simbolos,tablasim_global);
 }
+// Pilas NEXT TRUE Y FALSE
+struct NextPilaNodo* nextpila = NULL;
+struct TruePilaNodo* truepila = NULL;
+struct FalsePilaNodo* falsepila = NULL;
+void crearPilasGen(){
+  
+}
 

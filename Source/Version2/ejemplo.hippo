@@ -5,5 +5,7 @@ func int factorial(int f){
     //resultado = 1;
     //resultado = f * resultado;
     //f = f - 1;
+    if(true)
+        numero = 5;
     return 0;
 }

@@ -58,11 +58,28 @@ int toptipo = 5;
     char *id;
     int line;
     struct {
-      char codigo[150];
+      char codigo[250];
     }codigo;
     struct {
       int type;
     }type;
+    struct {
+      char True[50];
+      char False[50];
+      char codigo[50];
+      int direccion;
+    }condicionval;
+    struct {
+      char Next[50];
+      int tipo;
+      char codigo[100];
+    }sentenciasval;
+    struct{
+      int type;
+      char codigo[100];
+      int direccion;
+    }exprval;
+
 }
 
 /*DEFINICION DE TIPOS*/
@@ -95,7 +112,10 @@ int toptipo = 5;
 %nonassoc ELSE
 
 %type<type> tipo arreglo lista
+%type<exprval> expresion
 %type<codigo> argumentos lista_argumentos
+%type<condicionval> condicion
+%type<sentenciasval> sentencia sentencias
 %start programa
 
 %%
@@ -168,27 +188,53 @@ funciones : FUNC tipo ID {
     llavesimbolos = 0;
     TablaSimbolos * FTS = crearTablaSimbolos();
     pushSimbolo(&simbolos,FTS);
-    escribirCodigo(tempid,":","","");
+    //escribirCodigo(tempid,":","","");
+    newLabel();
+    pushNext(&nextpila,actualLabel);
+    escribirCodigo(tempid,"","",actualLabel);
+
   }else{
     yyerror("ID Duplicado, se necesita cambiar el identificador de la funcion");
     exit(-1);
   }
 } LPAR argumentos RPAR LKEY declaraciones sentencias RKEY {
+  // Salimos de la tabla de simbolos de la funcion :3
   popSimbolos(&simbolos);} funciones | { printf("Exito!\n");};
-argumentos : lista_argumentos { strcpy($$.codigo,$1.codigo);} |  ;
+argumentos : lista_argumentos { strcpy($$.codigo,$1.codigo);} | {}  ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo {
   TablaSimbolos * t = crearTablaSimbolos();
 };
 parte_arreglo : LCOR RCOR parte_arreglo | ;
-sentencias : sentencia sentencias | sentencia;
-sentencia : IF LPAR condicion RPAR sentencia %prec IFX
-	| IF LPAR condicion RPAR sentencia ELSE  sentencia
+sentencias : sentencia sentencias { 
+  strcpy($$.Next,$2.Next);} | sentencia;
+sentencia : IF LPAR condicion {
+  newLabel();
+  strcpy($3.True,actualLabel);
+  pushTrue(&truepila,actualLabel);
+  } RPAR sentencia {
+    char c[25];
+    strcpy(c,$3.codigo);
+  } %prec IFX
+	| IF LPAR condicion {
+  newLabel();
+  strcpy($3.True,actualLabel);
+  pushTrue(&truepila,actualLabel);
+  } RPAR sentencia ELSE  sentencia
 	| WHILE LPAR condicion RPAR sentencia
 	| DO sentencia WHILE LPAR condicion RPAR PYC
 	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia
 	| parte_izq ASIG expresion PYC
-	| RETURN expresion PYC
-	| RETURN PYC
+	| RETURN expresion PYC {
+    char c[100] ="";
+    char ds[4];
+    strcat(c,"return ");
+    sprintf(ds, "%d", $2.direccion);
+    strcat(c,ds); 
+    strcat(c,"goto ");
+    strcat(c,actualLabel);
+    strcpy($$.codigo,c);
+    }
+	| RETURN PYC { char c[50] = "return goto"; strcat(c,popNext(&nextpila)); strcpy($$.codigo,c);}
 	| LKEY sentencias RKEY
 	| SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY
 	| BREAK PYC
@@ -205,8 +251,24 @@ expresion : expresion MAS expresion
   | LPAR expresion RPAR 
   | var_arreglo
   | CADENA | NUMERO | CARACTER | ID LPAR parametros RPAR ;
-condicion : condicion OR condicion | condicion AND condicion 
-  | NEG condicion | expresion rel expresion | LPAR condicion RPAR | TRUE | FALSE;
+condicion : condicion OR condicion 
+  | condicion AND condicion 
+  | NEG condicion 
+  | expresion rel expresion 
+  | LPAR condicion RPAR 
+  | TRUE {
+  char temp[10] = "goto ";  
+  newLabel();
+  pushTrue(&truepila,actualLabel);
+  strcat(temp,actualLabel);
+  strcpy($$.codigo,temp);
+  } | FALSE { 
+    char temp[10] = "goto ";
+    newLabel();
+    pushFalse(&falsepila,actualLabel);
+    strcat(temp,actualLabel);
+    strcpy($$.codigo,temp);
+  } ;
 parametros : | lista_param ;
 lista_param : lista_param COMA expresion | expresion ;
 rel: GT | LT | GE | LE | DISTINTO| IGUAL;
@@ -217,8 +279,8 @@ void yyerror(char *s) {
 }
 
 void init(){
-  crearPilaTablaTipos();
-  crearPilaTablaSimbolos();
+  crearPilaTablaTipos(); //Crea la Pila De Tipos
+  crearPilaTablaSimbolos(); //Crea la Pila de Simbolos
 }
 int existeID(char* id, TablaSimbolos* t){
   int resultado = 0;
