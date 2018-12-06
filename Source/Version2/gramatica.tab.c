@@ -1893,7 +1893,7 @@ yyreduce:
     { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
-    strcpy((yyval.sentenciasval).Next,popNext(&nextpila));
+    strcpy((yyval.sentenciasval).Next,"label0");
     char c[10];
     char cod[50];
     char direccions[15];

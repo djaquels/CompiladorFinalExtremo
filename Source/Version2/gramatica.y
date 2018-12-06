@@ -288,7 +288,7 @@ sentencia : IF LPAR condicion RPAR sentencia {
 	| parte_izq ASIG expresion PYC { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
-    strcpy($$.Next,popNext(&nextpila));
+    strcpy($$.Next,"label0:");
     char c[10];
     char cod[50];
     char direccions[15];

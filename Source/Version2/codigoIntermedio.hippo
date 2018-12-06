@@ -1,8 +1,11 @@
 factorial:   
-label2:� � 
- if 8 < 0 goto label1:
+label0: 
+if 8 < 0 goto label1:
 goto label2:
 label1:
-t2 := 0D * 0D 
-goto label2:   
+t1 := 0D * 8D 
+t3 := 8D + 16D
+goto label0   
+
+   
  label2:  
