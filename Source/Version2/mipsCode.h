@@ -47,7 +47,7 @@ void escribirCodigo(char* c1,char*c2,char*c3,char*c4){
 }
 void newLabel(){
   char l[50];
-  sprintf(l, "label%d", labelcounter);
+  sprintf(l, "label%d:", labelcounter);
   labelcounter += 1;
   strcpy(actualLabel,l);
 }
