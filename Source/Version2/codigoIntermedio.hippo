@@ -1,2 +1,11 @@
 factorial:   
- label0:  
+  
+ if 0 == 16 goto label1:
+goto label2:
+label1:
+return20D
+ goto label3:
+label2:
+return24D
+ goto label4:   
+ label4:  

@@ -42,6 +42,7 @@ extern FILE *yyin;
 void yyerror(char *s);
 void init();
 int existeID(char*id,TablaSimbolos *t);//Verifica si un id ya existe en la Tabla de Simbolos
+void printTablaSimbolos(TablaSimbolos*t);
 extern int yylex();
 extern int yylineno();
 int tipo;
@@ -63,7 +64,7 @@ int var_temporales = 0;
     char *id;
     int line;
     struct {
-      char codigo[1050];
+      char codigo[10050];
     }codigo;
     struct {
       int type;
@@ -71,17 +72,17 @@ int var_temporales = 0;
     struct {
       char True[50];
       char False[50];
-      char codigo[500];
+      char codigo[5000];
       int direccion;
     }condicionval;
     struct {
       char Next[50];
       int tipo;
-      char codigo[500];
+      char codigo[5000];
     }sentenciasval;
     struct{
       int type;
-      char codigo[500];
+      char codigo[5000];
       int direccion;
       char temporal[10];
     }exprval;
@@ -141,6 +142,7 @@ programa : {
   crearSalidaIntermedia();
   } declaraciones {
     printf("Aquí comienza el analicis de funciones\n");
+    printTablaSimbolos(tablasim_global);
   } funciones ;
 declaraciones : tipo lista  PYC declaraciones  | {printf("Fin De declaraciones\n");};
 tipo : INT { $$.type = 0; tipo = 0;} | FLOAT  {$$.type = 1; tipo = 1;}| DOUBLE  {$$.type = 2; tipo = 2;}
@@ -197,7 +199,7 @@ funciones : FUNC tipo ID {
   int existe = 0;
   TablaSimbolos * last = topSimbolos(simbolos);
   existe = existeID(tempid,last);
-  if(existe == 0){
+  if(existe < 0){
     // Se crea una tabla de simbolos;
     reskey = llavesimbolos;
     llavesimbolos = 0;
@@ -211,7 +213,10 @@ funciones : FUNC tipo ID {
   }else{
     yyerror("ID Duplicado, se necesita cambiar el identificador de la funcion");
     exit(-1);
-  } } LPAR argumentos RPAR LKEY declaraciones sentencias RKEY {
+  } } LPAR argumentos RPAR LKEY declaraciones {
+    printf("Tabla De Simbolos Local\n");
+    printTablaSimbolos(topSimbolos(simbolos));
+  } sentencias RKEY {
     escribirCodigo($6.codigo,popNext(&nextpila),"","");
   // Salimos de la tabla de simbolos de la funcion :3
   popSimbolos(&simbolos);
@@ -223,28 +228,48 @@ lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_a
 };
 parte_arreglo : LCOR RCOR parte_arreglo | ;
 sentencias : sentencia {
-  printf("%s",$1.codigo);
-} sentencias  | sentencia {
+  escribirCodigo($1.codigo,"","","");
+  //printf("%s",$1.codigo);
+} sentencias {} | sentencia {
   strcpy($$.codigo,$1.codigo);
-  printf("%s",$1.codigo);
+  escribirCodigo($1.codigo,"","","");
+  //printf("%s",$1.codigo);
 };
-sentencia : IF LPAR condicion {
-  newLabel();
-  strcpy($3.True,actualLabel);
+sentencia : IF LPAR condicion RPAR sentencia {
+  //newLabel();
+  //strcpy($3.True,actualLabel);
   pushTrue(&truepila,actualLabel);
-  } RPAR sentencia {
-    char c[25];
-    strcat(c,$3.codigo);
-    strcat(c,$3.True);
-    //strcat(c,$5.codigo);
-    strcpy($$.codigo,c);
-    printf("%s\n",c);
+  strcpy($$.Next,$3.False);
+  strcat($$.Next,$5.Next);
+  char cod[50];
+  strcat(cod,$3.codigo);
+  strcat(cod,$3.True);
+  strcat(cod,"\n");
+  strcat(cod,$5.codigo);
+  //printf("%s",cod);
+  strcpy($$.codigo,cod);
+  strcpy(cod,"");
   } %prec IFX
-	| IF LPAR condicion {
-  newLabel();
-  strcpy($3.True,actualLabel);
-  pushTrue(&truepila,actualLabel);
-  } RPAR sentencia ELSE  sentencia
+	| IF LPAR condicion RPAR sentencia  ELSE  sentencia {
+  //pushTrue(&truepila,actualLabel);
+  strcpy($$.Next,$5.Next);
+  strcat($$.Next,$7.Next);
+  char cod[100];
+  strcat(cod,$3.codigo);
+  strcat(cod,$3.True);
+  strcat(cod,"\n");
+  strcat(cod,$5.codigo);
+  strcat(cod,"\n");
+  //strcat(cod,"\n goto");
+  //strcat(cod,$$.Next);
+  strcat(cod,$3.False);
+  strcat(cod,"\n");
+  strcat(cod,$7.codigo);
+  //printf("%s",cod);
+  strcpy($$.codigo,cod);
+  //escribirCodigo($$.codigo,"","","");
+  strcpy(cod,"");
+  }
 	| WHILE LPAR condicion RPAR sentencia
 	| DO sentencia WHILE LPAR condicion RPAR PYC
 	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia
@@ -256,15 +281,18 @@ sentencia : IF LPAR condicion {
     char direccions[15];
     sprintf(c,"t%d := ",var_temporales);
     strcat(cod,c);
-    strcat(cod,$3.temporal);
+    //strcat(cod,$3.temporal);
     sprintf(direccions,"%dD\n",$3.direccion);
     strcat(cod,direccions);
+    //printf("u.u: %s",cod);
     strcpy($$.codigo,cod);
-    printf("Se realizo operacion de asignacion\n");
+    //printf("Se realizo operacion de asignacion\n");
+    strcpy(cod,"");
     var_temporales++;
   }
 	| RETURN expresion PYC {
     printf("Retornando\n");
+    newLabel();
     char c[100] ="";
     char ds[10];
     strcat(c,"return");
@@ -273,9 +301,10 @@ sentencia : IF LPAR condicion {
     strcat(c,"goto ");
     strcat(c,actualLabel);
     strcpy($$.codigo,c);
+    strcpy(c,"");
     }
 	| RETURN PYC { 
-    char c[50] = "return\n goto "; strcat(c,popNext(&nextpila)); strcpy($$.codigo,c);
+    char c[50] = "return\n goto "; strcat(c,$$.Next); strcpy($$.codigo,c);
     }
 	| LKEY sentencias RKEY
 	| SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY
@@ -289,9 +318,9 @@ parte_izq : ID {
   int existe = 0;
   int j = 0;
   for(int i = 0; i < reskey ; i++){
-    printf("%s\n",tablasim_global[i].lexema.tokens);
+    //printf("%s\n",tablasim_global[i].lexema.tokens);
     if(strcmp($1,tablasim_global[i].lexema.tokens) == 0){
-      printf("%s encontrado en la tabla global de simbolos\n",$1);
+      //printf("%s encontrado en la tabla global de simbolos\n",$1);
       existe = 1;
       j = i;
       break;
@@ -304,7 +333,7 @@ parte_izq : ID {
     TablaSimbolos *t;
     t = topSimbolos(simbolos);
     int r = existeID($1,t);
-    if( r >= 1){
+    if( r >= 0){
      int a = t[r].lexema.direccion;
      $$.direccion = a;
     }else{
@@ -430,7 +459,7 @@ expresion : expresion MAS expresion {
   for(int i = 0; i < reskey ; i++){
     //printf("%s\n",tablasim_global[i].lexema.tokens);
     if(strcmp($1,tablasim_global[i].lexema.tokens) == 0){
-      printf("%s encontrado en la tabla global de simbolos\n",$1);
+      //printf("%s encontrado en la tabla global de simbolos\n",$1);
       existe = 1;
       j = i;
       break;
@@ -443,7 +472,7 @@ expresion : expresion MAS expresion {
     TablaSimbolos *t;
     t = topSimbolos(simbolos);
     int r = existeID($1,t);
-    if( r >= 1){
+    if( r >= 0){
      int a = t[r].lexema.direccion;
      $$.direccion = a;
     }else{
@@ -460,20 +489,21 @@ expresion : expresion MAS expresion {
   for(int i = 0; i < reskey ; i++){
     //printf("%s\n",tablasim_global[i].lexema.tokens);
     if(strcmp($1,tablasim_global[i].lexema.tokens) == 0){
-      printf("%s encontrado en la tabla global de simbolos\n",$1);
+      //printf("%s encontrado en la tabla global de simbolos\n",$1);
       existe = 1;
       j = i;
       break;
     }
   }
   // Si no, se busca en la tabla local
-  if( existe == 1){
+  if( existe >= 1){
      $$.direccion = tablasim_global[j].lexema.direccion;
   }else{
     TablaSimbolos *t;
     t = topSimbolos(simbolos);
     int r = existeID($1,t);
-    if( r >= 1){
+    printf("%d\n",r);
+    if( r >= 0){
      int a = t[r].lexema.direccion;
      $$.direccion = a;
     }else{
@@ -508,13 +538,15 @@ condicion : condicion  OR condicion {
     strcpy($$.True,$2.False);
     strcpy($$.False,$2.True);
     strcpy($$.codigo,$2.codigo);
-    printf("Negando el codigo\n");
+    //printf("Negando el codigo\n");
   }
   | expresion rel expresion {
   newLabel();
   strcpy($$.True,actualLabel);
+  pushTrue(&truepila,actualLabel);
   newLabel();
   strcpy($$.False,actualLabel);
+  pushFalse(&falsepila,actualLabel);
   char c[200];
   char aux[50];
   strcat(c,$1.codigo);
@@ -561,7 +593,7 @@ void init(){
   crearPilaTablaSimbolos(); //Crea la Pila de Simbolos
 }
 int existeID(char* id, TablaSimbolos* t){
-  int resultado = 0;
+  int resultado = -1;
   for(int i = 0; i < llavesimbolos;i++){
     if(strcmp(id,t[i].lexema.tokens) == 0){
       //printf("omg ya existe\n");
@@ -569,5 +601,14 @@ int existeID(char* id, TablaSimbolos* t){
     }
     //printf("%s ==? %s\n",id,t[i].lexema.tokens);
   }
+  //printf("%d",resultado);
   return resultado;
+}
+void printTablaSimbolos(TablaSimbolos* t){
+  printf("\t\t\tTabla De Simbolos\n");
+  printf("id dir tipo tipo_var\n");
+  int i = llavesimbolos;
+  for(int j = 0; j < i ; j++){
+    printf("%s %d %d %d\n",t[j].lexema.tokens,t[j].lexema.direccion,t[j].lexema.tipo,t[j].lexema.tipo_variable);
+  }
 }

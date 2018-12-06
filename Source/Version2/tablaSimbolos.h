@@ -62,7 +62,7 @@ TablaSimbolos* crearTablaSimbolos(){
 int addSimbolo(int llave ,Lexema l, TablaSimbolos t[]){
  t[llave].id = llave;
  t[llave].lexema = l;
- printf("id:%i-> tipo:%d identificador:%s dir:%i tipo_var:%i \n",t[llave].id,t[llave].lexema.tipo,t[llave].lexema.tokens,t[llave].lexema.direccion,t[llave].lexema.tipo_variable);
+ //printf("id:%i-> tipo:%d identificador:%s dir:%i tipo_var:%i \n",t[llave].id,t[llave].lexema.tipo,t[llave].lexema.tokens,t[llave].lexema.direccion,t[llave].lexema.tipo_variable);
  return llave += 1;
 }
 Lexema crearLexema(int t,char* id,int d, int t_var,char* args[]){

@@ -103,7 +103,7 @@ extern int yydebug;
 
 union YYSTYPE
 {
-#line 57 "gramatica.y" /* yacc.c:1909  */
+#line 58 "gramatica.y" /* yacc.c:1909  */
 
     struct{
      char*numero;
@@ -113,7 +113,7 @@ union YYSTYPE
     char *id;
     int line;
     struct {
-      char codigo[1050];
+      char codigo[10050];
     }codigo;
     struct {
       int type;
@@ -121,17 +121,17 @@ union YYSTYPE
     struct {
       char True[50];
       char False[50];
-      char codigo[500];
+      char codigo[5000];
       int direccion;
     }condicionval;
     struct {
       char Next[50];
       int tipo;
-      char codigo[500];
+      char codigo[5000];
     }sentenciasval;
     struct{
       int type;
-      char codigo[500];
+      char codigo[5000];
       int direccion;
       char temporal[10];
     }exprval;
