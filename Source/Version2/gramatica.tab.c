@@ -1758,7 +1758,7 @@ yyreduce:
     strcat(c,t);
     sprintf(t,"%dD + ",(yyvsp[-2].exprval).direccion);
     strcat(c,t);
-    sprintf(t,"%dD",(yyvsp[0].exprval).direccion);
+    sprintf(t,"%dD\n",(yyvsp[0].exprval).direccion);
     strcat(c,t);
     strcpy((yyval.exprval).codigo,c);
     escribirCodigo(c,"","","");
@@ -1784,7 +1784,7 @@ yyreduce:
     strcat(c,t);
     sprintf(t,"%dD - ",(yyvsp[-2].exprval).direccion);
     strcat(c,t);
-    sprintf(t,"%dD",(yyvsp[0].exprval).direccion);
+    sprintf(t,"%dD \n",(yyvsp[0].exprval).direccion);
     strcat(c,t);
     strcpy((yyval.exprval).codigo,c);
     escribirCodigo(c,"","","");
@@ -1809,7 +1809,7 @@ yyreduce:
     strcat(c,t);
     sprintf(t,"%dD * ",(yyvsp[-2].exprval).direccion);
     strcat(c,t);
-    sprintf(t,"%dD",(yyvsp[0].exprval).direccion);
+    sprintf(t,"%dD \n",(yyvsp[0].exprval).direccion);
     strcat(c,t);
     strcpy((yyval.exprval).codigo,c);
     escribirCodigo(c,"","","");
@@ -1834,7 +1834,7 @@ yyreduce:
     strcat(c,t);
     sprintf(t,"%dD / ",(yyvsp[-2].exprval).direccion);
     strcat(c,t);
-    sprintf(t,"%dD",(yyvsp[0].exprval).direccion);
+    sprintf(t,"%dD \n",(yyvsp[0].exprval).direccion);
     strcat(c,t);
     strcpy((yyval.exprval).codigo,c);
     escribirCodigo(c,"","","");
@@ -1859,7 +1859,7 @@ yyreduce:
     strcat(c,t);
     sprintf(t,"%dD % ",(yyvsp[-2].exprval).direccion);
     strcat(c,t);
-    sprintf(t,"%dD",(yyvsp[0].exprval).direccion);
+    sprintf(t,"%dD \n",(yyvsp[0].exprval).direccion);
     strcat(c,t);
     strcpy((yyval.exprval).codigo,c);
     escribirCodigo(c,"","","");

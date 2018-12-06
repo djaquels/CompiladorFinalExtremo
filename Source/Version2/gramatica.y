@@ -310,7 +310,7 @@ expresion : expresion MAS expresion {
     strcat(c,t);
     sprintf(t,"%dD + ",$1.direccion);
     strcat(c,t);
-    sprintf(t,"%dD",$3.direccion);
+    sprintf(t,"%dD\n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
     escribirCodigo(c,"","","");
@@ -330,7 +330,7 @@ expresion : expresion MAS expresion {
     strcat(c,t);
     sprintf(t,"%dD - ",$1.direccion);
     strcat(c,t);
-    sprintf(t,"%dD",$3.direccion);
+    sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
     escribirCodigo(c,"","","");
@@ -350,7 +350,7 @@ expresion : expresion MAS expresion {
     strcat(c,t);
     sprintf(t,"%dD * ",$1.direccion);
     strcat(c,t);
-    sprintf(t,"%dD",$3.direccion);
+    sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
     escribirCodigo(c,"","","");
@@ -370,7 +370,7 @@ expresion : expresion MAS expresion {
     strcat(c,t);
     sprintf(t,"%dD / ",$1.direccion);
     strcat(c,t);
-    sprintf(t,"%dD",$3.direccion);
+    sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
     escribirCodigo(c,"","","");
@@ -390,7 +390,7 @@ expresion : expresion MAS expresion {
     strcat(c,t);
     sprintf(t,"%dD % ",$1.direccion);
     strcat(c,t);
-    sprintf(t,"%dD",$3.direccion);
+    sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
     escribirCodigo(c,"","","");

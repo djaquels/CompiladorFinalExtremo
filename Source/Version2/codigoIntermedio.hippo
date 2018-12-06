@@ -1,4 +1,7 @@
 factorial   label0
-t0 := 16D + 20D   
-t0 := 16D + 20Dt1 := t0t1 := 24D - 28D   
+t0 := 16D + 20D
+   
+t0 := 16D + 20D
+t1 := t0t1 := 24D - 28D 
+   
 return 4D goto label0   
