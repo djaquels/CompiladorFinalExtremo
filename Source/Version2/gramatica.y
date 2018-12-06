@@ -320,10 +320,86 @@ expresion : expresion MAS expresion {
     exit(-1);
   }
    
-} | expresion MENOS expresion 
-  | expresion MUL expresion 
-  | expresion DIV expresion 
-  | expresion MOD expresion 
+} | expresion MENOS expresion {
+  if($1.type == $3.type){
+    char c[100];
+    char t[10];
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
+    sprintf(t,"%dD - ",$1.direccion);
+    strcat(c,t);
+    sprintf(t,"%dD",$3.direccion);
+    strcat(c,t);
+    strcpy($$.codigo,c);
+    escribirCodigo(c,"","","");
+    var_temporales++;
+  }else{
+    printf("Error no son del mismo tipo\n");
+    exit(-1);
+  }
+}
+  | expresion MUL expresion {
+    if($1.type == $3.type){
+    char c[100];
+    char t[10];
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
+    sprintf(t,"%dD * ",$1.direccion);
+    strcat(c,t);
+    sprintf(t,"%dD",$3.direccion);
+    strcat(c,t);
+    strcpy($$.codigo,c);
+    escribirCodigo(c,"","","");
+    var_temporales++;
+  }else{
+    printf("Error no son del mismo tipo\n");
+    exit(-1);
+  }
+  }
+  | expresion DIV expresion {
+  if($1.type == $3.type){
+    char c[100];
+    char t[10];
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
+    sprintf(t,"%dD / ",$1.direccion);
+    strcat(c,t);
+    sprintf(t,"%dD",$3.direccion);
+    strcat(c,t);
+    strcpy($$.codigo,c);
+    escribirCodigo(c,"","","");
+    var_temporales++;
+  }else{
+    printf("Error no son del mismo tipo\n");
+    exit(-1);
+   }
+  }
+  | expresion MOD expresion {
+  if($1.type == $3.type){
+    char c[100];
+    char t[10];
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
+    sprintf(t,"%dD % ",$1.direccion);
+    strcat(c,t);
+    sprintf(t,"%dD",$3.direccion);
+    strcat(c,t);
+    strcpy($$.codigo,c);
+    escribirCodigo(c,"","","");
+    var_temporales++;
+  }else{
+    printf("Error no son del mismo tipo\n");
+    exit(-1);
+  }
+}
   | LPAR expresion RPAR 
   | var_arreglo
   | CADENA 
@@ -364,11 +440,21 @@ expresion : expresion MAS expresion {
     }
   }
   }
-condicion : condicion OR condicion 
-  | condicion AND condicion 
-  | NEG condicion 
-  | expresion rel expresion 
-  | LPAR condicion RPAR 
+condicion : condicion OR condicion {
+
+  }
+  | condicion AND condicion {
+
+  }
+  | NEG condicion {
+
+  }
+  | expresion rel expresion {
+
+  }
+  | LPAR condicion RPAR {
+
+  }
   | TRUE {
   char temp[10] = "goto ";  
   newLabel();
