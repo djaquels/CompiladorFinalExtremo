@@ -1,11 +1,11 @@
 factorial:   
-  
- if 0 == 16 goto label1:
+Ù Ù 
+ if 0 == 24 goto label1:
 goto label2:
 label1:
-return20D
+return  28D
  goto label3:
 label2:
-return24D
+return  32D
  goto label4:   
  label4:  

@@ -254,7 +254,7 @@ sentencia : IF LPAR condicion RPAR sentencia {
   //pushTrue(&truepila,actualLabel);
   strcpy($$.Next,$5.Next);
   strcat($$.Next,$7.Next);
-  char cod[100];
+  char cod[1000];
   strcat(cod,$3.codigo);
   strcat(cod,$3.True);
   strcat(cod,"\n");
@@ -270,7 +270,9 @@ sentencia : IF LPAR condicion RPAR sentencia {
   //escribirCodigo($$.codigo,"","","");
   strcpy(cod,"");
   }
-	| WHILE LPAR condicion RPAR sentencia
+	| WHILE LPAR condicion RPAR sentencia {
+    
+  }
 	| DO sentencia WHILE LPAR condicion RPAR PYC
 	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia
 	| parte_izq ASIG expresion PYC { 
@@ -294,9 +296,9 @@ sentencia : IF LPAR condicion RPAR sentencia {
     printf("Retornando\n");
     newLabel();
     char c[100] ="";
-    char ds[10];
-    strcat(c,"return");
-    sprintf(ds, "%dD\n ", $2.direccion);
+    char ds[100];
+    strcat(c,"return ");
+    sprintf(ds, " %dD\n ", $2.direccion);
     strcat(c,ds); 
     strcat(c,"goto ");
     strcat(c,actualLabel);
@@ -431,7 +433,7 @@ expresion : expresion MAS expresion {
     strcpy($$.temporal,t);
     sprintf(t, "t%d := ", var_temporales);
     strcat(c,t);
-    sprintf(t,"%dD % ",$1.direccion);
+    sprintf(t,"%dD",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);

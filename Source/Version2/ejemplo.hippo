@@ -1,7 +1,10 @@
+// Ejemplo de nuestro lenguaje de programacion
+
 int numero;
 int resultado;
 int i;
 func int factorial(int f){
+    int j,k;
     if(numero == 0)
         return 1;
     else
