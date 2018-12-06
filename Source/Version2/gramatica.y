@@ -451,7 +451,10 @@ condicion : condicion OR condicion {
 
   }
   | NEG condicion {
-
+    strcpy($$.True,$2.False);
+    strcpy($$.False,$2.True);
+    strcpy($$.codigo,$2.codigo);
+    printf("Negando el codigo\n");
   }
   | expresion rel expresion {
   newLabel();
@@ -469,8 +472,7 @@ condicion : condicion OR condicion {
   sprintf(aux,"goto %s\n",$$.False);
   strcat(c,aux);
   strcpy($$.codigo,c);
-  escribirCodigo(c,"","","");
-
+  //escribirCodigo(c,"","","");
   }
   | LPAR condicion RPAR {
     $$.direccion = $2.direccion;

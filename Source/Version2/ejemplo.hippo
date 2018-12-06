@@ -2,6 +2,6 @@ int numero;
 int resultado;
 int i;
 func int factorial(int f){
-    if(4 < 5)
+    if(! (4 < 5)) 
         return 1;
 }

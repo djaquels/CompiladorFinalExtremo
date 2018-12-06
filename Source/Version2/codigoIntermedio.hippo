@@ -1,6 +1,2 @@
 factorial   label0
-  
-if 16 < 20 goto label1
-goto label2
-   
    

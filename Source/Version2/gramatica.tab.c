@@ -548,8 +548,8 @@ static const yytype_uint16 yyrline[] =
      237,   237,   242,   243,   244,   245,   256,   267,   270,   271,
      272,   273,   274,   274,   275,   275,   276,   305,   305,   305,
      306,   306,   307,   327,   347,   367,   387,   407,   408,   409,
-     410,   416,   417,   447,   450,   453,   456,   475,   479,   486,
-     494,   494,   495,   495,   496,   496,   496,   496,   496,   496
+     410,   416,   417,   447,   450,   453,   459,   477,   481,   488,
+     496,   496,   497,   497,   498,   498,   498,   498,   498,   498
 };
 #endif
 
@@ -1940,13 +1940,16 @@ yyreduce:
   case 65:
 #line 453 "gramatica.y" /* yacc.c:1646  */
     {
-
+    strcpy((yyval.condicionval).True,(yyvsp[0].condicionval).False);
+    strcpy((yyval.condicionval).False,(yyvsp[0].condicionval).True);
+    strcpy((yyval.condicionval).codigo,(yyvsp[0].condicionval).codigo);
+    printf("Negando el codigo\n");
   }
-#line 1946 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1949 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 456 "gramatica.y" /* yacc.c:1646  */
+#line 459 "gramatica.y" /* yacc.c:1646  */
     {
   newLabel();
   strcpy((yyval.condicionval).True,actualLabel);
@@ -1963,23 +1966,22 @@ yyreduce:
   sprintf(aux,"goto %s\n",(yyval.condicionval).False);
   strcat(c,aux);
   strcpy((yyval.condicionval).codigo,c);
-  escribirCodigo(c,"","","");
-
+  //escribirCodigo(c,"","","");
   }
-#line 1970 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1972 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 475 "gramatica.y" /* yacc.c:1646  */
+#line 477 "gramatica.y" /* yacc.c:1646  */
     {
     (yyval.condicionval).direccion = (yyvsp[-1].condicionval).direccion;
     strcpy((yyval.condicionval).codigo,(yyvsp[-1].condicionval).codigo);
   }
-#line 1979 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1981 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 479 "gramatica.y" /* yacc.c:1646  */
+#line 481 "gramatica.y" /* yacc.c:1646  */
     {
   char temp[10] = "goto ";  
   newLabel();
@@ -1988,11 +1990,11 @@ yyreduce:
   strcat(temp,actualLabel);
   strcpy((yyval.condicionval).codigo,temp);
   }
-#line 1992 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1994 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 486 "gramatica.y" /* yacc.c:1646  */
+#line 488 "gramatica.y" /* yacc.c:1646  */
     { 
     char temp[10] = "goto ";
     newLabel();
@@ -2001,11 +2003,11 @@ yyreduce:
     strcat(temp,actualLabel);
     strcpy((yyval.condicionval).codigo,temp);
   }
-#line 2005 "gramatica.tab.c" /* yacc.c:1646  */
+#line 2007 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 2009 "gramatica.tab.c" /* yacc.c:1646  */
+#line 2011 "gramatica.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2233,7 +2235,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 498 "gramatica.y" /* yacc.c:1906  */
+#line 500 "gramatica.y" /* yacc.c:1906  */
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylval.line);
