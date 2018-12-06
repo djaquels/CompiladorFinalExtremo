@@ -271,13 +271,24 @@ sentencia : IF LPAR condicion RPAR sentencia {
   strcpy(cod,"");
   }
 	| WHILE LPAR condicion RPAR sentencia {
-    
+    char codigos[1000];
+    strcat(codigos,$5.Next);
+    strcat(codigos,$3.codigo);
+    strcat(codigos,$3.True);
+    strcat(codigos,"\n");
+    strcat(codigos,$5.codigo);
+    strcat(codigos,"\n");
+    strcat(codigos,"goto ");
+    strcat(codigos,$5.Next);
+    strcpy($$.codigo,codigos);
+    strcpy(codigos,"");
   }
 	| DO sentencia WHILE LPAR condicion RPAR PYC
 	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia
 	| parte_izq ASIG expresion PYC { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
+    strcpy($$.Next,popNext(&nextpila));
     char c[10];
     char cod[50];
     char direccions[15];
@@ -285,7 +296,7 @@ sentencia : IF LPAR condicion RPAR sentencia {
     strcat(cod,c);
     //strcat(cod,$3.temporal);
     sprintf(direccions,"%dD\n",$3.direccion);
-    strcat(cod,direccions);
+    strcat(cod,$3.codigo);
     //printf("u.u: %s",cod);
     strcpy($$.codigo,cod);
     //printf("Se realizo operacion de asignacion\n");
@@ -346,25 +357,23 @@ parte_izq : ID {
 } | var_arreglo | ID PTO ID | ;
 var_arreglo : ID LCOR expresion RCOR | var_arreglo LCOR expresion RCOR  ;
 expresion : expresion MAS expresion {
-  if($1.type == $3.type){
+  printf("sumando\n");
     char c[100];
     char t[10];
-    sprintf(t, "t%d", var_temporales);
-    strcpy($$.temporal,t);
-    sprintf(t, "t%d := ", var_temporales);
-    strcat(c,t);
+    //sprintf(t, "t%d", var_temporales);
+    //strcpy($$.temporal,t);
+    //sprintf(t, "t%d := ", var_temporales);
+    //strcat(c,t);
     sprintf(t,"%dD + ",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD\n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
+    printf("%s\n",c);
     //escribirCodigo(c,"","","");
     var_temporales++;
-  }else{
-    printf("Error no son del mismo tipo\n");
-    exit(-1);
-  }
-   
+    //printf("Error no son del mismo tipo\n");
+    //exit(-1);
 } | expresion MENOS expresion {
   if($1.type == $3.type){
     char c[100];
@@ -452,6 +461,9 @@ expresion : expresion MAS expresion {
     $1.direccion =  direccion + 4;
     direccion = direccion + 4 ;
     $$.direccion = $1.direccion;
+    char s[10];
+    sprintf(s,"%d",$$.direccion);
+    strcpy($$.codigo,s);
     $$.type = $1.type;
     }
   | CARACTER
@@ -543,6 +555,7 @@ condicion : condicion  OR condicion {
     //printf("Negando el codigo\n");
   }
   | expresion rel expresion {
+  pushNext(&nextpila,actualLabel);
   newLabel();
   strcpy($$.True,actualLabel);
   pushTrue(&truepila,actualLabel);
@@ -594,6 +607,7 @@ void init(){
   crearPilaTablaTipos(); //Crea la Pila De Tipos
   crearPilaTablaSimbolos(); //Crea la Pila de Simbolos
 }
+
 int existeID(char* id, TablaSimbolos* t){
   int resultado = -1;
   for(int i = 0; i < llavesimbolos;i++){

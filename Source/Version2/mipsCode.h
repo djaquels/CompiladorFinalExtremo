@@ -29,7 +29,7 @@
 */
 FILE * codintermedio;
 int labelcounter = 0;
-char actualLabel[50];
+char actualLabel[50] ;
 typedef struct tripleta
 {
 	char op[20];
@@ -38,6 +38,7 @@ typedef struct tripleta
 } tresdireciones;
 // Estructura Para Codigo Intermedio
 void crearSalidaIntermedia(){
+    strcpy(actualLabel,"label0:");
     codintermedio = fopen("codigoIntermedio.hippo","w+");
     fclose(codintermedio);
     codintermedio = fopen("codigoIntermedio.hippo","a");
