@@ -319,7 +319,9 @@ sentencia : IF LPAR condicion RPAR sentencia {
 	| RETURN PYC { 
     char c[50] = "return\n goto "; strcat(c,$$.Next); strcpy($$.codigo,c);
     }
-	| LKEY sentencias RKEY
+	| LKEY sentencias RKEY {
+    strcpy($$.codigo,$2.codigo);
+  }
 	| SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY
 	| BREAK PYC
 	| PRINT expresion PYC ;
@@ -375,13 +377,12 @@ expresion : expresion MAS expresion {
     //printf("Error no son del mismo tipo\n");
     //exit(-1);
 } | expresion MENOS expresion {
-  if($1.type == $3.type){
     char c[100];
     char t[10];
-    sprintf(t, "t%d", var_temporales);
-    strcpy($$.temporal,t);
-    sprintf(t, "t%d := ", var_temporales);
-    strcat(c,t);
+    //sprintf(t, "t%d", var_temporales);
+    //strcpy($$.temporal,t);
+    //sprintf(t, "t%d := ", var_temporales);
+    //strcat(c,t);
     sprintf(t,"%dD - ",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD \n",$3.direccion);
@@ -389,19 +390,14 @@ expresion : expresion MAS expresion {
     strcpy($$.codigo,c);
     //escribirCodigo(c,"","","");
     var_temporales++;
-  }else{
-    printf("Error no son del mismo tipo\n");
-    exit(-1);
-  }
 }
   | expresion MUL expresion {
-    if($1.type == $3.type){
     char c[100];
     char t[10];
-    sprintf(t, "t%d", var_temporales);
-    strcpy($$.temporal,t);
-    sprintf(t, "t%d := ", var_temporales);
-    strcat(c,t);
+    //sprintf(t, "t%d", var_temporales);
+    //strcpy($$.temporal,t);
+    //sprintf(t, "t%d := ", var_temporales);
+    //strcat(c,t);
     sprintf(t,"%dD * ",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD \n",$3.direccion);
@@ -409,10 +405,6 @@ expresion : expresion MAS expresion {
     strcpy($$.codigo,c);
     //escribirCodigo(c,"","","");
     var_temporales++;
-  }else{
-    printf("Error no son del mismo tipo\n");
-    exit(-1);
-  }
   }
   | expresion DIV expresion {
   if($1.type == $3.type){
@@ -458,6 +450,7 @@ expresion : expresion MAS expresion {
   | var_arreglo
   | CADENA 
   | NUMERO { 
+    $1.type = 0;
     $1.direccion =  direccion + 4;
     direccion = direccion + 4 ;
     $$.direccion = $1.direccion;
