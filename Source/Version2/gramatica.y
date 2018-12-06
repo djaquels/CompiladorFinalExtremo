@@ -63,7 +63,7 @@ int var_temporales = 0;
     char *id;
     int line;
     struct {
-      char codigo[250];
+      char codigo[1050];
     }codigo;
     struct {
       int type;
@@ -71,17 +71,17 @@ int var_temporales = 0;
     struct {
       char True[50];
       char False[50];
-      char codigo[50];
+      char codigo[500];
       int direccion;
     }condicionval;
     struct {
       char Next[50];
       int tipo;
-      char codigo[100];
+      char codigo[500];
     }sentenciasval;
     struct{
       int type;
-      char codigo[100];
+      char codigo[500];
       int direccion;
       char temporal[10];
     }exprval;
@@ -89,6 +89,9 @@ int var_temporales = 0;
       int direccion;
       int type;
     }p_izq;
+    struct {
+      char operador[3];
+    }relacionalop;
 
 }
 
@@ -127,6 +130,7 @@ int var_temporales = 0;
 %type<condicionval> condicion
 %type<sentenciasval> sentencia sentencias
 %type<p_izq> parte_izq
+%type<relacionalop> rel
 %start programa
 
 %%
@@ -450,20 +454,39 @@ condicion : condicion OR condicion {
 
   }
   | expresion rel expresion {
+  newLabel();
+  strcpy($$.True,actualLabel);
+  newLabel();
+  strcpy($$.False,actualLabel);
+  char c[200];
+  char aux[50];
+  strcat(c,$1.codigo);
+  strcat(c," ");
+  strcat(c,$3.codigo);
+  strcat(c," ");
+  sprintf(aux,"\n if %d %s %d goto %s\n",$1.direccion,$2.operador,$3.direccion,$$.True);
+  strcat(c,aux);
+  sprintf(aux,"goto %s\n",$$.False);
+  strcat(c,aux);
+  strcpy($$.codigo,c);
+  escribirCodigo(c,"","","");
 
   }
   | LPAR condicion RPAR {
-
+    $$.direccion = $2.direccion;
+    strcpy($$.codigo,$2.codigo);
   }
   | TRUE {
   char temp[10] = "goto ";  
   newLabel();
+  strcpy($$.True,actualLabel);
   pushTrue(&truepila,actualLabel);
   strcat(temp,actualLabel);
   strcpy($$.codigo,temp);
   } | FALSE { 
     char temp[10] = "goto ";
     newLabel();
+    strcpy($$.False,actualLabel);    
     pushFalse(&falsepila,actualLabel);
     strcat(temp,actualLabel);
     strcpy($$.codigo,temp);

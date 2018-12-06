@@ -1,7 +1,6 @@
 factorial   label0
-t0 := 16D + 20D
+  
+if 16 < 20 goto label1
+goto label2
    
-t0 := 16D + 20D
-t1 := t0t1 := 24D - 28D 
    
-return 4D goto label0   

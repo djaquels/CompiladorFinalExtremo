@@ -2,7 +2,6 @@ int numero;
 int resultado;
 int i;
 func int factorial(int f){
-    numero = 4 + 1;
-    resultado = 5 - 5;
-    return resultado();
+    if(4 < 5)
+        return 1;
 }

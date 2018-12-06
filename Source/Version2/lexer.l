@@ -96,12 +96,24 @@ id_valido  [a-zA-Z_\-]
 "/" {return DIV;}
 "*" {return MUL;}
 "=" {return ASIG;}
-"==" {return IGUAL;}
-"!=" {return DISTINTO;}
-"<=" {return GE;}
-">=" {return LE;}
-"<" {return LT;}
-">" {return GT;}
+"==" {
+			strcpy(yylval.relacionalop.operador, yytext);
+      return IGUAL;}
+"!=" {
+      strcpy(yylval.relacionalop.operador, yytext);
+      return DISTINTO;}
+"<=" {
+      strcpy(yylval.relacionalop.operador, yytext);
+      return GE;}
+">=" {
+      strcpy(yylval.relacionalop.operador, yytext);
+      return LE;}
+"<" {
+      strcpy(yylval.relacionalop.operador, yytext);
+      return LT;}
+">" {
+      strcpy(yylval.relacionalop.operador, yytext);
+      return GT;}
 [\%] {return MOD;}
 {id_valido}+{id_valido}* {
 			yylval.id = (char*)malloc(strlen(yytext)*sizeof(char));

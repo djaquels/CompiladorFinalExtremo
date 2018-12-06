@@ -113,7 +113,7 @@ union YYSTYPE
     char *id;
     int line;
     struct {
-      char codigo[250];
+      char codigo[1050];
     }codigo;
     struct {
       int type;
@@ -121,17 +121,17 @@ union YYSTYPE
     struct {
       char True[50];
       char False[50];
-      char codigo[50];
+      char codigo[500];
       int direccion;
     }condicionval;
     struct {
       char Next[50];
       int tipo;
-      char codigo[100];
+      char codigo[500];
     }sentenciasval;
     struct{
       int type;
-      char codigo[100];
+      char codigo[500];
       int direccion;
       char temporal[10];
     }exprval;
@@ -139,9 +139,12 @@ union YYSTYPE
       int direccion;
       int type;
     }p_izq;
+    struct {
+      char operador[3];
+    }relacionalop;
 
 
-#line 145 "gramatica.tab.h" /* yacc.c:1909  */
+#line 148 "gramatica.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

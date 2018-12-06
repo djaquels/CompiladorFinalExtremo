@@ -192,7 +192,7 @@ union YYSTYPE
     char *id;
     int line;
     struct {
-      char codigo[250];
+      char codigo[1050];
     }codigo;
     struct {
       int type;
@@ -200,17 +200,17 @@ union YYSTYPE
     struct {
       char True[50];
       char False[50];
-      char codigo[50];
+      char codigo[500];
       int direccion;
     }condicionval;
     struct {
       char Next[50];
       int tipo;
-      char codigo[100];
+      char codigo[500];
     }sentenciasval;
     struct{
       int type;
-      char codigo[100];
+      char codigo[500];
       int direccion;
       char temporal[10];
     }exprval;
@@ -218,9 +218,12 @@ union YYSTYPE
       int direccion;
       int type;
     }p_izq;
+    struct {
+      char operador[3];
+    }relacionalop;
 
 
-#line 224 "gramatica.tab.c" /* yacc.c:355  */
+#line 227 "gramatica.tab.c" /* yacc.c:355  */
 };
 
 typedef union YYSTYPE YYSTYPE;
@@ -237,7 +240,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 241 "gramatica.tab.c" /* yacc.c:358  */
+#line 244 "gramatica.tab.c" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -539,14 +542,14 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   134,   134,   136,   134,   139,   139,   140,   140,   140,
-     141,   141,   142,   156,   172,   187,   188,   211,   188,   213,
-     214,   214,   215,   215,   218,   218,   219,   220,   224,   224,
-     233,   233,   238,   239,   240,   241,   252,   263,   266,   267,
-     268,   269,   270,   270,   271,   271,   272,   301,   301,   301,
-     302,   302,   303,   323,   343,   363,   383,   403,   404,   405,
-     406,   412,   413,   443,   446,   449,   452,   455,   458,   464,
-     471,   471,   472,   472,   473,   473,   473,   473,   473,   473
+       0,   138,   138,   140,   138,   143,   143,   144,   144,   144,
+     145,   145,   146,   160,   176,   191,   192,   215,   192,   217,
+     218,   218,   219,   219,   222,   222,   223,   224,   228,   228,
+     237,   237,   242,   243,   244,   245,   256,   267,   270,   271,
+     272,   273,   274,   274,   275,   275,   276,   305,   305,   305,
+     306,   306,   307,   327,   347,   367,   387,   407,   408,   409,
+     410,   416,   417,   447,   450,   453,   456,   475,   479,   486,
+     494,   494,   495,   495,   496,   496,   496,   496,   496,   496
 };
 #endif
 
@@ -1443,59 +1446,59 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 134 "gramatica.y" /* yacc.c:1646  */
+#line 138 "gramatica.y" /* yacc.c:1646  */
     {
   direccion = 0;
   init();}
-#line 1451 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1454 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 136 "gramatica.y" /* yacc.c:1646  */
+#line 140 "gramatica.y" /* yacc.c:1646  */
     {
     printf("Aquí comienza el analicis de funciones\n");
   }
-#line 1459 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1462 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 139 "gramatica.y" /* yacc.c:1646  */
+#line 143 "gramatica.y" /* yacc.c:1646  */
     {printf("Fin De declaraciones\n");}
-#line 1465 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1468 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 140 "gramatica.y" /* yacc.c:1646  */
+#line 144 "gramatica.y" /* yacc.c:1646  */
     { (yyval.type).type = 0; tipo = 0;}
-#line 1471 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1474 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 140 "gramatica.y" /* yacc.c:1646  */
+#line 144 "gramatica.y" /* yacc.c:1646  */
     {(yyval.type).type = 1; tipo = 1;}
-#line 1477 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1480 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 140 "gramatica.y" /* yacc.c:1646  */
+#line 144 "gramatica.y" /* yacc.c:1646  */
     {(yyval.type).type = 2; tipo = 2;}
-#line 1483 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1486 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 141 "gramatica.y" /* yacc.c:1646  */
+#line 145 "gramatica.y" /* yacc.c:1646  */
     {(yyval.type).type = 3; tipo = 3;}
-#line 1489 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1492 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 141 "gramatica.y" /* yacc.c:1646  */
+#line 145 "gramatica.y" /* yacc.c:1646  */
     {(yyval.type).type = 4; tipo = 4;}
-#line 1495 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1498 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 142 "gramatica.y" /* yacc.c:1646  */
+#line 146 "gramatica.y" /* yacc.c:1646  */
     {
  printf("Añadiendo Simbolo: %s\n", (yyvsp[-1].id));
  //$$.type = $4.type;
@@ -1511,11 +1514,11 @@ yyreduce:
  free(yylval.id);
  direccion = direccion + t[(yyvsp[0].type).type].tipo.dim;
 }
-#line 1515 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1518 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 156 "gramatica.y" /* yacc.c:1646  */
+#line 160 "gramatica.y" /* yacc.c:1646  */
     {
  printf("Añadiendo Simbolo : %s\n",(yyvsp[-1].id));
  //$$.type = $2.type;
@@ -1532,11 +1535,11 @@ yyreduce:
  free(yylval.id);
  direccion = direccion + t[(yyvsp[0].type).type].tipo.dim;
 }
-#line 1536 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1539 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 172 "gramatica.y" /* yacc.c:1646  */
+#line 176 "gramatica.y" /* yacc.c:1646  */
     {
   int dimarr ;
   TablaTipos * t = topTipos(tipos);
@@ -1553,17 +1556,17 @@ yyreduce:
   toptipo += 1;
   (yyval.type).type = toptipo - 1 ;
 }
-#line 1557 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1560 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 187 "gramatica.y" /* yacc.c:1646  */
+#line 191 "gramatica.y" /* yacc.c:1646  */
     {(yyval.type).type = tipo;}
-#line 1563 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1566 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 188 "gramatica.y" /* yacc.c:1646  */
+#line 192 "gramatica.y" /* yacc.c:1646  */
     {
   crearSalidaIntermedia();
   //Buscamos en la tabla de simbolos
@@ -1588,91 +1591,91 @@ yyreduce:
     exit(-1);
   }
 }
-#line 1592 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1595 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 211 "gramatica.y" /* yacc.c:1646  */
+#line 215 "gramatica.y" /* yacc.c:1646  */
     {
   // Salimos de la tabla de simbolos de la funcion :3
   popSimbolos(&simbolos);}
-#line 1600 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1603 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 213 "gramatica.y" /* yacc.c:1646  */
+#line 217 "gramatica.y" /* yacc.c:1646  */
     { printf("Exito!\n");}
-#line 1606 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1609 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 214 "gramatica.y" /* yacc.c:1646  */
+#line 218 "gramatica.y" /* yacc.c:1646  */
     { strcpy((yyval.codigo).codigo,(yyvsp[0].codigo).codigo);}
-#line 1612 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1615 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 214 "gramatica.y" /* yacc.c:1646  */
+#line 218 "gramatica.y" /* yacc.c:1646  */
     {}
-#line 1618 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1621 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 215 "gramatica.y" /* yacc.c:1646  */
+#line 219 "gramatica.y" /* yacc.c:1646  */
     {
   TablaSimbolos * t = crearTablaSimbolos();
 }
-#line 1626 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1629 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 219 "gramatica.y" /* yacc.c:1646  */
+#line 223 "gramatica.y" /* yacc.c:1646  */
     { 
   }
-#line 1633 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1636 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 220 "gramatica.y" /* yacc.c:1646  */
+#line 224 "gramatica.y" /* yacc.c:1646  */
     {
   printf("%s\n",(yyvsp[0].sentenciasval).codigo);
   escribirCodigo((yyvsp[0].sentenciasval).codigo,"","","");
   }
-#line 1642 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1645 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 224 "gramatica.y" /* yacc.c:1646  */
+#line 228 "gramatica.y" /* yacc.c:1646  */
     {
   newLabel();
   strcpy((yyvsp[0].condicionval).True,actualLabel);
   pushTrue(&truepila,actualLabel);
   }
-#line 1652 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1655 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 228 "gramatica.y" /* yacc.c:1646  */
+#line 232 "gramatica.y" /* yacc.c:1646  */
     {
     char c[25];
    // strcpy(c,$5.codigo);
     printf("SIGO CON LO MIO");
   }
-#line 1662 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1665 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 233 "gramatica.y" /* yacc.c:1646  */
+#line 237 "gramatica.y" /* yacc.c:1646  */
     {
   newLabel();
   strcpy((yyvsp[0].condicionval).True,actualLabel);
   pushTrue(&truepila,actualLabel);
   }
-#line 1672 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1675 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 241 "gramatica.y" /* yacc.c:1646  */
+#line 245 "gramatica.y" /* yacc.c:1646  */
     { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
@@ -1684,11 +1687,11 @@ yyreduce:
     strcpy((yyval.sentenciasval).codigo,cod);
     printf("Se realizo operacion\n");
   }
-#line 1688 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1691 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 252 "gramatica.y" /* yacc.c:1646  */
+#line 256 "gramatica.y" /* yacc.c:1646  */
     {
     printf("Retornando\n");
     char c[100] ="";
@@ -1700,19 +1703,19 @@ yyreduce:
     strcat(c,actualLabel);
     strcpy((yyval.sentenciasval).codigo,c);
     }
-#line 1704 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1707 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 263 "gramatica.y" /* yacc.c:1646  */
+#line 267 "gramatica.y" /* yacc.c:1646  */
     { 
     char c[50] = "return goto "; strcat(c,popNext(&nextpila)); strcpy((yyval.sentenciasval).codigo,c);
     }
-#line 1712 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1715 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 46:
-#line 272 "gramatica.y" /* yacc.c:1646  */
+#line 276 "gramatica.y" /* yacc.c:1646  */
     {
   //printf("%s\n",$1);
   // Buscamos en la tabla de simbolos global
@@ -1743,11 +1746,11 @@ yyreduce:
     }
   }
 }
-#line 1747 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1750 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 52:
-#line 303 "gramatica.y" /* yacc.c:1646  */
+#line 307 "gramatica.y" /* yacc.c:1646  */
     {
   if((yyvsp[-2].exprval).type == (yyvsp[0].exprval).type){
     char c[100];
@@ -1769,11 +1772,11 @@ yyreduce:
   }
    
 }
-#line 1773 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1776 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 53:
-#line 323 "gramatica.y" /* yacc.c:1646  */
+#line 327 "gramatica.y" /* yacc.c:1646  */
     {
   if((yyvsp[-2].exprval).type == (yyvsp[0].exprval).type){
     char c[100];
@@ -1794,11 +1797,11 @@ yyreduce:
     exit(-1);
   }
 }
-#line 1798 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1801 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 54:
-#line 343 "gramatica.y" /* yacc.c:1646  */
+#line 347 "gramatica.y" /* yacc.c:1646  */
     {
     if((yyvsp[-2].exprval).type == (yyvsp[0].exprval).type){
     char c[100];
@@ -1819,11 +1822,11 @@ yyreduce:
     exit(-1);
   }
   }
-#line 1823 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1826 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 55:
-#line 363 "gramatica.y" /* yacc.c:1646  */
+#line 367 "gramatica.y" /* yacc.c:1646  */
     {
   if((yyvsp[-2].exprval).type == (yyvsp[0].exprval).type){
     char c[100];
@@ -1844,11 +1847,11 @@ yyreduce:
     exit(-1);
    }
   }
-#line 1848 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1851 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 56:
-#line 383 "gramatica.y" /* yacc.c:1646  */
+#line 387 "gramatica.y" /* yacc.c:1646  */
     {
   if((yyvsp[-2].exprval).type == (yyvsp[0].exprval).type){
     char c[100];
@@ -1869,22 +1872,22 @@ yyreduce:
     exit(-1);
   }
 }
-#line 1873 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1876 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 60:
-#line 406 "gramatica.y" /* yacc.c:1646  */
+#line 410 "gramatica.y" /* yacc.c:1646  */
     { 
     (yyvsp[0].numero).direccion =  direccion + 4;
     direccion = direccion + 4 ;
     (yyval.exprval).direccion = (yyvsp[0].numero).direccion;
     (yyval.exprval).type = (yyvsp[0].numero).type;
     }
-#line 1884 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1887 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 62:
-#line 413 "gramatica.y" /* yacc.c:1646  */
+#line 417 "gramatica.y" /* yacc.c:1646  */
     {
     //printf("%s\n",$1);
   // Buscamos en la tabla de simbolos global
@@ -1915,75 +1918,94 @@ yyreduce:
     }
   }
   }
-#line 1919 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1922 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 63:
-#line 443 "gramatica.y" /* yacc.c:1646  */
+#line 447 "gramatica.y" /* yacc.c:1646  */
     {
 
   }
-#line 1927 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1930 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 64:
-#line 446 "gramatica.y" /* yacc.c:1646  */
+#line 450 "gramatica.y" /* yacc.c:1646  */
     {
 
   }
-#line 1935 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1938 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 65:
-#line 449 "gramatica.y" /* yacc.c:1646  */
+#line 453 "gramatica.y" /* yacc.c:1646  */
     {
 
   }
-#line 1943 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1946 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 66:
-#line 452 "gramatica.y" /* yacc.c:1646  */
+#line 456 "gramatica.y" /* yacc.c:1646  */
     {
+  newLabel();
+  strcpy((yyval.condicionval).True,actualLabel);
+  newLabel();
+  strcpy((yyval.condicionval).False,actualLabel);
+  char c[200];
+  char aux[50];
+  strcat(c,(yyvsp[-2].exprval).codigo);
+  strcat(c," ");
+  strcat(c,(yyvsp[0].exprval).codigo);
+  strcat(c," ");
+  sprintf(aux,"\n if %d %s %d goto %s\n",(yyvsp[-2].exprval).direccion,(yyvsp[-1].relacionalop).operador,(yyvsp[0].exprval).direccion,(yyval.condicionval).True);
+  strcat(c,aux);
+  sprintf(aux,"goto %s\n",(yyval.condicionval).False);
+  strcat(c,aux);
+  strcpy((yyval.condicionval).codigo,c);
+  escribirCodigo(c,"","","");
 
   }
-#line 1951 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1970 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 67:
-#line 455 "gramatica.y" /* yacc.c:1646  */
+#line 475 "gramatica.y" /* yacc.c:1646  */
     {
-
+    (yyval.condicionval).direccion = (yyvsp[-1].condicionval).direccion;
+    strcpy((yyval.condicionval).codigo,(yyvsp[-1].condicionval).codigo);
   }
-#line 1959 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1979 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 68:
-#line 458 "gramatica.y" /* yacc.c:1646  */
+#line 479 "gramatica.y" /* yacc.c:1646  */
     {
   char temp[10] = "goto ";  
   newLabel();
+  strcpy((yyval.condicionval).True,actualLabel);
   pushTrue(&truepila,actualLabel);
   strcat(temp,actualLabel);
   strcpy((yyval.condicionval).codigo,temp);
   }
-#line 1971 "gramatica.tab.c" /* yacc.c:1646  */
+#line 1992 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
   case 69:
-#line 464 "gramatica.y" /* yacc.c:1646  */
+#line 486 "gramatica.y" /* yacc.c:1646  */
     { 
     char temp[10] = "goto ";
     newLabel();
+    strcpy((yyval.condicionval).False,actualLabel);    
     pushFalse(&falsepila,actualLabel);
     strcat(temp,actualLabel);
     strcpy((yyval.condicionval).codigo,temp);
   }
-#line 1983 "gramatica.tab.c" /* yacc.c:1646  */
+#line 2005 "gramatica.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1987 "gramatica.tab.c" /* yacc.c:1646  */
+#line 2009 "gramatica.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2211,7 +2233,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 475 "gramatica.y" /* yacc.c:1906  */
+#line 498 "gramatica.y" /* yacc.c:1906  */
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylval.line);
