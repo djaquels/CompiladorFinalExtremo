@@ -1,11 +1,9 @@
 factorial:   
-label0: 
-if 8 < 0 goto label1:
-goto label2:
-label1:
-t1 := 0D * 8D 
-t3 := 8D + 16D
-goto label0   
-
-   
- label2:  
+t0 := 8D
+return  0D
+goto label1:   
+label1:  
+recursivo:   
+return  28D
+goto label3:   
+label3:  

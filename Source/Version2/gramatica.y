@@ -270,7 +270,7 @@ sentencia : IF LPAR condicion RPAR sentencia {
   //escribirCodigo($$.codigo,"","","");
   strcpy(cod,"");
   }
-	| WHILE LPAR condicion RPAR sentencia {
+	| WHILE LPAR condicion RPAR sentencia{
     char codigos[1000];
     strcat(codigos,$5.Next);
     strcat(codigos,$3.codigo);
@@ -283,8 +283,10 @@ sentencia : IF LPAR condicion RPAR sentencia {
     strcpy($$.codigo,codigos);
     strcpy(codigos,"");
   }
-	| DO sentencia WHILE LPAR condicion RPAR PYC
-	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia
+	| DO sentencia WHILE LPAR condicion RPAR PYC {
+
+  }
+	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia {}
 	| parte_izq ASIG expresion PYC { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
@@ -292,11 +294,15 @@ sentencia : IF LPAR condicion RPAR sentencia {
     char c[10];
     char cod[50];
     char direccions[15];
+    //strcat(cod,$3.codigo);
     sprintf(c,"t%d := ",var_temporales);
     strcat(cod,c);
-    //strcat(cod,$3.temporal);
     sprintf(direccions,"%dD\n",$3.direccion);
-    strcat(cod,$3.codigo);
+    if(strcmp("",$3.temporal) == 0){
+      strcat(cod,direccions);
+    }else{
+      strcat(cod,$3.temporal);
+    }
     //printf("u.u: %s",cod);
     strcpy($$.codigo,cod);
     //printf("Se realizo operacion de asignacion\n");
@@ -322,9 +328,9 @@ sentencia : IF LPAR condicion RPAR sentencia {
 	| LKEY sentencias RKEY {
     strcpy($$.codigo,$2.codigo);
   }
-	| SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY
-	| BREAK PYC
-	| PRINT expresion PYC ;
+	| SWICH LPAR expresion RPAR LKEY casos predeterminado RKEY {}
+	| BREAK PYC {}
+	| PRINT expresion PYC {} ;
 casos : CASE NUMERO DP  sentencias casos | ;
 predeterminado : DEFAULT DP sentencias | ;
 parte_izq : ID {
@@ -362,10 +368,10 @@ expresion : expresion MAS expresion {
   printf("sumando\n");
     char c[100];
     char t[10];
-    //sprintf(t, "t%d", var_temporales);
-    //strcpy($$.temporal,t);
-    //sprintf(t, "t%d := ", var_temporales);
-    //strcat(c,t);
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
     sprintf(t,"%dD + ",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD\n",$3.direccion);
@@ -373,41 +379,43 @@ expresion : expresion MAS expresion {
     strcpy($$.codigo,c);
     printf("%s\n",c);
     //escribirCodigo(c,"","","");
+    strcpy(c,"");
     var_temporales++;
     //printf("Error no son del mismo tipo\n");
     //exit(-1);
 } | expresion MENOS expresion {
     char c[100];
     char t[10];
-    //sprintf(t, "t%d", var_temporales);
-    //strcpy($$.temporal,t);
-    //sprintf(t, "t%d := ", var_temporales);
-    //strcat(c,t);
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
     sprintf(t,"%dD - ",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
+    strcpy(c,"");
     //escribirCodigo(c,"","","");
     var_temporales++;
 }
   | expresion MUL expresion {
     char c[100];
     char t[10];
-    //sprintf(t, "t%d", var_temporales);
-    //strcpy($$.temporal,t);
-    //sprintf(t, "t%d := ", var_temporales);
-    //strcat(c,t);
+    sprintf(t, "t%d", var_temporales);
+    strcpy($$.temporal,t);
+    sprintf(t, "t%d := ", var_temporales);
+    strcat(c,t);
     sprintf(t,"%dD * ",$1.direccion);
     strcat(c,t);
     sprintf(t,"%dD \n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
+    strcpy(c,"");
     //escribirCodigo(c,"","","");
     var_temporales++;
   }
   | expresion DIV expresion {
-  if($1.type == $3.type){
     char c[100];
     char t[10];
     sprintf(t, "t%d", var_temporales);
@@ -421,10 +429,6 @@ expresion : expresion MAS expresion {
     strcpy($$.codigo,c);
     //escribirCodigo(c,"","","");
     var_temporales++;
-  }else{
-    printf("Error no son del mismo tipo\n");
-    exit(-1);
-   }
   }
   | expresion MOD expresion {
   if($1.type == $3.type){
@@ -453,7 +457,7 @@ expresion : expresion MAS expresion {
     $1.type = 0;
     $1.direccion =  direccion + 4;
     direccion = direccion + 4 ;
-    $$.direccion = $1.direccion;
+    $$.direccion = direccion + 4;
     char s[10];
     sprintf(s,"%d",$$.direccion);
     strcpy($$.codigo,s);

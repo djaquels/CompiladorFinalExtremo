@@ -3,8 +3,12 @@
 int numero;
 int resultado;
 int i;
-func int factorial(int f){
-    while( i < numero )
-     numero = numero * i;
-     i = i + 1;
+func int factorial(){
+    int aux;
+    numero = i;
+    return numero;
+}
+func int recursivo(){
+    int intentos;
+    return 0;
 }
