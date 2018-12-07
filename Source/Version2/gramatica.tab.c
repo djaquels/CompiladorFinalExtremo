@@ -174,7 +174,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 30 "gramatica.y"
+#line 32 "gramatica.y"
 
 #include <string.h>
 #include <stdlib.h>
@@ -223,7 +223,7 @@ int var_temporales = 0;
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 58 "gramatica.y"
+#line 60 "gramatica.y"
 {
     struct{
      char*numero;
@@ -598,15 +598,15 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint16 yyrline[] =
 {
-       0,   139,   139,   143,   139,   147,   147,   148,   148,   148,
-     149,   149,   150,   164,   180,   195,   196,   216,   219,   196,
-     224,   226,   226,   227,   227,   230,   230,   231,   231,   235,
-     240,   255,   275,   288,   291,   292,   314,   327,   330,   333,
-     334,   335,   336,   336,   337,   337,   338,   367,   367,   367,
-     368,   368,   369,   388,   404,   420,   435,   455,   456,   457,
-     458,   468,   469,   497,   528,   539,   550,   556,   577,   581,
-     588,   596,   596,   597,   597,   598,   598,   598,   598,   598,
-     598
+       0,   141,   141,   145,   141,   149,   149,   150,   150,   150,
+     151,   151,   152,   166,   182,   197,   198,   218,   221,   198,
+     226,   228,   228,   229,   229,   232,   232,   233,   233,   237,
+     242,   257,   277,   290,   293,   294,   316,   329,   332,   335,
+     336,   337,   338,   338,   339,   339,   340,   369,   369,   369,
+     370,   370,   371,   390,   406,   422,   437,   457,   458,   459,
+     460,   470,   471,   499,   530,   541,   552,   558,   579,   583,
+     590,   598,   598,   599,   599,   600,   600,   600,   600,   600,
+     600
 };
 #endif
 
@@ -1631,7 +1631,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 139 "gramatica.y"
+#line 141 "gramatica.y"
     {
   direccion = 0;
   init();
@@ -1640,7 +1640,7 @@ yyreduce:
     break;
 
   case 3:
-#line 143 "gramatica.y"
+#line 145 "gramatica.y"
     {
     printf("Aquí comienza el analicis de funciones\n");
     printTablaSimbolos(tablasim_global);
@@ -1648,37 +1648,37 @@ yyreduce:
     break;
 
   case 6:
-#line 147 "gramatica.y"
+#line 149 "gramatica.y"
     {printf("Fin De declaraciones\n");;}
     break;
 
   case 7:
-#line 148 "gramatica.y"
+#line 150 "gramatica.y"
     { (yyval.type).type = 0; tipo = 0;;}
     break;
 
   case 8:
-#line 148 "gramatica.y"
+#line 150 "gramatica.y"
     {(yyval.type).type = 1; tipo = 1;;}
     break;
 
   case 9:
-#line 148 "gramatica.y"
+#line 150 "gramatica.y"
     {(yyval.type).type = 2; tipo = 2;;}
     break;
 
   case 10:
-#line 149 "gramatica.y"
+#line 151 "gramatica.y"
     {(yyval.type).type = 3; tipo = 3;;}
     break;
 
   case 11:
-#line 149 "gramatica.y"
+#line 151 "gramatica.y"
     {(yyval.type).type = 4; tipo = 4;;}
     break;
 
   case 12:
-#line 150 "gramatica.y"
+#line 152 "gramatica.y"
     {
  printf("Añadiendo Simbolo: %s\n", (yyvsp[(3) - (4)].id));
  //$$.type = $4.type;
@@ -1697,7 +1697,7 @@ yyreduce:
     break;
 
   case 13:
-#line 164 "gramatica.y"
+#line 166 "gramatica.y"
     {
  printf("Añadiendo Simbolo : %s\n",(yyvsp[(1) - (2)].id));
  //$$.type = $2.type;
@@ -1717,7 +1717,7 @@ yyreduce:
     break;
 
   case 14:
-#line 180 "gramatica.y"
+#line 182 "gramatica.y"
     {
   int dimarr ;
   TablaTipos * t = topTipos(tipos);
@@ -1737,12 +1737,12 @@ yyreduce:
     break;
 
   case 15:
-#line 195 "gramatica.y"
+#line 197 "gramatica.y"
     {(yyval.type).type = tipo;;}
     break;
 
   case 16:
-#line 196 "gramatica.y"
+#line 198 "gramatica.y"
     {
   char * tempid = malloc(sizeof(char*));
   strcpy(tempid,(yyvsp[(3) - (3)].id));
@@ -1767,7 +1767,7 @@ yyreduce:
     break;
 
   case 17:
-#line 216 "gramatica.y"
+#line 218 "gramatica.y"
     {
     printf("Tabla De Simbolos Local\n");
     printTablaSimbolos(topSimbolos(simbolos));
@@ -1775,7 +1775,7 @@ yyreduce:
     break;
 
   case 18:
-#line 219 "gramatica.y"
+#line 221 "gramatica.y"
     {
     escribirCodigo("",popNext(&nextpila),"","");
   // Salimos de la tabla de simbolos de la funcion :3
@@ -1785,30 +1785,30 @@ yyreduce:
     break;
 
   case 20:
-#line 224 "gramatica.y"
+#line 226 "gramatica.y"
     { printf("Exito!\n");
   ;}
     break;
 
   case 21:
-#line 226 "gramatica.y"
+#line 228 "gramatica.y"
     { strcpy((yyval.codigo).codigo,(yyvsp[(1) - (1)].codigo).codigo);;}
     break;
 
   case 22:
-#line 226 "gramatica.y"
+#line 228 "gramatica.y"
     {;}
     break;
 
   case 24:
-#line 227 "gramatica.y"
+#line 229 "gramatica.y"
     {
   TablaSimbolos * t = crearTablaSimbolos();
 ;}
     break;
 
   case 27:
-#line 231 "gramatica.y"
+#line 233 "gramatica.y"
     {
   escribirCodigo((yyvsp[(1) - (1)].sentenciasval).codigo,"","","");
   //strcpy($$.codigo,$1.codigo);
@@ -1817,12 +1817,12 @@ yyreduce:
     break;
 
   case 28:
-#line 235 "gramatica.y"
+#line 237 "gramatica.y"
     {;}
     break;
 
   case 29:
-#line 235 "gramatica.y"
+#line 237 "gramatica.y"
     {
   strcpy((yyval.sentenciasval).codigo,(yyvsp[(1) - (1)].sentenciasval).codigo);
   escribirCodigo((yyvsp[(1) - (1)].sentenciasval).codigo,"","","");
@@ -1831,7 +1831,7 @@ yyreduce:
     break;
 
   case 30:
-#line 240 "gramatica.y"
+#line 242 "gramatica.y"
     {
   //newLabel();
   //strcpy($3.True,actualLabel);
@@ -1850,7 +1850,7 @@ yyreduce:
     break;
 
   case 31:
-#line 255 "gramatica.y"
+#line 257 "gramatica.y"
     {
   //pushTrue(&truepila,actualLabel);
   strcpy((yyval.sentenciasval).Next,(yyvsp[(5) - (7)].sentenciasval).Next);
@@ -1874,7 +1874,7 @@ yyreduce:
     break;
 
   case 32:
-#line 275 "gramatica.y"
+#line 277 "gramatica.y"
     {
     char codigos[1000];
     strcat(codigos,(yyvsp[(5) - (5)].sentenciasval).Next);
@@ -1891,19 +1891,19 @@ yyreduce:
     break;
 
   case 33:
-#line 288 "gramatica.y"
+#line 290 "gramatica.y"
     {
 
   ;}
     break;
 
   case 34:
-#line 291 "gramatica.y"
+#line 293 "gramatica.y"
     {;}
     break;
 
   case 35:
-#line 292 "gramatica.y"
+#line 294 "gramatica.y"
     { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
@@ -1929,7 +1929,7 @@ yyreduce:
     break;
 
   case 36:
-#line 314 "gramatica.y"
+#line 316 "gramatica.y"
     {
     printf("Retornando\n");
     newLabel();
@@ -1946,36 +1946,36 @@ yyreduce:
     break;
 
   case 37:
-#line 327 "gramatica.y"
+#line 329 "gramatica.y"
     { 
     char c[50] = "return\n goto "; strcat(c,(yyval.sentenciasval).Next); strcpy((yyval.sentenciasval).codigo,c);
     ;}
     break;
 
   case 38:
-#line 330 "gramatica.y"
+#line 332 "gramatica.y"
     {
     strcpy((yyval.sentenciasval).codigo,(yyvsp[(2) - (3)].sentenciasval).codigo);
   ;}
     break;
 
   case 39:
-#line 333 "gramatica.y"
-    {;}
-    break;
-
-  case 40:
-#line 334 "gramatica.y"
-    {;}
-    break;
-
-  case 41:
 #line 335 "gramatica.y"
     {;}
     break;
 
+  case 40:
+#line 336 "gramatica.y"
+    {;}
+    break;
+
+  case 41:
+#line 337 "gramatica.y"
+    {;}
+    break;
+
   case 46:
-#line 338 "gramatica.y"
+#line 340 "gramatica.y"
     {
   //printf("%s %d\n",$1,reskey);
   // Buscamos en la tabla de simbolos global
@@ -2009,7 +2009,7 @@ yyreduce:
     break;
 
   case 52:
-#line 369 "gramatica.y"
+#line 371 "gramatica.y"
     {
   printf("sumando\n");
     char c[100];
@@ -2033,7 +2033,7 @@ yyreduce:
     break;
 
   case 53:
-#line 388 "gramatica.y"
+#line 390 "gramatica.y"
     {
     char c[100];
     char t[10];
@@ -2053,7 +2053,7 @@ yyreduce:
     break;
 
   case 54:
-#line 404 "gramatica.y"
+#line 406 "gramatica.y"
     {
     char c[100];
     char t[10];
@@ -2073,7 +2073,7 @@ yyreduce:
     break;
 
   case 55:
-#line 420 "gramatica.y"
+#line 422 "gramatica.y"
     {
     char c[100];
     char t[10];
@@ -2092,7 +2092,7 @@ yyreduce:
     break;
 
   case 56:
-#line 435 "gramatica.y"
+#line 437 "gramatica.y"
     {
   if((yyvsp[(1) - (3)].exprval).type == (yyvsp[(3) - (3)].exprval).type){
     char c[100];
@@ -2116,7 +2116,7 @@ yyreduce:
     break;
 
   case 60:
-#line 458 "gramatica.y"
+#line 460 "gramatica.y"
     { 
     (yyvsp[(1) - (1)].numero).type = 0;
     (yyvsp[(1) - (1)].numero).direccion =  direccion + 4;
@@ -2130,7 +2130,7 @@ yyreduce:
     break;
 
   case 62:
-#line 469 "gramatica.y"
+#line 471 "gramatica.y"
     {
   int existe = 0;
   int j = 0;
@@ -2162,7 +2162,7 @@ yyreduce:
     break;
 
   case 63:
-#line 497 "gramatica.y"
+#line 499 "gramatica.y"
     {
     //printf("%s\n",$1);
   // Buscamos en la tabla de simbolos global
@@ -2197,7 +2197,7 @@ yyreduce:
     break;
 
   case 64:
-#line 528 "gramatica.y"
+#line 530 "gramatica.y"
     {
     strcpy((yyval.condicionval).True,(yyvsp[(1) - (3)].condicionval).True);
     char codigo[100];
@@ -2212,7 +2212,7 @@ yyreduce:
     break;
 
   case 65:
-#line 539 "gramatica.y"
+#line 541 "gramatica.y"
     {
     strcpy((yyval.condicionval).False,(yyvsp[(1) - (3)].condicionval).False);
     char codigo[100];
@@ -2227,7 +2227,7 @@ yyreduce:
     break;
 
   case 66:
-#line 550 "gramatica.y"
+#line 552 "gramatica.y"
     {
     strcpy((yyval.condicionval).True,(yyvsp[(2) - (2)].condicionval).False);
     strcpy((yyval.condicionval).False,(yyvsp[(2) - (2)].condicionval).True);
@@ -2237,7 +2237,7 @@ yyreduce:
     break;
 
   case 67:
-#line 556 "gramatica.y"
+#line 558 "gramatica.y"
     {
   pushNext(&nextpila,actualLabel);
   newLabel();
@@ -2262,7 +2262,7 @@ yyreduce:
     break;
 
   case 68:
-#line 577 "gramatica.y"
+#line 579 "gramatica.y"
     {
     (yyval.condicionval).direccion = (yyvsp[(2) - (3)].condicionval).direccion;
     strcpy((yyval.condicionval).codigo,(yyvsp[(2) - (3)].condicionval).codigo);
@@ -2270,7 +2270,7 @@ yyreduce:
     break;
 
   case 69:
-#line 581 "gramatica.y"
+#line 583 "gramatica.y"
     {
   char temp[10] = "goto ";  
   newLabel();
@@ -2282,7 +2282,7 @@ yyreduce:
     break;
 
   case 70:
-#line 588 "gramatica.y"
+#line 590 "gramatica.y"
     { 
     char temp[10] = "goto ";
     newLabel();
@@ -2509,7 +2509,7 @@ yyreturn:
 }
 
 
-#line 600 "gramatica.y"
+#line 602 "gramatica.y"
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylval.line);

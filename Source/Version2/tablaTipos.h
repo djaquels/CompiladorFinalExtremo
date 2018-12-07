@@ -1,5 +1,5 @@
 /* Biblioteca para la tabla de Simbolos */
-/* Escaner Para Proyecto Final
+/* Tabla De Tipos
 
                               __
                             .d$$b
@@ -27,11 +27,11 @@
                             ;`-
                            :\
                            ;
-                           Desmadroso desde morro
-                           Ya ni modo esta vida me toco
-
-                           Y aquí andamos al millón
-                           Bien placoso y malandron - La Escuela No Me Gusto - Adriel Favela
+EQUIPO :
+1.- Santiago Lopez Ricardo
+2.- Jacales Rojas Héctor Daniel
+3.- Moreloz Alquezada Mario David
+4.- Pina Lopez Christian
 
 
 */

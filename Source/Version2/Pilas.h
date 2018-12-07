@@ -27,11 +27,11 @@
                             ;`-
                            :\
                            ;
-                           Mujer tan bella y yo con una botella
-                           Me dejé enredar fácil, caí en las garras de ella
-                           Mujer tan bella y yo con una botella
-                           Me dejé enredar fácil, caí en las garras de ella - Wolfine
-
+EQUIPO :
+1.- Santiago Lopez Ricardo
+2.- Jacales Rojas Héctor Daniel
+3.- Moreloz Alquezada Mario David
+4.- Pina Lopez Christian
 
 */
 //#include "tablaSimbolos.h"

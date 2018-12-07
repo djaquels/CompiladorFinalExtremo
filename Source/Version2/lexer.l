@@ -26,6 +26,11 @@
                             ;`-
                            :\
                            ;
+EQUIPO :
+1.- Santiago Lopez Ricardo
+2.- Jacales Rojas Héctor Daniel
+3.- Moreloz Alquezada Mario David
+4.- Pina Lopez Christian
 */
 %{
  #include <stdio.h>

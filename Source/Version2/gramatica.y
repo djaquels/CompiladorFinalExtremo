@@ -26,6 +26,8 @@
                             ;`-
                            :\
                            ;
+
+PROGRAMO : Jacales Rojas Hèctor Daniel
 */
 %{
 #include <string.h>

@@ -148,7 +148,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 58 "gramatica.y"
+#line 60 "gramatica.y"
 {
     struct{
      char*numero;

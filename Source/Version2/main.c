@@ -26,13 +26,11 @@
                             ;`-
                            :\
                            ;
-                          Me gustó vivirla recio
-                          Siempre me gusto el peligro
-                          Nunca he sido mala gente
-                          Pero defiendo lo mío
-
-                          Acá andamos en la perla
-                          Bien puesta la camiseta - Sigo Con Lo Mio - Adriel Favela
+EQUIPO :
+1.- Santiago Lopez Ricardo
+2.- Jacales Rojas Héctor Daniel
+3.- Moreloz Alquezada Mario David
+4.- Pina Lopez Christian
 */
 #include <stdio.h>
 #include <stdlib.h>
