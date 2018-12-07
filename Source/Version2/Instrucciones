@@ -1,0 +1,9 @@
+Para ejecutar el compilador
+se procede a ejecutar los siguientes comandos en el orden indicado
+bison -d gramatica.y
+flex lexer.l
+gcc main.c gramatica.tab.c lex.yy.c -o compilador
+./compilador [archivo-fuente]
+
+El programa obtendra como salida el codigo de 3 direcciones del programa [archivo-fuente]
+dentro del archivo: codigoIntermedio.hippo

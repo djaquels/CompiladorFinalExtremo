@@ -1,10 +1,15 @@
 factorial:   
-t0 := 8D
+
+ if 0 < 4 goto label1:
+goto label2:
+
+ if 0 == 24 goto label3:
+goto label4:
+
+t0 := 28D
    
-return  0D
- goto label1:   
- label1:  
+ label4:  
 recursivo:   
-return  28D
- goto label3:   
- label3:  
+return  36D
+ goto label6:   
+ label6:  

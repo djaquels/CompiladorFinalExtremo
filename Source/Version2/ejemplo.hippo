@@ -4,9 +4,9 @@ int numero;
 int resultado;
 int i;
 func int factorial(){
-    int aux;
-    numero = i;
-    return numero;
+    int j;
+    if( ( numero < resultado) || ( numero == 0))
+     numero = 1;
 }
 func int recursivo(){
     int intentos;

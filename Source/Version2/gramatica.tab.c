@@ -601,12 +601,12 @@ static const yytype_uint16 yyrline[] =
        0,   141,   141,   145,   141,   149,   149,   150,   150,   150,
      151,   151,   152,   166,   182,   197,   198,   218,   221,   198,
      226,   228,   228,   229,   229,   232,   232,   233,   233,   237,
-     242,   257,   277,   290,   293,   294,   316,   329,   332,   335,
-     336,   337,   338,   338,   339,   339,   340,   369,   369,   369,
-     370,   370,   371,   390,   406,   422,   437,   457,   458,   459,
-     460,   470,   471,   499,   530,   541,   552,   558,   579,   583,
-     590,   598,   598,   599,   599,   600,   600,   600,   600,   600,
-     600
+     242,   258,   278,   291,   294,   295,   317,   330,   333,   336,
+     337,   338,   339,   339,   340,   340,   341,   370,   370,   370,
+     371,   371,   372,   391,   407,   423,   438,   458,   459,   460,
+     461,   471,   472,   500,   531,   542,   553,   559,   582,   586,
+     593,   601,   601,   602,   602,   603,   603,   603,   603,   603,
+     603
 };
 #endif
 
@@ -1838,19 +1838,20 @@ yyreduce:
   pushTrue(&truepila,actualLabel);
   strcpy((yyval.sentenciasval).Next,(yyvsp[(3) - (5)].condicionval).False);
   strcat((yyval.sentenciasval).Next,(yyvsp[(5) - (5)].sentenciasval).Next);
-  char cod[50];
+  char cod[5000];
   strcat(cod,(yyvsp[(3) - (5)].condicionval).codigo);
   strcat(cod,(yyvsp[(3) - (5)].condicionval).True);
   strcat(cod,"\n");
   strcat(cod,(yyvsp[(5) - (5)].sentenciasval).codigo);
   //printf("%s",cod);
   strcpy((yyval.sentenciasval).codigo,cod);
+  printf("%s u.u\n",cod);
   strcpy(cod,"");
   ;}
     break;
 
   case 31:
-#line 257 "gramatica.y"
+#line 258 "gramatica.y"
     {
   //pushTrue(&truepila,actualLabel);
   strcpy((yyval.sentenciasval).Next,(yyvsp[(5) - (7)].sentenciasval).Next);
@@ -1874,7 +1875,7 @@ yyreduce:
     break;
 
   case 32:
-#line 277 "gramatica.y"
+#line 278 "gramatica.y"
     {
     char codigos[1000];
     strcat(codigos,(yyvsp[(5) - (5)].sentenciasval).Next);
@@ -1891,19 +1892,19 @@ yyreduce:
     break;
 
   case 33:
-#line 290 "gramatica.y"
+#line 291 "gramatica.y"
     {
 
   ;}
     break;
 
   case 34:
-#line 293 "gramatica.y"
+#line 294 "gramatica.y"
     {;}
     break;
 
   case 35:
-#line 294 "gramatica.y"
+#line 295 "gramatica.y"
     { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
@@ -1929,7 +1930,7 @@ yyreduce:
     break;
 
   case 36:
-#line 316 "gramatica.y"
+#line 317 "gramatica.y"
     {
     printf("Retornando\n");
     newLabel();
@@ -1946,36 +1947,36 @@ yyreduce:
     break;
 
   case 37:
-#line 329 "gramatica.y"
+#line 330 "gramatica.y"
     { 
     char c[50] = "return\n goto "; strcat(c,(yyval.sentenciasval).Next); strcpy((yyval.sentenciasval).codigo,c);
     ;}
     break;
 
   case 38:
-#line 332 "gramatica.y"
+#line 333 "gramatica.y"
     {
     strcpy((yyval.sentenciasval).codigo,(yyvsp[(2) - (3)].sentenciasval).codigo);
   ;}
     break;
 
   case 39:
-#line 335 "gramatica.y"
-    {;}
-    break;
-
-  case 40:
 #line 336 "gramatica.y"
     {;}
     break;
 
-  case 41:
+  case 40:
 #line 337 "gramatica.y"
     {;}
     break;
 
+  case 41:
+#line 338 "gramatica.y"
+    {;}
+    break;
+
   case 46:
-#line 340 "gramatica.y"
+#line 341 "gramatica.y"
     {
   //printf("%s %d\n",$1,reskey);
   // Buscamos en la tabla de simbolos global
@@ -2009,7 +2010,7 @@ yyreduce:
     break;
 
   case 52:
-#line 371 "gramatica.y"
+#line 372 "gramatica.y"
     {
   printf("sumando\n");
     char c[100];
@@ -2033,7 +2034,7 @@ yyreduce:
     break;
 
   case 53:
-#line 390 "gramatica.y"
+#line 391 "gramatica.y"
     {
     char c[100];
     char t[10];
@@ -2053,7 +2054,7 @@ yyreduce:
     break;
 
   case 54:
-#line 406 "gramatica.y"
+#line 407 "gramatica.y"
     {
     char c[100];
     char t[10];
@@ -2073,7 +2074,7 @@ yyreduce:
     break;
 
   case 55:
-#line 422 "gramatica.y"
+#line 423 "gramatica.y"
     {
     char c[100];
     char t[10];
@@ -2092,7 +2093,7 @@ yyreduce:
     break;
 
   case 56:
-#line 437 "gramatica.y"
+#line 438 "gramatica.y"
     {
   if((yyvsp[(1) - (3)].exprval).type == (yyvsp[(3) - (3)].exprval).type){
     char c[100];
@@ -2116,7 +2117,7 @@ yyreduce:
     break;
 
   case 60:
-#line 460 "gramatica.y"
+#line 461 "gramatica.y"
     { 
     (yyvsp[(1) - (1)].numero).type = 0;
     (yyvsp[(1) - (1)].numero).direccion =  direccion + 4;
@@ -2130,7 +2131,7 @@ yyreduce:
     break;
 
   case 62:
-#line 471 "gramatica.y"
+#line 472 "gramatica.y"
     {
   int existe = 0;
   int j = 0;
@@ -2162,7 +2163,7 @@ yyreduce:
     break;
 
   case 63:
-#line 499 "gramatica.y"
+#line 500 "gramatica.y"
     {
     //printf("%s\n",$1);
   // Buscamos en la tabla de simbolos global
@@ -2197,25 +2198,25 @@ yyreduce:
     break;
 
   case 64:
-#line 530 "gramatica.y"
+#line 531 "gramatica.y"
     {
     strcpy((yyval.condicionval).True,(yyvsp[(1) - (3)].condicionval).True);
-    char codigo[100];
+    char codigo[1000];
     strcpy((yyval.condicionval).True,(yyvsp[(3) - (3)].condicionval).True);
     strcpy((yyval.condicionval).False,(yyvsp[(3) - (3)].condicionval).False);
     strcat(codigo,(yyvsp[(1) - (3)].condicionval).codigo);
     strcat(codigo,(yyvsp[(1) - (3)].condicionval).False);
     strcat(codigo,(yyvsp[(3) - (3)].condicionval).codigo);
     strcpy((yyval.condicionval).codigo,codigo);
-    //printf("%s\n",codigo);
+    printf("%s\n",codigo);
   ;}
     break;
 
   case 65:
-#line 541 "gramatica.y"
+#line 542 "gramatica.y"
     {
     strcpy((yyval.condicionval).False,(yyvsp[(1) - (3)].condicionval).False);
-    char codigo[100];
+    char codigo[1000];
     strcpy((yyval.condicionval).False,(yyvsp[(3) - (3)].condicionval).False);
     strcpy((yyval.condicionval).True,(yyvsp[(3) - (3)].condicionval).True);
     strcat(codigo,(yyvsp[(1) - (3)].condicionval).codigo);
@@ -2227,7 +2228,7 @@ yyreduce:
     break;
 
   case 66:
-#line 552 "gramatica.y"
+#line 553 "gramatica.y"
     {
     strcpy((yyval.condicionval).True,(yyvsp[(2) - (2)].condicionval).False);
     strcpy((yyval.condicionval).False,(yyvsp[(2) - (2)].condicionval).True);
@@ -2237,7 +2238,7 @@ yyreduce:
     break;
 
   case 67:
-#line 558 "gramatica.y"
+#line 559 "gramatica.y"
     {
   pushNext(&nextpila,actualLabel);
   newLabel();
@@ -2246,23 +2247,25 @@ yyreduce:
   newLabel();
   strcpy((yyval.condicionval).False,actualLabel);
   pushFalse(&falsepila,actualLabel);
-  char c[200];
-  char aux[50];
-  strcat(c,(yyvsp[(1) - (3)].exprval).codigo);
-  strcat(c," ");
-  strcat(c,(yyvsp[(3) - (3)].exprval).codigo);
-  strcat(c," ");
+  char c[2000];
+  char aux[500];
+  //strcat(c,$1.codigo);
+  //strcat(c," ");
+  //strcat(c,$3.codigo);
+  //strcat(c," ");
   sprintf(aux,"\n if %d %s %d goto %s\n",(yyvsp[(1) - (3)].exprval).direccion,(yyvsp[(2) - (3)].relacionalop).operador,(yyvsp[(3) - (3)].exprval).direccion,(yyval.condicionval).True);
   strcat(c,aux);
   sprintf(aux,"goto %s\n",(yyval.condicionval).False);
   strcat(c,aux);
   strcpy((yyval.condicionval).codigo,c);
+  //printf("%s\n",c);
+  strcpy(c,"");
   //escribirCodigo(c,"","","");
   ;}
     break;
 
   case 68:
-#line 579 "gramatica.y"
+#line 582 "gramatica.y"
     {
     (yyval.condicionval).direccion = (yyvsp[(2) - (3)].condicionval).direccion;
     strcpy((yyval.condicionval).codigo,(yyvsp[(2) - (3)].condicionval).codigo);
@@ -2270,7 +2273,7 @@ yyreduce:
     break;
 
   case 69:
-#line 583 "gramatica.y"
+#line 586 "gramatica.y"
     {
   char temp[10] = "goto ";  
   newLabel();
@@ -2282,7 +2285,7 @@ yyreduce:
     break;
 
   case 70:
-#line 590 "gramatica.y"
+#line 593 "gramatica.y"
     { 
     char temp[10] = "goto ";
     newLabel();
@@ -2295,7 +2298,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 2299 "gramatica.tab.c"
+#line 2302 "gramatica.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -2509,7 +2512,7 @@ yyreturn:
 }
 
 
-#line 602 "gramatica.y"
+#line 605 "gramatica.y"
 
 void yyerror(char *s) {
 	printf("Error: %s  %d\n ",s,yylval.line);
@@ -2520,6 +2523,8 @@ void init(){
   crearPilaTablaSimbolos(); //Crea la Pila de Simbolos
 }
 
+// Implementacion de funcion que busca un identificador en una Tabla de Simbolos
+// Retorna -1 si no se encuentra;
 int existeID(char* id, TablaSimbolos* t){
   int resultado = -1;
   for(int i = 0; i < llavesimbolos;i++){
@@ -2532,6 +2537,7 @@ int existeID(char* id, TablaSimbolos* t){
   //printf("%d",resultado);
   return resultado;
 }
+// Procedimieto auxiliar que imprime una Tabla De Simbolos
 void printTablaSimbolos(TablaSimbolos* t){
   printf("\t\t\tTabla De Simbolos\n");
   printf("id dir tipo tipo_var\n");

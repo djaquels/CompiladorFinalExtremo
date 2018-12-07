@@ -245,20 +245,21 @@ sentencia : IF LPAR condicion RPAR sentencia {
   pushTrue(&truepila,actualLabel);
   strcpy($$.Next,$3.False);
   strcat($$.Next,$5.Next);
-  char cod[50];
+  char cod[5000];
   strcat(cod,$3.codigo);
   strcat(cod,$3.True);
   strcat(cod,"\n");
   strcat(cod,$5.codigo);
   //printf("%s",cod);
   strcpy($$.codigo,cod);
+  //printf("%s u.u\n",cod);
   strcpy(cod,"");
   } %prec IFX
 	| IF LPAR condicion RPAR sentencia  ELSE  sentencia {
   //pushTrue(&truepila,actualLabel);
   strcpy($$.Next,$5.Next);
   strcat($$.Next,$7.Next);
-  char cod[1000];
+  char cod[5000];
   strcat(cod,$3.codigo);
   strcat(cod,$3.True);
   strcat(cod,"\n");
@@ -275,7 +276,7 @@ sentencia : IF LPAR condicion RPAR sentencia {
   strcpy(cod,"");
   }
 	| WHILE LPAR condicion RPAR sentencia{
-    char codigos[1000];
+    char codigos[5000];
     strcat(codigos,$5.Next);
     strcat(codigos,$3.codigo);
     strcat(codigos,$3.True);
@@ -529,18 +530,18 @@ expresion : expresion MAS expresion {
   }
 condicion : condicion  OR condicion {
     strcpy($$.True,$1.True);
-    char codigo[100];
+    char codigo[1000];
     strcpy($$.True,$3.True);
     strcpy($$.False,$3.False);
     strcat(codigo,$1.codigo);
     strcat(codigo,$1.False);
     strcat(codigo,$3.codigo);
     strcpy($$.codigo,codigo);
-    //printf("%s\n",codigo);
+    printf("%s\n",codigo);
   }
   | condicion AND condicion {
     strcpy($$.False,$1.False);
-    char codigo[100];
+    char codigo[1000];
     strcpy($$.False,$3.False);
     strcpy($$.True,$3.True);
     strcat(codigo,$1.codigo);
@@ -563,17 +564,19 @@ condicion : condicion  OR condicion {
   newLabel();
   strcpy($$.False,actualLabel);
   pushFalse(&falsepila,actualLabel);
-  char c[200];
-  char aux[50];
-  strcat(c,$1.codigo);
-  strcat(c," ");
-  strcat(c,$3.codigo);
-  strcat(c," ");
+  char c[2000];
+  char aux[500];
+  //strcat(c,$1.codigo);
+  //strcat(c," ");
+  //strcat(c,$3.codigo);
+  //strcat(c," ");
   sprintf(aux,"\n if %d %s %d goto %s\n",$1.direccion,$2.operador,$3.direccion,$$.True);
   strcat(c,aux);
   sprintf(aux,"goto %s\n",$$.False);
   strcat(c,aux);
   strcpy($$.codigo,c);
+  //printf("%s\n",c);
+  strcpy(c,"");
   //escribirCodigo(c,"","","");
   }
   | LPAR condicion RPAR {
