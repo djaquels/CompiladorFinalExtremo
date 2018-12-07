@@ -217,11 +217,12 @@ funciones : FUNC tipo ID {
     printf("Tabla De Simbolos Local\n");
     printTablaSimbolos(topSimbolos(simbolos));
   } sentencias RKEY {
-    escribirCodigo($6.codigo,popNext(&nextpila),"","");
+    escribirCodigo("",popNext(&nextpila),"","");
   // Salimos de la tabla de simbolos de la funcion :3
   popSimbolos(&simbolos);
   llavesimbolos = reskey;
-  } funciones | { printf("Exito!\n");};
+  } funciones | { printf("Exito!\n");
+  };
 argumentos : lista_argumentos { strcpy($$.codigo,$1.codigo);} | {}  ;
 lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_arreglo {
   TablaSimbolos * t = crearTablaSimbolos();
@@ -229,6 +230,7 @@ lista_argumentos : lista_argumentos COMA tipo ID parte_arreglo | tipo ID parte_a
 parte_arreglo : LCOR RCOR parte_arreglo | ;
 sentencias : sentencia {
   escribirCodigo($1.codigo,"","","");
+  //strcpy($$.codigo,$1.codigo);
   //printf("%s",$1.codigo);
 } sentencias {} | sentencia {
   strcpy($$.codigo,$1.codigo);

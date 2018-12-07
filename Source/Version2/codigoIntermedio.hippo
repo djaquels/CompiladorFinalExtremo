@@ -1,9 +1,10 @@
 factorial:   
 t0 := 8D
+   
 return  0D
-goto label1:   
-label1:  
+ goto label1:   
+ label1:  
 recursivo:   
 return  28D
-goto label3:   
-label3:  
+ goto label3:   
+ label3:  
