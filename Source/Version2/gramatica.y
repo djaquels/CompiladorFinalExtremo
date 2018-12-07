@@ -301,8 +301,7 @@ sentencia : IF LPAR condicion RPAR sentencia {
     strcpy($$.codigo,cod);
     strcpy(aux,"");
   }
-	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia {
-    
+	| FOR LPAR sentencia PYC condicion PYC sentencia RPAR sentencia {
   }
 	| parte_izq ASIG expresion PYC { 
     //printf("%d\n",$1.direccion);
