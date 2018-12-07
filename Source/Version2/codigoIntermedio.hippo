@@ -1,1 +1,9 @@
 factorial:   
+label0:
+ if 8 < 28 goto label1:
+goto label2:
+	t0 := 20D + 24D
+t1 := t0
+goto label0:
+   
+ label2:  

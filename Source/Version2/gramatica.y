@@ -298,9 +298,12 @@ sentencia : IF LPAR condicion RPAR sentencia {
     strcat(cod,$2.codigo);
     sprintf(aux,"goto %s\n",$2.Next);
     strcat(cod,aux);
+    strcpy($$.codigo,cod);
     strcpy(aux,"");
   }
-	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia {}
+	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia {
+    
+  }
 	| parte_izq ASIG expresion PYC { 
     //printf("%d\n",$1.direccion);
     //printf("%s\n",$3.temporal);
@@ -310,12 +313,15 @@ sentencia : IF LPAR condicion RPAR sentencia {
     char direccions[15];
     //strcat(cod,$3.codigo);
     sprintf(c,"t%d := ",var_temporales);
-    strcat(cod,c);
     sprintf(direccions,"%dD\n",$3.direccion);
     if(strcmp("",$3.temporal) == 0){
+      strcat(cod,c);
       strcat(cod,direccions);
     }else{
+      strcat(cod,$3.codigo);
+      strcat(cod,c);
       strcat(cod,$3.temporal);
+      strcat(cod,"\n");
     }
     //printf("u.u: %s",cod);
     strcpy($$.codigo,cod);
@@ -473,7 +479,7 @@ expresion : expresion MAS expresion {
     direccion = direccion + 4 ;
     $$.direccion = direccion + 4;
     char s[10];
-    sprintf(s,"%d",$$.direccion);
+    sprintf(s,"%dD",$$.direccion);
     strcpy($$.codigo,s);
     $$.type = $1.type;
     }

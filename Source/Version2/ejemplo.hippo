@@ -4,5 +4,7 @@ int numero;
 int resultado;
 int i;
 func int factorial(){
-    
+    do
+     numero = 5 + 3;
+    while((i < 9));
 }

@@ -7,3 +7,4 @@ gcc main.c gramatica.tab.c lex.yy.c -o compilador
 
 El programa obtendra como salida el codigo de 3 direcciones del programa [archivo-fuente]
 dentro del archivo: codigoIntermedio.hippo
+el sufijo D despues de un numero indica que se trata de una direccion;
