@@ -289,7 +289,16 @@ sentencia : IF LPAR condicion RPAR sentencia {
     strcpy(codigos,"");
   }
 	| DO sentencia WHILE LPAR condicion RPAR PYC {
-
+    strcpy($$.Next,$5.False);
+    char cod[5000];
+    char aux[50];
+    strcat(cod,$2.Next);
+    strcat(cod,$5.codigo);
+    strcat(cod,$5.True);
+    strcat(cod,$2.codigo);
+    sprintf(aux,"goto %s\n",$2.Next);
+    strcat(cod,aux);
+    strcpy(aux,"");
   }
 	| FOR LPAR sentencia  PYC condicion PYC sentencia RPAR sentencia {}
 	| parte_izq ASIG expresion PYC { 
@@ -382,7 +391,7 @@ expresion : expresion MAS expresion {
     sprintf(t,"%dD\n",$3.direccion);
     strcat(c,t);
     strcpy($$.codigo,c);
-    printf("%s\n",c);
+    //printf("%s\n",c);
     //escribirCodigo(c,"","","");
     strcpy(c,"");
     var_temporales++;
