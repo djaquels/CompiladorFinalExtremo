@@ -609,6 +609,8 @@ void init(){
   crearPilaTablaSimbolos(); //Crea la Pila de Simbolos
 }
 
+// Implementacion de funcion que busca un identificador en una Tabla de Simbolos
+// Retorna -1 si no se encuentra;
 int existeID(char* id, TablaSimbolos* t){
   int resultado = -1;
   for(int i = 0; i < llavesimbolos;i++){
@@ -621,6 +623,7 @@ int existeID(char* id, TablaSimbolos* t){
   //printf("%d",resultado);
   return resultado;
 }
+// Procedimieto auxiliar que imprime una Tabla De Simbolos
 void printTablaSimbolos(TablaSimbolos* t){
   printf("\t\t\tTabla De Simbolos\n");
   printf("id dir tipo tipo_var\n");

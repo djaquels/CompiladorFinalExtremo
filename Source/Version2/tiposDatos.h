@@ -27,13 +27,15 @@
                             ;`-
                            :\
                            ;
-                           Amistades,
-                           En estos tiempos lealtad queda muy poca,
-                           Inteligencia adquirió experiencia
-                           Se ha escuchado mentar como "Él Neto Roca". - Tomen Nota - Adirel Favela
+EQUIPO :
+1.- Santiago Lopez Ricardo
+2.- Jacales Rojas Héctor Daniel
+3.- Moreloz Alquezada Mario David
+4.- Pina Lopez Christian
 
 
 */
+// Partimos de la siguiente definicion
 #define INTT 0
 #define FLOATT 1
 #define DOUBLET 2
